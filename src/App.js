@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useMemo } from "react";
 import jwtDecode from "jwt-decode";
-import AdminLayout from "./layouts/AdminLayout";
-import HomeLayout from "./layouts/HomeLayout"; //importacion del layout de pagina principal
 
 import AuthContext from "./context/AuthContext";
-
 import { setToken, getToken, removeToken } from "./api/token";
+
+import Navigation from "./config/Navigation";
+import { homeRoutes, adminRoutes } from "./config/routes";
 
 import "./less/index.less";
 
 export default function App() {
-  const [auth, setAuth] = useState(true);
+  const [auth, setAuth] = useState(false);
   const [realoadUser, setReloadUser] = useState(false);
 
   useEffect(() => {
@@ -55,7 +55,11 @@ export default function App() {
 
   return (
     <AuthContext.Provider value={authData}>
-      <div>{auth ? <AdminLayout /> : <HomeLayout />}</div>
+      {!auth ? (
+        <Navigation routes={homeRoutes} />
+      ) : (
+        <Navigation routes={adminRoutes} />
+      )}
     </AuthContext.Provider>
   );
 }

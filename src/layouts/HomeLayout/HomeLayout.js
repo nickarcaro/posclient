@@ -1,10 +1,9 @@
-import { Layout, Row, Col, Space } from "antd";
+import { Layout, Row, Col } from "antd";
 
 import MenuTop from "../../components/HomeLayout/MenuTop";
 import Banner from "../../components/HomeLayout/MenuTop/Banner";
-import Clients from "../../components/HomeLayout/Content/Clients";
-import AboutUs from "../../components/HomeLayout/Content/AboutUs";
-const HomeLayout = () => {
+import { LoadRoutes } from "../LoadRoutes";
+const HomeLayout = ({ routes }) => {
   const { Header, Content, Footer } = Layout;
 
   return (
@@ -24,12 +23,7 @@ const HomeLayout = () => {
       <Banner />
       <Content className="site-layout">
         <div className="site-layout-background">
-          <AboutUs />
-        </div>
-      </Content>
-      <Content className="site-layout">
-        <div className="site-layout-background">
-          <Clients />
+          <LoadRoutes routes={routes} />
         </div>
       </Content>
       <Footer style={{ background: "black" }}>

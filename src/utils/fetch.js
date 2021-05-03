@@ -4,7 +4,7 @@ export async function authFetch(url, params, logout) {
   const token = getToken();
 
   if (!token) {
-    // Usuario no logeador
+    // Usuario no logeado
     logout();
   } else {
     if (hasExpiredToken(token)) {
