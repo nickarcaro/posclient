@@ -8,39 +8,56 @@ import {
   UserOutlined,
   UploadOutlined,
   VideoCameraOutlined,
+  MailOutlined,
 } from "@ant-design/icons";
-import { Menu } from "antd";
-const MenuSider = () => {
+import { Menu, Layout } from "antd";
+import { Link, withRouter } from "react-router-dom";
+
+const MenuSider = ({ menuCollapsed, location }) => {
+  const { Sider } = Layout;
+  const { SubMenu } = Menu;
   return (
-    <div>
+    <Sider trigger={null} collapsible collapsed={menuCollapsed}>
+      <div className="logo-admin" />
       <Menu theme="dark" mode="inline" defaultSelectedKeys={["4"]}>
-        <Menu.Item key="1" icon={<UserOutlined />}>
-          nav 1
-        </Menu.Item>
+        <SubMenu key="sub1" icon={<MailOutlined />} title="Productos">
+          <Menu.Item key="1" icon={<UserOutlined />}>
+            catalogo
+          </Menu.Item>
+        </SubMenu>
         <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-          nav 2
+          stock
         </Menu.Item>
         <Menu.Item key="3" icon={<UploadOutlined />}>
-          nav 3
+          proveedores
         </Menu.Item>
         <Menu.Item key="4" icon={<BarChartOutlined />}>
-          nav 4
+          Categorias
         </Menu.Item>
         <Menu.Item key="5" icon={<CloudOutlined />}>
-          nav 5
+          ventas
         </Menu.Item>
         <Menu.Item key="6" icon={<AppstoreOutlined />}>
-          nav 6
+          inventario
         </Menu.Item>
         <Menu.Item key="7" icon={<TeamOutlined />}>
-          nav 7
+          precios
         </Menu.Item>
         <Menu.Item key="8" icon={<ShopOutlined />}>
-          nav 8
+          promociones
+        </Menu.Item>
+        <Menu.Item key="9" icon={<ShopOutlined />}>
+          impuesto
+        </Menu.Item>
+        <Menu.Item key="10" icon={<ShopOutlined />}>
+          precios
+        </Menu.Item>
+        <Menu.Item key="11" icon={<ShopOutlined />}>
+          informes
         </Menu.Item>
       </Menu>
-    </div>
+    </Sider>
   );
 };
 
-export default MenuSider;
+export default withRouter(MenuSider);

@@ -1,18 +1,22 @@
-import { Layout, Row, Col } from "antd";
-
+import { Layout, Row, Col } from "antd"; //libreria de estilo
+import { Link } from "react-router-dom"; //link para redireccionar
+//componentes
 import MenuTop from "../../components/HomeLayout/MenuTop";
-import Banner from "../../components/HomeLayout/MenuTop/Banner";
-import { LoadRoutes } from "../LoadRoutes";
+import MainFooter from "../../components/HomeLayout/Footer/MainFooter";
+import { LoadRoutes } from "../LoadRoutes"; //funcion para cargar rutas
+
 const HomeLayout = ({ routes }) => {
-  const { Header, Content, Footer } = Layout;
+  const { Header, Content } = Layout;
 
   return (
     <Layout>
-      <Header className="header">
+      <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
         <Row>
           <Col lg={1} />
           <Col lg={11}>
-            <div className="logo" />
+            <Link to={"/"}>
+              <div className="logo-home" />
+            </Link>
           </Col>
           <Col lg={2} />
           <Col lg={10}>
@@ -20,15 +24,11 @@ const HomeLayout = ({ routes }) => {
           </Col>
         </Row>
       </Header>
-      <Banner />
-      <Content className="site-layout">
-        <div className="site-layout-background">
-          <LoadRoutes routes={routes} />
-        </div>
+      <Content>
+        <LoadRoutes routes={routes} />
       </Content>
-      <Footer style={{ background: "black" }}>
-        <h2 style={{ color: "white" }}>suscribete</h2>
-      </Footer>
+
+      <MainFooter />
     </Layout>
   );
 };

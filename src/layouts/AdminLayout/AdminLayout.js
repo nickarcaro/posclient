@@ -1,28 +1,37 @@
+import React, { useState } from "react";
 import { Layout } from "antd";
 import MenuSider from "../../components/AdminLayout/MenuSider";
+
 import { LoadRoutes } from "../LoadRoutes";
+
+import MenuTop from "../../components/AdminLayout/MenuTop";
+
 const AdminLayout = ({ routes }) => {
+  const [menuCollapsed, setMenuCollapsed] = useState(false);
   const { Header, Content, Footer, Sider } = Layout;
+
   return (
-    <Layout>
-      <Sider
-        style={{
-          overflow: "auto",
-          height: "100vh",
-          position: "fixed",
-          left: 0,
-        }}
-        collapsible
-      >
-        <div className="logo" />
-        <MenuSider />
-      </Sider>
-      <Layout className="site-layout" style={{ marginLeft: 200 }}>
-        <Header className="site-layout-background" style={{ padding: 0 }} />
-        <Content style={{ margin: "24px 16px 0", overflow: "initial" }}>
+    <Layout style={{ minHeight: "100vh" }}>
+      <MenuSider menuCollapsed={menuCollapsed} />
+
+      <Layout className="site-layout">
+        <Header className="site-layout-background" style={{ padding: 0 }}>
+          <MenuTop
+            menuCollapsed={menuCollapsed}
+            setMenuCollapsed={setMenuCollapsed}
+          />
+        </Header>
+        <Content
+          className="site-layout-background"
+          style={{
+            margin: "24px 16px",
+            padding: 24,
+            minHeight: 280,
+          }}
+        >
           <div
             className="site-layout-background"
-            style={{ padding: 24, textAlign: "center" }}
+            style={{ padding: 24, minHeight: 360 }}
           >
             <LoadRoutes routes={routes} />
           </div>

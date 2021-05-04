@@ -1,7 +1,12 @@
-import React from "react";
-
+import Banner from "../../../components/HomeLayout/MenuTop/Banner";
+import HowToWork from "../../../components/HomeLayout/Content/HowToWork";
 const Home = () => {
-  return <div>home</div>;
+  return (
+    <>
+      <Banner />
+      <HowToWork />
+    </>
+  );
 };
 
 export default Home;

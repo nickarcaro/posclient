@@ -1,6 +1,6 @@
 //layouts
 import HomeLayout from "../layouts/HomeLayout";
-import PosLayout from "../layouts/PosLayout";
+
 import AdminLayout from "../layouts/AdminLayout";
 
 //pages Home
@@ -38,9 +38,6 @@ export const homeRoutes = [
     ],
   },
 ];
-
-//rutas de usuarios que son vendedores
-export const posRoutes = [];
 
 //rutas de usuario administrador (dueño de local)
 export const adminRoutes = [
