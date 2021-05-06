@@ -13,10 +13,17 @@ const Auth = ({ onCloseModal, setTitleModal }) => {
     setTitleModal("Recuperar Contraseña");
     setShowLogin(false);
   };
-  return showLogin ? (
-    <LoginForm showForgotPass={showForgotPass} onCloseModal={onCloseModal} />
-  ) : (
-    <ForgotPass showLoginForm={showLoginForm} onCloseModal={onCloseModal} />
+  return (
+    <>
+      {showLogin ? (
+        <LoginForm
+          showForgotPass={showForgotPass}
+          onCloseModal={onCloseModal}
+        />
+      ) : (
+        <ForgotPass showLoginForm={showLoginForm} onCloseModal={onCloseModal} />
+      )}
+    </>
   );
 };
 

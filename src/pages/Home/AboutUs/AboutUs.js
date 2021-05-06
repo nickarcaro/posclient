@@ -1,5 +1,5 @@
 import { Row, Col, Typography } from "antd";
-
+import FAQ from "../../../components/HomeLayout/Content/FAQ";
 const AboutUs = () => {
   const { Title } = Typography;
   return (
@@ -11,9 +11,7 @@ const AboutUs = () => {
 
         <Col lg={4} />
         <Col lg={16}>
-          <Row>
-            <Col md={24}>Sobre nosotros</Col>
-          </Row>
+          <FAQ />
         </Col>
         <Col lg={4} />
       </Row>

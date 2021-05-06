@@ -31,11 +31,7 @@ const ForgotPass = ({ showLoginForm, onCloseModal }) => {
   });
 
   return (
-    <Form
-      name="normal_login"
-      className="login-form"
-      onFinish={formik.handleSubmit}
-    >
+    <Form style={{ maxWidth: 500 }} onFinish={formik.handleSubmit}>
       <Form.Item>
         <Input
           prefix={<MailOutlined className="site-form-item-icon" />}
