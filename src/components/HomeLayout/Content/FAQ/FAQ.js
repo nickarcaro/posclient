@@ -10,14 +10,14 @@ const FAQ = () => {
 `;
 
   return (
-    <Collapse defaultActiveKey={["1"]} onChange={callback}>
-      <Panel header="pregunta 1" key="1">
+    <Collapse onChange={callback}>
+      <Panel header="pregunta 1">
         <p>{text}</p>
       </Panel>
-      <Panel header="pregunta 1" key="2">
+      <Panel header="pregunta 1">
         <p>{text}</p>
       </Panel>
-      <Panel header="pregunta 1" key="3">
+      <Panel header="pregunta 1">
         <p>{text}</p>
       </Panel>
     </Collapse>

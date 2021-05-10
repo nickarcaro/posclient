@@ -7,6 +7,7 @@ import AdminLayout from "../layouts/AdminLayout";
 import Home from "../pages/Home/Home";
 import Contact from "../pages/Home/Contact";
 import AboutUs from "../pages/Home/AboutUs";
+import Subscribe from "../pages/Home/Subscribe";
 
 //pages dashboard
 import Dashboard from "../pages/Admin/Dashboard";
@@ -30,6 +31,11 @@ export const homeRoutes = [
       {
         path: "/sobre-nosotros",
         component: AboutUs,
+        exact: true,
+      },
+      {
+        path: "/suscribete",
+        component: Subscribe,
         exact: true,
       },
       {

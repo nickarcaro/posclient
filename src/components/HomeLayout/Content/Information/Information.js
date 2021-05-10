@@ -1,16 +1,22 @@
-import { Card, Row, Col } from "antd";
+import { Tabs } from "antd";
 
 const Information = () => {
-  const { Meta } = Card;
+  const { TabPane } = Tabs;
   return (
-    <Card style={{ width: 300 }} bordered={false}>
-      <Row>
-        <Col md={24}>
-          <Meta title="Informacion" />
-          Dirección
-        </Col>
-      </Row>
-    </Card>
+    <div className="card-container">
+      <Tabs type="card">
+        <TabPane tab="Contacto" key="1">
+          <ul>
+            <li>Direccion:</li>
+            <li>Horario:</li>
+            <li>Telefono:</li>
+          </ul>
+        </TabPane>
+        <TabPane tab="Mapa" key="2">
+          <p>mapa del lugar</p>
+        </TabPane>
+      </Tabs>
+    </div>
   );
 };
 

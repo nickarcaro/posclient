@@ -1,7 +1,7 @@
 import Information from "../../../components/HomeLayout/Content/Information";
 import ContactForm from "../../../components/HomeLayout/Content/ContactForm";
 
-import { Row, Col, Typography, Space } from "antd";
+import { Row, Col, Typography } from "antd";
 
 const Contact = () => {
   const { Title } = Typography;

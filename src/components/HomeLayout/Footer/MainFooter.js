@@ -1,27 +1,94 @@
-import { Layout, Row, Col } from "antd";
+import { Row, Col } from "antd";
 
 const MainFooter = () => {
-  const { Footer } = Layout;
   return (
-    <Footer
-      className="footer"
-      style={{ borderTop: 3, backgroundColor: "gray" }}
-    >
-      <Row>
-        <Col md={4} />
-        <Col md={16}>
-          <Row>
-            <Col md={8}>Direccion</Col>
-            <Col md={16}>Links de interes</Col>
-          </Row>
-          <Row className="footer__copyright" style={{ marginTop: 30 }}>
-            <Col md={14}>© 2021 equipo</Col>
-            <Col md={10}>integrantes</Col>
-          </Row>
+    <footer id="footer" className="dark">
+      <div className="footer-wrap">
+        <Row>
+          <Col lg={4} sm={24} xs={24}>
+            <div className="footer-center">
+              <h2>Links</h2>
+              <div>
+                <p target="_blank ">link1</p>
+              </div>
+              <div>
+                <p target="_blank ">link1</p>
+              </div>
+              <div>
+                <p target="_blank ">link1</p>
+              </div>
+            </div>
+          </Col>
+          <Col lg={4} sm={24} xs={24}>
+            <div className="footer-center">
+              <h2>Contacto</h2>
+              <div>
+                <p target="_blank ">link1</p>
+              </div>
+              <div>
+                <p target="_blank ">link1</p>
+              </div>
+              <div>
+                <p target="_blank ">link1</p>
+              </div>
+            </div>
+          </Col>
+          <Col lg={4} sm={24} xs={24}>
+            <div className="footer-center">
+              <h2>Producto</h2>
+              <div>
+                <p target="_blank ">link1</p>
+              </div>
+              <div>
+                <p target="_blank ">link1</p>
+              </div>
+              <div>
+                <p target="_blank ">link1</p>
+              </div>
+            </div>
+          </Col>
+          <Col lg={4} sm={24} xs={24}>
+            <div className="footer-center">
+              <h2>usuarios</h2>
+              <div>
+                <p target="_blank ">link1</p>
+              </div>
+              <div>
+                <p target="_blank ">link1</p>
+              </div>
+              <div>
+                <p target="_blank ">link1</p>
+              </div>
+              <div>
+                <p target="_blank ">link1</p>
+              </div>
+            </div>
+          </Col>
+          <Col lg={8} sm={24} xs={24}>
+            <div className="footer-center">
+              <h2>Nosotros</h2>
+              <div>
+                <p target="_blank">Pos almacenes</p>
+                <span> - </span>
+                <span>tics3</span>
+              </div>
+              <div>
+                <p target="_blank">Egg</p>
+                <span> - </span>
+                <span>Node Web </span>
+              </div>
+            </div>
+          </Col>
+        </Row>
+      </div>
+      <Row className="bottom-bar">
+        <Col lg={6} sm={24} />
+        <Col lg={18} sm={24}>
+          <span style={{ marginRight: 12 }}>2021</span>
+          <span style={{ marginRight: 12 }}>Copyright © udp</span>
         </Col>
-        <Col md={4} />
       </Row>
-    </Footer>
+    </footer>
   );
 };
 

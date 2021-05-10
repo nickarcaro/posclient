@@ -28,7 +28,9 @@ const MenuTop = () => {
       <SubMenu title="empieza">
         <Menu.Item onClick={onShowModal}>Login </Menu.Item>
         <Menu.Item>Login vendedores </Menu.Item>
-        <Menu.Item>Suscribete </Menu.Item>
+        <Menu.Item>
+          <Link to={"/suscribete"}>Suscribete</Link>
+        </Menu.Item>
       </SubMenu>
       <Modal show={showModal} setShow={setShowModal} title={titleModal}>
         <Auth onCloseModal={onCloseModal} setTitleModal={setTitleModal} />
