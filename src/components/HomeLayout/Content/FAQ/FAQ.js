@@ -1,27 +1,19 @@
 import { Collapse } from "antd";
+import { questions } from "./data";
 
 const FAQ = () => {
   const { Panel } = Collapse;
   function callback(key) {
     console.log(key);
   }
-  const text = `
-  pregunta que sera respondida de las mas comunes
-`;
 
-  return (
-    <Collapse onChange={callback}>
-      <Panel header="pregunta 1">
-        <p>{text}</p>
-      </Panel>
-      <Panel header="pregunta 1">
-        <p>{text}</p>
-      </Panel>
-      <Panel header="pregunta 1">
-        <p>{text}</p>
-      </Panel>
-    </Collapse>
-  );
+  const children = questions.map((question, i) => (
+    <Panel header={question.pregunta}>
+      <p>{question.text}</p>
+    </Panel>
+  ));
+
+  return <Collapse onChange={callback}>{children}</Collapse>;
 };
 
 export default FAQ;

@@ -1,5 +1,6 @@
 import { getToken, hasExpiredToken } from "../api/token";
 
+//funcion para autenticar
 export async function authFetch(url, params, logout) {
   const token = getToken();
 

@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import Modal from "../../../components/Modal";
 import Auth from "../../../pages/Home/Auth";
-
-import { Menu, Button } from "antd";
+import { Menu } from "antd";
 import { Link } from "react-router-dom";
-import SubMenu from "antd/lib/menu/SubMenu";
 
 const MenuTop = () => {
-  const { subMenu } = Menu;
+  const { SubMenu } = Menu;
   const [showModal, setShowModal] = useState(false);
   const [titleModal, setTitleModal] = useState("Iniciar Sesión");
 
@@ -25,10 +23,12 @@ const MenuTop = () => {
       <Menu.Item key={"/contacto"}>
         <Link to={"/contacto"}>Contacto </Link>
       </Menu.Item>
-      <SubMenu title="empieza">
-        <Menu.Item onClick={onShowModal}>Login </Menu.Item>
-        <Menu.Item>Login vendedores </Menu.Item>
-        <Menu.Item>
+      <SubMenu key="SubMenu" title="empieza">
+        <Menu.Item key="setting:1" onClick={onShowModal}>
+          Login
+        </Menu.Item>
+        <Menu.Item key="setting:2">Login vendedores </Menu.Item>
+        <Menu.Item key={"/suscribete"}>
           <Link to={"/suscribete"}>Suscribete</Link>
         </Menu.Item>
       </SubMenu>

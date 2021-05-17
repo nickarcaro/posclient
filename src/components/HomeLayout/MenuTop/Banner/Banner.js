@@ -1,5 +1,6 @@
 import BannerAnim, { Element } from "rc-banner-anim";
 import TweenOne from "rc-tween-one";
+import { BannerInfo } from "./data";
 import "rc-banner-anim/assets/index.css";
 
 const Banner = () => {
@@ -19,13 +20,13 @@ const Banner = () => {
           className="banner-user-title"
           animation={{ y: 30, opacity: 0, type: "from" }}
         >
-          Pos Almacenes
+          {BannerInfo.title1}
         </TweenOne>
         <TweenOne
           className="banner-user-text"
           animation={{ y: 30, opacity: 0, type: "from", delay: 100 }}
         >
-          Una nueva forma de Gestionar tu negocio
+          {BannerInfo.title2}
         </TweenOne>
       </Element>
     </BannerAnim>

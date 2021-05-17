@@ -1,7 +1,7 @@
 import QueueAnim from "rc-queue-anim";
 import OverPack from "rc-scroll-anim/lib/ScrollOverPack";
 
-const Content1 = () => {
+const DescriptionUs = () => {
   return (
     <OverPack component="section" className="page-wrapper page2">
       <QueueAnim
@@ -10,14 +10,12 @@ const Content1 = () => {
         leaveReverse
         key="page"
       >
-        <h2 key="title">Pos Almacenes</h2>
+        <h2 key="title">Sobre Nosotros</h2>
         <span key="line" className="separator" />
         <QueueAnim type="bottom" className="info-content" key="content">
           <p className="main-info" key="1">
-            Pos almacenes proyecto
-          </p>
-          <p className="main-info" key="2">
-            Pos almacenes proyecto
+            "Somos un grupo dedicado a la labor de brindar servicios a los
+            almacenes"
           </p>
         </QueueAnim>
       </QueueAnim>
@@ -25,4 +23,4 @@ const Content1 = () => {
   );
 };
 
-export default Content1;
+export default DescriptionUs;

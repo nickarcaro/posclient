@@ -1,5 +1,5 @@
 import { Tabs } from "antd";
-
+import { direction } from "./data";
 const Information = () => {
   const { TabPane } = Tabs;
   return (
@@ -7,9 +7,17 @@ const Information = () => {
       <Tabs type="card">
         <TabPane tab="Contacto" key="1">
           <ul>
-            <li>Direccion:</li>
-            <li>Horario:</li>
-            <li>Telefono:</li>
+            <li>
+              <span> Dirección: </span>
+              {direction.direccion}
+            </li>
+            <li>
+              <span> Horario: </span>
+              {direction.horario}
+            </li>
+            <li>
+              <span>Telefono:</span> {direction.telefono}
+            </li>
           </ul>
         </TabPane>
         <TabPane tab="Mapa" key="2">

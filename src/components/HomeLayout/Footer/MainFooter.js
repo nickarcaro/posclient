@@ -1,8 +1,8 @@
-import { Row, Col } from "antd";
+import { Row, Col, BackTop } from "antd";
 
 const MainFooter = () => {
   return (
-    <footer id="footer" className="dark">
+    <footer id="footer" className="dark footer">
       <div className="footer-wrap">
         <Row>
           <Col lg={4} sm={24} xs={24}>
@@ -12,10 +12,10 @@ const MainFooter = () => {
                 <p target="_blank ">link1</p>
               </div>
               <div>
-                <p target="_blank ">link1</p>
+                <p target="_blank ">link2</p>
               </div>
               <div>
-                <p target="_blank ">link1</p>
+                <p target="_blank ">link3</p>
               </div>
             </div>
           </Col>
@@ -23,13 +23,13 @@ const MainFooter = () => {
             <div className="footer-center">
               <h2>Contacto</h2>
               <div>
-                <p target="_blank ">link1</p>
+                <p target="_blank ">link4</p>
               </div>
               <div>
-                <p target="_blank ">link1</p>
+                <p target="_blank ">link5</p>
               </div>
               <div>
-                <p target="_blank ">link1</p>
+                <p target="_blank ">link6</p>
               </div>
             </div>
           </Col>
@@ -68,14 +68,7 @@ const MainFooter = () => {
             <div className="footer-center">
               <h2>Nosotros</h2>
               <div>
-                <p target="_blank">Pos almacenes</p>
-                <span> - </span>
-                <span>tics3</span>
-              </div>
-              <div>
-                <p target="_blank">Egg</p>
-                <span> - </span>
-                <span>Node Web </span>
+                <p target="_blank">Pos almacenes - tics3</p>
               </div>
             </div>
           </Col>
@@ -88,6 +81,7 @@ const MainFooter = () => {
           <span style={{ marginRight: 12 }}>Copyright © udp</span>
         </Col>
       </Row>
+      <BackTop />
     </footer>
   );
 };

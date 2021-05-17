@@ -1,15 +1,15 @@
 import Information from "../../../components/HomeLayout/Content/Information";
 import ContactForm from "../../../components/HomeLayout/Content/ContactForm";
-
 import { Row, Col, Typography } from "antd";
 
+//pagina de contacto
 const Contact = () => {
   const { Title } = Typography;
   const styleRow = { marginTop: 100, marginBottom: 100 };
-  const paddingCol = { padding: 20 };
+
   return (
     <Row style={styleRow}>
-      <Col lg={24} style={paddingCol}>
+      <Col lg={24} style={{ textAlign: "center", marginBottom: 25 }}>
         <Title>Contacto</Title>
       </Col>
 

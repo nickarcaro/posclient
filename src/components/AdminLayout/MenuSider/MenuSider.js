@@ -1,59 +1,54 @@
 import React from "react";
 import {
-  AppstoreOutlined,
-  BarChartOutlined,
-  CloudOutlined,
-  ShopOutlined,
+  DashboardOutlined,
+  MenuUnfoldOutlined,
+  MenuFoldOutlined,
   TeamOutlined,
-  UserOutlined,
-  UploadOutlined,
-  VideoCameraOutlined,
-  MailOutlined,
+  DollarOutlined,
+  ContainerOutlined,
+  CarOutlined,
+  TagsOutlined,
+  PercentageOutlined,
+  PartitionOutlined,
 } from "@ant-design/icons";
 import { Menu, Layout } from "antd";
 import { Link, withRouter } from "react-router-dom";
 
-const MenuSider = ({ menuCollapsed, location }) => {
+const MenuSider = ({ menuCollapsed, setMenuCollapsed, location }) => {
   const { Sider } = Layout;
-  const { SubMenu } = Menu;
+
   return (
-    <Sider trigger={null} collapsible collapsed={menuCollapsed}>
-      <div className="logo-admin" />
-      <Menu theme="dark" mode="inline" defaultSelectedKeys={["4"]}>
-        <SubMenu key="sub1" icon={<MailOutlined />} title="Productos">
-          <Menu.Item key="1" icon={<UserOutlined />}>
-            catalogo
-          </Menu.Item>
-        </SubMenu>
-        <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-          stock
+    <Sider
+      trigger={menuCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+      collapsible
+      collapsed={menuCollapsed}
+      onCollapse={setMenuCollapsed}
+    >
+      <div className="logo" />
+      <Menu theme="dark" mode="inline" defaultSelectedKeys={["/"]}>
+        <Menu.Item key="/" icon={<DashboardOutlined />}>
+          <Link to="/"> Indicadores</Link>
         </Menu.Item>
-        <Menu.Item key="3" icon={<UploadOutlined />}>
-          proveedores
+        <Menu.Item key="/productos" icon={<ContainerOutlined />}>
+          <Link to="/productos">Productos</Link>
         </Menu.Item>
-        <Menu.Item key="4" icon={<BarChartOutlined />}>
-          Categorias
+        <Menu.Item key="/vendedores" icon={<TeamOutlined />}>
+          <Link to="/vendedores">Vendedores</Link>
         </Menu.Item>
-        <Menu.Item key="5" icon={<CloudOutlined />}>
-          ventas
+        <Menu.Item key="/ventas" icon={<DollarOutlined />}>
+          <Link to="/ventas">Ventas</Link>
         </Menu.Item>
-        <Menu.Item key="6" icon={<AppstoreOutlined />}>
-          inventario
+        <Menu.Item key="/proveedores" icon={<CarOutlined />}>
+          <Link to="/proveedores">Proveedores</Link>
         </Menu.Item>
-        <Menu.Item key="7" icon={<TeamOutlined />}>
-          precios
+        <Menu.Item key="/jerarquias" icon={<PartitionOutlined />}>
+          <Link to="/jerarquias">Jerarquias</Link>
         </Menu.Item>
-        <Menu.Item key="8" icon={<ShopOutlined />}>
-          promociones
+        <Menu.Item key="/categorias" icon={<TagsOutlined />}>
+          <Link to="/categorias">Categorias</Link>
         </Menu.Item>
-        <Menu.Item key="9" icon={<ShopOutlined />}>
-          impuesto
-        </Menu.Item>
-        <Menu.Item key="10" icon={<ShopOutlined />}>
-          precios
-        </Menu.Item>
-        <Menu.Item key="11" icon={<ShopOutlined />}>
-          informes
+        <Menu.Item key={"/promociones"} icon={<PercentageOutlined />}>
+          <Link to="/promociones"> Promociones</Link>
         </Menu.Item>
       </Menu>
     </Sider>

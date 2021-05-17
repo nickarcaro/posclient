@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import LoginForm from "../../../components/HomeLayout/LoginForm";
 import ForgotPass from "../../../components/HomeLayout/ForgotPass";
 
+//pagina del modal de autenticacion
 const Auth = ({ onCloseModal, setTitleModal }) => {
   const [showLogin, setShowLogin] = useState(true);
 

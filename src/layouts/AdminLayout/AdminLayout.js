@@ -1,44 +1,27 @@
 import React, { useState } from "react";
 import { Layout } from "antd";
-import MenuSider from "../../components/AdminLayout/MenuSider";
-
 import { LoadRoutes } from "../LoadRoutes";
-
+import MenuSider from "../../components/AdminLayout/MenuSider";
 import MenuTop from "../../components/AdminLayout/MenuTop";
 
 const AdminLayout = ({ routes }) => {
   const [menuCollapsed, setMenuCollapsed] = useState(false);
-  const { Header, Content, Footer, Sider } = Layout;
+  const { Header, Content, Footer } = Layout;
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      <MenuSider menuCollapsed={menuCollapsed} />
-
-      <Layout className="site-layout">
-        <Header className="site-layout-background" style={{ padding: 0 }}>
-          <MenuTop
-            menuCollapsed={menuCollapsed}
-            setMenuCollapsed={setMenuCollapsed}
-          />
+      <MenuSider
+        menuCollapsed={menuCollapsed}
+        setMenuCollapsed={setMenuCollapsed}
+      />
+      <Layout>
+        <Header style={{ padding: 0, background: "#fff" }}>
+          <MenuTop />
         </Header>
-        <Content
-          className="site-layout-background"
-          style={{
-            margin: "24px 16px",
-            padding: 24,
-            minHeight: 280,
-          }}
-        >
-          <div
-            className="site-layout-background"
-            style={{ padding: 24, minHeight: 360 }}
-          >
-            <LoadRoutes routes={routes} />
-          </div>
+        <Content style={{ margin: "0 16px" }}>
+          <LoadRoutes routes={routes} />
         </Content>
-        <Footer style={{ textAlign: "center" }}>
-          Ant Design ©2018 Created by Ant UED
-        </Footer>
+        <Footer>POS Almacenes</Footer>
       </Layout>
     </Layout>
   );

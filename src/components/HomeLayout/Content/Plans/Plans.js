@@ -5,14 +5,13 @@ import { page1 } from "./data";
 const Plans = () => {
   const children = page1.map((card, i) => (
     <Col className="card-wrapper" key={i.toString()} md={8} xs={24}>
-      <a className="card" href={card.href}>
+      <div className="card">
         <h3>{card.title}</h3>
         <img src={card.img} alt="" className="card-img-top" />
         <div className="card-body">
-          <span className="title">{card.title}</span>
           <span className="description text-secondary">{card.description}</span>
         </div>
-      </a>
+      </div>
     </Col>
   ));
 

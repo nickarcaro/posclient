@@ -1,6 +1,7 @@
 //librerias (react y decodificacion de JWT)
 import React, { useState, useEffect, useMemo } from "react";
 import jwtDecode from "jwt-decode";
+import { useHistory } from "react-router-dom";
 //contexto de la aplicación (globalmente en la app tiene los datos del usuario)
 import AuthContext from "./context/AuthContext";
 //api de token
@@ -15,6 +16,7 @@ export default function App() {
   //estados de usuario autenticado y de recargar usuario
   const [auth, setAuth] = useState(false);
   const [realoadUser, setReloadUser] = useState(false);
+  let history = useHistory();
 
   //obtención de token
   useEffect(() => {
@@ -45,7 +47,7 @@ export default function App() {
       setAuth(null);
     }
   };
-
+  //manejo global del dato de usuario
   const authData = useMemo(
     () => ({
       auth,

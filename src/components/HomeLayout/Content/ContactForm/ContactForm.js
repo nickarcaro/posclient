@@ -1,33 +1,17 @@
-import { Form, Input, Button } from "antd";
-import {
-  MailOutlined,
-  UserOutlined,
-  QuestionCircleOutlined,
-} from "@ant-design/icons";
+import { Form, Input, Button, Select } from "antd";
+import { MailOutlined, UserOutlined } from "@ant-design/icons";
+import { data } from "./data";
 const ContactForm = () => {
-  const layout = {
-    labelCol: {
-      span: 8,
-    },
-    wrapperCol: {
-      span: 16,
-    },
-  };
+  const { Option } = Select;
 
-  const validateMessages = {
-    required: "${label} is required!",
-    types: {
-      email: "${label} is not a valid email!",
-      number: "${label} is not a valid number!",
-    },
-    number: {
-      range: "${label} must be between ${min} and ${max}",
-    },
-  };
+  const selects = data.map((index, i) => (
+    <Option value={index.tipo}> {index.tipo}</Option>
+  ));
 
   const onFinish = (values) => {
     console.log(values);
   };
+
   return (
     <Form onFinish={onFinish}>
       <Form.Item>
@@ -38,15 +22,14 @@ const ContactForm = () => {
       </Form.Item>
       <Form.Item>
         <Input
-          prefix={<QuestionCircleOutlined className="site-form-item-icon" />}
-          placeholder="Consulta"
-        />
-      </Form.Item>
-      <Form.Item>
-        <Input
           prefix={<MailOutlined className="site-form-item-icon" />}
           placeholder="Correo Electrónico"
         />
+      </Form.Item>
+      <Form.Item>
+        <Select style={{ width: 120 }} placeholder="Consulta">
+          {selects}
+        </Select>
       </Form.Item>
       <Form.Item>
         <Input.TextArea placeholder="Contacto" />

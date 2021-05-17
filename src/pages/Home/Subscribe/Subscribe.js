@@ -1,22 +1,23 @@
-import { Row, Col } from "antd";
+import { Row, Col, Layout } from "antd";
 
 const Subscribe = () => {
+  const { Content } = Layout;
   return (
-    <Row>
-      <Col lg={24}>
-        <h1>registrate</h1>
-      </Col>
-
-      <Col lg={4} />
-      <Col lg={16}>
-        <Row gutter={24}>
-          <Col lg={12}>registro</Col>
-
-          <Col lg={12}>planes</Col>
-        </Row>
-      </Col>
-      <Col lg={4} />
-    </Row>
+    <Content style={{ padding: "0 50px", marginTop: 64 }}>
+      <Row style={{ marginTop: 100, marginBottom: 100 }}>
+        <Col xl={4} lg={4} />
+        <Col xl={16} lg={16} style={{ textAlign: "center" }}>
+          <p>Formulario de registro para usuario</p>
+          <p>Formulario de registro para usuario</p>
+          <p>Formulario de registro para usuario</p>
+          <p>Formulario de registro para usuario</p>
+          <p>Formulario de registro para usuario</p>
+          <p>Formulario de registro para usuario</p>
+          <p>Formulario de registro para usuario</p>
+        </Col>
+        <Col xl={4} lg={4} />
+      </Row>
+    </Content>
   );
 };
 
