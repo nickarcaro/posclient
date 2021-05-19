@@ -1,23 +1,22 @@
 //librerias (react y decodificacion de JWT)
 import React, { useState, useEffect, useMemo } from "react";
+import { Redirect, useHistory } from "react-router-dom";
 import jwtDecode from "jwt-decode";
-import { useHistory } from "react-router-dom";
 //contexto de la aplicación (globalmente en la app tiene los datos del usuario)
 import AuthContext from "./context/AuthContext";
 //api de token
 import { setToken, getToken, removeToken } from "./api/token";
 //sistema de navegación
 import Navigation from "./config/Navigation";
-import { homeRoutes, adminRoutes } from "./config/routes";
+//import { homeRoutes } from "./config/routes";
 //css (less)
 import "./less/index.less";
 
 export default function App() {
   //estados de usuario autenticado y de recargar usuario
-  const [auth, setAuth] = useState(false);
+  const [auth, setAuth] = useState(undefined);
   const [realoadUser, setReloadUser] = useState(false);
   let history = useHistory();
-
   //obtención de token
   useEffect(() => {
     const token = getToken();
@@ -35,6 +34,7 @@ export default function App() {
   //login de usuario
   const login = (token) => {
     setToken(token);
+    window.location.reload();
     setAuth({
       token,
       idUser: jwtDecode(token).id,
@@ -44,6 +44,7 @@ export default function App() {
   const logout = () => {
     if (auth) {
       removeToken();
+      window.location.reload();
       setAuth(null);
     }
   };
@@ -63,11 +64,7 @@ export default function App() {
   //si auth true, usa las rutas de admin. sino el portal comercial
   return (
     <AuthContext.Provider value={authData}>
-      {!auth ? (
-        <Navigation routes={homeRoutes} />
-      ) : (
-        <Navigation routes={adminRoutes} />
-      )}
+      <Navigation />
     </AuthContext.Provider>
   );
 }

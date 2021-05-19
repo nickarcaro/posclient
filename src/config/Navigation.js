@@ -1,25 +1,26 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { CPRoutes as routes, adminRoutes } from "./routes";
+import { map } from "lodash";
+import useAuth from "../hooks/useAuth";
 
-const Navigation = ({ routes }) => {
+export default function Navigation() {
+  const { auth } = useAuth();
   return (
     <Router>
       <Switch>
-        {routes.map((route, index) => (
-          <RouteWithSubRoutes key={index} {...route} />
+        {map(routes, (route, index) => (
+          <Route
+            key={index}
+            path={route.path}
+            exact={route.exact}
+            render={(props) => (
+              <route.layout>
+                <route.component {...props} />
+              </route.layout>
+            )}
+          />
         ))}
       </Switch>
     </Router>
   );
-};
-
-function RouteWithSubRoutes(route) {
-  return (
-    <Route
-      path={route.path}
-      exact={route.exact}
-      render={(props) => <route.component routes={route.routes} {...props} />}
-    />
-  );
 }
-
-export default Navigation;

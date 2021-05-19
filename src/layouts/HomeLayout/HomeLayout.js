@@ -2,9 +2,8 @@ import { Layout, Row, Col } from "antd"; //libreria de estilo
 //componentes
 import MenuTop from "../../components/HomeLayout/MenuTop";
 import MainFooter from "../../components/HomeLayout/Footer/MainFooter";
-import { LoadRoutes } from "../LoadRoutes"; //funcion para cargar rutas
 
-const HomeLayout = ({ routes }) => {
+const HomeLayout = ({ children }) => {
   const { Header, Content } = Layout;
 
   return (
@@ -20,11 +19,7 @@ const HomeLayout = ({ routes }) => {
           </Col>
         </Row>
       </Header>
-
-      <Content>
-        <LoadRoutes routes={routes} />
-      </Content>
-
+      <Content>{children} </Content>
       <MainFooter />
     </Layout>
   );
