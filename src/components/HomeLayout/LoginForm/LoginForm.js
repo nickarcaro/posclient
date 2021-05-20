@@ -1,4 +1,6 @@
+import { React, useState } from "react";
 import { Form, Input, Button, notification } from "antd";
+import { useHistory } from "react-router-dom";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -6,13 +8,15 @@ import useAuth from "../../../hooks/useAuth";
 import { loginApi } from "../../../api/user";
 
 const LoginForm = ({ showForgotPass, onCloseModal }) => {
+  const [loading, setLoading] = useState(false);
   const { login } = useAuth();
+  let history = useHistory();
 
   const formik = useFormik({
     initialValues: initialValues(),
     validationSchema: Yup.object(validationSchema()),
     onSubmit: async (formData) => {
-      formData.username = "pepe";
+      setLoading(true);
       const response = await loginApi(formData);
       onCloseModal();
       if (response?.jwt) {
@@ -20,11 +24,14 @@ const LoginForm = ({ showForgotPass, onCloseModal }) => {
           message: "Login correcto.",
         });
         login(response.jwt);
+        onCloseModal();
+        history.replace("/pos");
       } else {
         notification["error"]({
           message: "El email o la contraseña son incorrectos",
         });
       }
+      setLoading(false);
     },
   });
 
@@ -59,7 +66,12 @@ const LoginForm = ({ showForgotPass, onCloseModal }) => {
       </Form.Item>
 
       <Form.Item>
-        <Button type="primary" htmlType="submit" className="login-form-button">
+        <Button
+          type="primary"
+          htmlType="submit"
+          className="login-form-button"
+          loading={loading}
+        >
           Iniciar Sesión
         </Button>
         O <div>suscribete!</div>

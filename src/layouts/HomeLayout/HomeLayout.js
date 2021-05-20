@@ -1,4 +1,6 @@
+import React, { useState, useEffect } from "react";
 import { Layout, Row, Col } from "antd"; //libreria de estilo
+
 //componentes
 import MenuTop from "../../components/HomeLayout/MenuTop";
 import MainFooter from "../../components/HomeLayout/Footer/MainFooter";
@@ -19,7 +21,7 @@ const HomeLayout = ({ children }) => {
           </Col>
         </Row>
       </Header>
-      <Content>{children} </Content>
+      <Content>{children}</Content>
       <MainFooter />
     </Layout>
   );

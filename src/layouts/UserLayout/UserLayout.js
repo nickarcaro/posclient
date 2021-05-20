@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { Layout, Menu, Breadcrumb } from "antd";
 import {
   UserOutlined,
@@ -6,11 +7,29 @@ import {
 } from "@ant-design/icons";
 import MenuTop from "../../components/HomeLayout/MenuTop";
 import MainFooter from "../../components/HomeLayout/Footer/MainFooter";
+import useAuth from "../../hooks/useAuth";
+import { getMeApi } from "../../api/user";
+import { useHistory } from "react-router-dom";
 
 const UserLayout = ({ children }) => {
   const { SubMenu } = Menu;
   const { Header, Content, Sider } = Layout; //componentes
+  const [user, setUser] = useState(undefined);
+  const { auth, logout, setReloadUser } = useAuth();
+  const history = useHistory();
 
+  useEffect(() => {
+    (async () => {
+      const response = await getMeApi(logout);
+      setUser(response || null);
+    })();
+  }, [auth]);
+
+  if (user === undefined) return null;
+  if (!auth && !user) {
+    history.replace("/");
+    return null;
+  }
   return (
     <Layout>
       <Header className="header">
