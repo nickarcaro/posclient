@@ -1,5 +1,5 @@
 import { Row, Col, Layout } from "antd";
-
+import SubscribeForm from "../../../components/HomeLayout/SubscribeForm";
 const Subscribe = () => {
   const { Content } = Layout;
   return (
@@ -7,13 +7,7 @@ const Subscribe = () => {
       <Row style={{ marginTop: 100, marginBottom: 100 }}>
         <Col xl={4} lg={4} />
         <Col xl={16} lg={16} style={{ textAlign: "center" }}>
-          <p>Formulario de registro para usuario</p>
-          <p>Formulario de registro para usuario</p>
-          <p>Formulario de registro para usuario</p>
-          <p>Formulario de registro para usuario</p>
-          <p>Formulario de registro para usuario</p>
-          <p>Formulario de registro para usuario</p>
-          <p>Formulario de registro para usuario</p>
+          <SubscribeForm />
         </Col>
         <Col xl={4} lg={4} />
       </Row>

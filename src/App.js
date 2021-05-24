@@ -1,5 +1,5 @@
 //librerias (react y decodificacion de JWT)
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import jwtDecode from "jwt-decode";
 //contexto de la aplicación (globalmente en la app tiene los datos del usuario)
 import AuthContext from "./context/AuthContext";
@@ -16,7 +16,7 @@ export default function App() {
   const [auth, setAuth] = useState(undefined);
   const [realoadUser, setReloadUser] = useState(false);
 
-  //obtención de token
+  //obtención de token cuando se actualice la pagina (reload user)
 
   useEffect(() => {
     const token = getToken();
@@ -31,7 +31,7 @@ export default function App() {
     setReloadUser(false);
   }, [realoadUser]);
 
-  //login de usuario
+  //login de usuario (guarda los datos del usuario)
 
   const login = (token) => {
     setToken(token);
@@ -39,16 +39,18 @@ export default function App() {
       token,
       idUser: jwtDecode(token).id,
     });
+    window.location.replace("/pos");
   };
-  //cerrar sesión
-  const logout = () => {
+  //cerrar sesión (remueve token, setea al autenticado y redirige al home del portal comercial)
+  const logout = useCallback(() => {
     if (auth) {
       removeToken();
       setAuth(null);
       window.location.replace("/");
     }
-  };
-  //manejo global del dato de usuario
+  }, [auth, setAuth]);
+
+  //manejo global del dato de usuario cuando se actualice el auth
 
   const authData = useMemo(
     () => ({
@@ -57,8 +59,9 @@ export default function App() {
       logout,
       setReloadUser,
     }),
-    [auth]
+    [auth, logout]
   );
+  //cuando se actualiza, auth es undefined y luego tiene el dato
   if (auth === undefined) return null;
 
   return (

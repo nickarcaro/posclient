@@ -1,6 +1,5 @@
 import { React, useState } from "react";
 import { Form, Input, Button, notification } from "antd";
-import { useHistory } from "react-router-dom";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -10,7 +9,6 @@ import { loginApi } from "../../../api/user";
 const LoginForm = ({ showForgotPass, onCloseModal }) => {
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
-  let history = useHistory();
 
   const formik = useFormik({
     initialValues: initialValues(),
@@ -18,14 +16,12 @@ const LoginForm = ({ showForgotPass, onCloseModal }) => {
     onSubmit: async (formData) => {
       setLoading(true);
       const response = await loginApi(formData);
-      onCloseModal();
       if (response?.jwt) {
         notification["success"]({
           message: "Login correcto.",
         });
         login(response.jwt);
         onCloseModal();
-        history.replace("/pos");
       } else {
         notification["error"]({
           message: "El email o la contraseña son incorrectos",

@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import { Layout, Row, Col } from "antd"; //libreria de estilo
 
 //componentes
@@ -7,7 +6,7 @@ import MainFooter from "../../components/HomeLayout/Footer/MainFooter";
 
 const HomeLayout = ({ children }) => {
   const { Header, Content } = Layout;
-
+  //recibe la página (children) que se realiza en navigation
   return (
     <Layout>
       <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
@@ -28,18 +27,3 @@ const HomeLayout = ({ children }) => {
 };
 
 export default HomeLayout;
-
-/*
-
-<Row>
-          <Col lg={1} />
-          <Col lg={11}>
-            <div className="logo-home" />
-          </Col>
-          <Col lg={2} />
-          <Col lg={10}>
-            <MenuTop />
-          </Col>
-        </Row>
-
-*/

@@ -1,4 +1,5 @@
-import React from "react";
+import { Menu, Layout } from "antd";
+import { Link, withRouter, useParams } from "react-router-dom";
 import {
   DashboardOutlined,
   MenuUnfoldOutlined,
@@ -11,11 +12,12 @@ import {
   PercentageOutlined,
   PartitionOutlined,
 } from "@ant-design/icons";
-import { Menu, Layout } from "antd";
-import { Link, withRouter } from "react-router-dom";
 
-const MenuSider = ({ menuCollapsed, setMenuCollapsed, location }) => {
+const MenuSider = ({ menuCollapsed, setMenuCollapsed }) => {
   const { Sider } = Layout;
+  //el nombre del almacen
+  const { store } = useParams();
+  //sider cambia el icono cuando se oprime
 
   return (
     <Sider
@@ -25,30 +27,30 @@ const MenuSider = ({ menuCollapsed, setMenuCollapsed, location }) => {
       onCollapse={setMenuCollapsed}
     >
       <div className="logo" />
-      <Menu theme="dark" mode="inline" defaultSelectedKeys={["/"]}>
-        <Menu.Item key="/" icon={<DashboardOutlined />}>
-          <Link to="/"> Indicadores</Link>
+      <Menu theme="dark" mode="inline" defaultSelectedKeys={[`${store}`]}>
+        <Menu.Item key={`${store}`} icon={<DashboardOutlined />}>
+          <Link to={`${store}`}> Indicadores</Link>
         </Menu.Item>
-        <Menu.Item key="/productos" icon={<ContainerOutlined />}>
-          <Link to="/productos">Productos</Link>
+        <Menu.Item key={`/productos`} icon={<ContainerOutlined />}>
+          <Link to={`/productos`}>Productos</Link>
         </Menu.Item>
-        <Menu.Item key="/vendedores" icon={<TeamOutlined />}>
-          <Link to="/vendedores">Vendedores</Link>
+        <Menu.Item key={`/vendedores`} icon={<TeamOutlined />}>
+          <Link to={`/vendedores`}>Vendedores</Link>
         </Menu.Item>
-        <Menu.Item key="/ventas" icon={<DollarOutlined />}>
-          <Link to="/ventas">Ventas</Link>
+        <Menu.Item key={`/ventas`} icon={<DollarOutlined />}>
+          <Link to={`/ventas`}>Ventas</Link>
         </Menu.Item>
-        <Menu.Item key="/proveedores" icon={<CarOutlined />}>
-          <Link to="/proveedores">Proveedores</Link>
+        <Menu.Item key={`/proveedores`} icon={<CarOutlined />}>
+          <Link to={`/proveedores`}>Proveedores</Link>
         </Menu.Item>
-        <Menu.Item key="/jerarquias" icon={<PartitionOutlined />}>
-          <Link to="/jerarquias">Jerarquias</Link>
+        <Menu.Item key={`/jerarquias`} icon={<PartitionOutlined />}>
+          <Link to={`/jerarquias`}>Jerarquias</Link>
         </Menu.Item>
-        <Menu.Item key="/categorias" icon={<TagsOutlined />}>
-          <Link to="/categorias">Categorias</Link>
+        <Menu.Item key={`/categorias`} icon={<TagsOutlined />}>
+          <Link to={`/categorias`}>Categorias</Link>
         </Menu.Item>
-        <Menu.Item key={"/promociones"} icon={<PercentageOutlined />}>
-          <Link to="/promociones"> Promociones</Link>
+        <Menu.Item key={`/promociones`} icon={<PercentageOutlined />}>
+          <Link to={`/promociones`}> Promociones</Link>
         </Menu.Item>
       </Menu>
     </Sider>

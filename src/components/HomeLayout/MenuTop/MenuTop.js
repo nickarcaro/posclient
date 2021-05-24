@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Modal from "../../../components/Modal";
 import Auth from "../../../pages/Home/Auth";
-import { Menu, Avatar, Row, Col } from "antd";
+import { Menu, Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
@@ -18,9 +18,9 @@ const MenuTop = () => {
   useEffect(() => {
     (async () => {
       const response = await getMeApi(logout);
-      setUser(response);
+      setUser(response || null);
     })();
-  }, [auth]);
+  }, [auth, logout, setUser]);
 
   return (
     <div>
@@ -58,7 +58,7 @@ const MenuOptions = ({ onShowModal, user, logout }) => {
             title={` ${user.name}`}
           >
             <Menu.Item key="setting:1">
-              <Link to="/mi-cuenta"> Mi Cuenta</Link>
+              <Link to="/pos/mi-cuenta"> Mi Cuenta</Link>
             </Menu.Item>
             <Menu.Item key="setting:2" onClick={logout}>
               Salir

@@ -1,30 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Layout } from "antd";
+//components
 import MenuSider from "../../components/AdminLayout/MenuSider";
 import MenuTop from "../../components/AdminLayout/MenuTop";
-import useAuth from "../../hooks/useAuth";
-import { getMeApi } from "../../api/user";
-import { useHistory } from "react-router-dom";
 
 const AdminLayout = ({ children }) => {
-  const [menuCollapsed, setMenuCollapsed] = useState(false);
   const { Header, Content, Footer } = Layout;
-  const [user, setUser] = useState(undefined);
-  const { auth, logout, setReloadUser } = useAuth();
-  const history = useHistory();
+  //estados, si hay user, y cuando se apreta el boton del nav vertical de abajo
+  const [menuCollapsed, setMenuCollapsed] = useState(false);
 
-  useEffect(() => {
-    (async () => {
-      const response = await getMeApi(logout);
-      setUser(response || null);
-    })();
-  }, [auth]);
-
-  if (user === undefined) return null;
-  if (!auth && !user) {
-    history.replace("/");
-    return null;
-  }
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <MenuSider

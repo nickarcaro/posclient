@@ -12,18 +12,16 @@ const ForgotPass = ({ showLoginForm, onCloseModal }) => {
     initialValues: initialValues(),
     validationSchema: Yup.object(validationSchema()),
     onSubmit: async (formData) => {
-      formik.setErrors({});
       setLoading(true);
-      const response = await resetPasswordApi(formData);
-      if (response?.jwt) {
-        notification["success"]({
-          message: `se ha enviado correo a ${formData}`,
-        });
+      formik.setErrors({});
+      const validateEmail = Yup.string().email().required();
 
-        onCloseModal();
+      if (!validateEmail.isValidSync(formik.values.identifier)) {
+        formik.setErrors({ identifier: true });
       } else {
-        notification["error"]({
-          message: "El email incorrecto",
+        await resetPasswordApi(formik.values.identifier);
+        notification["success"]({
+          message: "se ha enviado correo.",
         });
       }
       setLoading(false);
