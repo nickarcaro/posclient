@@ -5,7 +5,6 @@ import * as Yup from "yup";
 import { updateNameApi } from "../../../api/user";
 
 const ChangeNameForm = ({ user, logout, setReloadUser }) => {
-  console.log(user);
   const [loading, setLoading] = useState(false);
 
   const formik = useFormik({

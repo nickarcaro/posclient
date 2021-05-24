@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import useAuth from "../../../hooks/useAuth";
 import * as Yup from "yup";
 import { addStore, updateStore } from "../../../api/store";
-const AddStore = ({ setReloadStores, setShowModal, newStore, store }) => {
+const AddStore = ({ setReloadStores, setShow, newStore, store }) => {
   const [loading, setLoading] = useState(false);
   const { auth, logout } = useAuth();
 
@@ -30,10 +30,13 @@ const AddStore = ({ setReloadStores, setShowModal, newStore, store }) => {
       });
       setLoading(false);
     } else {
+      notification["success"]({
+        message: "Almacen creado",
+      });
       formik.resetForm();
       setReloadStores(true);
       setLoading(false);
-      setShowModal(false);
+      setShow(false);
     }
   };
   const modifyStore = (formData) => {
@@ -42,7 +45,7 @@ const AddStore = ({ setReloadStores, setShowModal, newStore, store }) => {
       ...formData,
       user: auth.idUser,
     };
-    const response = updateStore(store._id, formDataTemp, logout);
+    const response = updateStore(store.id, formDataTemp, logout);
 
     if (!response) {
       notification["error"]({
@@ -50,10 +53,13 @@ const AddStore = ({ setReloadStores, setShowModal, newStore, store }) => {
       });
       setLoading(false);
     } else {
+      notification["success"]({
+        message: "Almacen modificado",
+      });
       formik.resetForm();
       setReloadStores(true);
       setLoading(false);
-      setShowModal(false);
+      setShow(false);
     }
   };
 
@@ -67,7 +73,7 @@ const AddStore = ({ setReloadStores, setShowModal, newStore, store }) => {
         value={formik.values.name}
       />
       <div className="actions">
-        <Button className="submit" type="submit" loading={loading}>
+        <Button htmlType="submit" loading={loading}>
           {newStore ? "Crear almacen" : "Actualizar almacen"}
         </Button>
       </div>

@@ -1,15 +1,13 @@
+import React, { useState, useEffect } from "react";
 import QueueAnim from "rc-queue-anim";
 import { map, size } from "lodash";
 import { Row, Col, Button } from "antd";
-import React, { useState, useEffect } from "react";
-
 import { getStores } from "../../../api/store";
 import useAuth from "../../../hooks/useAuth";
 
 const ListStores = ({ setReloadStores, reloadStores, openModal }) => {
-  const { auth, logout } = useAuth();
   const [stores, setStores] = useState(null);
-
+  const { auth, logout } = useAuth();
   useEffect(() => {
     (async () => {
       const response = await getStores(auth.idUser, logout);
@@ -56,16 +54,16 @@ const ListStores = ({ setReloadStores, reloadStores, openModal }) => {
 };
 
 const Store = ({ store, logout, setReloadStores, openModal }) => {
+  console.log(store);
   return (
     <div className="address">
       <p>{store.nombre}</p>
       <p>{store.estado}</p>
 
       <div className="actions">
-        <Button
-          primary
-          onClick={() => openModal(`Editar: ${store.nombre}`, store)}
-        />
+        <Button onClick={() => openModal(`Editar: ${store.nombre}`, store)}>
+          Editar
+        </Button>
       </div>
     </div>
   );
