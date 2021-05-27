@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import QueueAnim from "rc-queue-anim";
 import { map, size } from "lodash";
-import { Row, Col, Button } from "antd";
+import { Row, Col, Button, Card, Avatar, Spin } from "antd";
+import { useParams, useHistory, Link, Redirect } from "react-router-dom";
+
 import { getStores } from "../../../api/store";
 import useAuth from "../../../hooks/useAuth";
 
 const ListStores = ({ setReloadStores, reloadStores, openModal }) => {
   const [stores, setStores] = useState(null);
   const { auth, logout } = useAuth();
+
   useEffect(() => {
     (async () => {
       const response = await getStores(auth.idUser, logout);
@@ -16,7 +19,14 @@ const ListStores = ({ setReloadStores, reloadStores, openModal }) => {
     })();
   }, [reloadStores, logout, setReloadStores, auth.idUser]);
 
-  if (!stores) return null;
+  if (!stores)
+    return (
+      <Spin
+        tip="Cargando almacenes..."
+        style={{ width: "100%", padding: "200px 0" }}
+      />
+    );
+
   return (
     <div className="list-address">
       {size(stores) === 0 ? (
@@ -30,14 +40,7 @@ const ListStores = ({ setReloadStores, reloadStores, openModal }) => {
             delay={500}
           >
             {map(stores, (store) => (
-              <Col
-                className="card-wrapper"
-                md={8}
-                lg={8}
-                xl={8}
-                xs={24}
-                key={store.id}
-              >
+              <Col md={4} key={store.id}>
                 <Store
                   store={store}
                   logout={logout}
@@ -54,18 +57,22 @@ const ListStores = ({ setReloadStores, reloadStores, openModal }) => {
 };
 
 const Store = ({ store, logout, setReloadStores, openModal }) => {
+  const { Meta } = Card;
+
   console.log(store);
   return (
-    <div className="address">
-      <p>{store.nombre}</p>
-      <p>{store.estado}</p>
+    <Card>
+      <Meta title={store.nombre} description={store.estado} />
 
       <div className="actions">
         <Button onClick={() => openModal(`Editar: ${store.nombre}`, store)}>
           Editar
         </Button>
+        <Button>
+          <Link to={`pos/${store.slug}`}>{store.nombre}</Link>
+        </Button>
       </div>
-    </div>
+    </Card>
   );
 };
 export default ListStores;

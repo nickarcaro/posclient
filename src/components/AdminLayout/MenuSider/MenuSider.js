@@ -1,5 +1,5 @@
 import { Menu, Layout } from "antd";
-import { Link, withRouter, useParams } from "react-router-dom";
+import { Link, withRouter, useLocation, useHistory } from "react-router-dom";
 import {
   DashboardOutlined,
   MenuUnfoldOutlined,
@@ -16,7 +16,6 @@ import {
 const MenuSider = ({ menuCollapsed, setMenuCollapsed }) => {
   const { Sider } = Layout;
   //el nombre del almacen
-  const { store } = useParams();
   //sider cambia el icono cuando se oprime
 
   return (
@@ -27,15 +26,19 @@ const MenuSider = ({ menuCollapsed, setMenuCollapsed }) => {
       onCollapse={setMenuCollapsed}
     >
       <div className="logo" />
-      <Menu theme="dark" mode="inline" defaultSelectedKeys={[`${store}`]}>
-        <Menu.Item key={`${store}`} icon={<DashboardOutlined />}>
-          <Link to={`${store}`}> Indicadores</Link>
+      <Menu
+        theme="dark"
+        mode="inline"
+        defaultSelectedKeys={[location.pathname]}
+      >
+        <Menu.Item key={`1`} icon={<DashboardOutlined />}>
+          indicadores
         </Menu.Item>
         <Menu.Item key={`/productos`} icon={<ContainerOutlined />}>
-          <Link to={`/productos`}>Productos</Link>
+          productos
         </Menu.Item>
         <Menu.Item key={`/vendedores`} icon={<TeamOutlined />}>
-          <Link to={`/vendedores`}>Vendedores</Link>
+          vendedores
         </Menu.Item>
         <Menu.Item key={`/ventas`} icon={<DollarOutlined />}>
           <Link to={`/ventas`}>Ventas</Link>
