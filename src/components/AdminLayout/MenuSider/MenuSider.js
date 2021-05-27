@@ -1,5 +1,5 @@
 import { Menu, Layout } from "antd";
-import { Link, withRouter, useLocation, useHistory } from "react-router-dom";
+import { Link, withRouter, useLocation } from "react-router-dom";
 import {
   DashboardOutlined,
   MenuUnfoldOutlined,
@@ -17,7 +17,7 @@ const MenuSider = ({ menuCollapsed, setMenuCollapsed }) => {
   const { Sider } = Layout;
   //el nombre del almacen
   //sider cambia el icono cuando se oprime
-
+  let location = useLocation();
   return (
     <Sider
       trigger={menuCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
