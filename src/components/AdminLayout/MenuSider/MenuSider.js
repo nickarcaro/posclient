@@ -35,25 +35,25 @@ const MenuSider = ({ menuCollapsed, setMenuCollapsed }) => {
           indicadores
         </Menu.Item>
         <Menu.Item key={`/productos`} icon={<ContainerOutlined />}>
-          productos
+        <Link to={`./productos`}>Productos</Link>
         </Menu.Item>
         <Menu.Item key={`/vendedores`} icon={<TeamOutlined />}>
           vendedores
         </Menu.Item>
         <Menu.Item key={`/ventas`} icon={<DollarOutlined />}>
-          <Link to={`/ventas`}>Ventas</Link>
+          <Link to={`./ventas`}>Ventas</Link>
         </Menu.Item>
         <Menu.Item key={`/proveedores`} icon={<CarOutlined />}>
-          <Link to={`/proveedores`}>Proveedores</Link>
+          <Link to={`./proveedores`}>Proveedores</Link>
         </Menu.Item>
         <Menu.Item key={`/jerarquias`} icon={<PartitionOutlined />}>
-          <Link to={`/jerarquias`}>Jerarquias</Link>
+          <Link to={`./jerarquias`}>Jerarquias</Link>
         </Menu.Item>
         <Menu.Item key={`/categorias`} icon={<TagsOutlined />}>
-          <Link to={`/categorias`}>Categorias</Link>
+          <Link to={`./categorias`}>Categorias</Link>
         </Menu.Item>
         <Menu.Item key={`/promociones`} icon={<PercentageOutlined />}>
-          <Link to={`/promociones`}> Promociones</Link>
+          <Link to={`./promociones`}> Promociones</Link>
         </Menu.Item>
       </Menu>
     </Sider>
