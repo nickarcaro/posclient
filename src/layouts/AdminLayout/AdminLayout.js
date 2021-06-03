@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Layout } from "antd";
-//components
+//components (sider y menutop)
 import MenuSider from "../../components/AdminLayout/MenuSider";
 import MenuTop from "../../components/AdminLayout/MenuTop";
 
+//componente layout , toma componente de página (paginas de /pages/admin)
 const AdminLayout = ({ children }) => {
   const { Header, Content, Footer } = Layout;
-  //estados, si hay user, y cuando se apreta el boton del nav vertical de abajo
+  //estados, cuando se apreta el boton del nav vertical de abajo (ese estado se manda al componente menusider)
   const [menuCollapsed, setMenuCollapsed] = useState(false);
 
   return (

@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^12.1.10",
     "antd": "^4.15.2",
     "craco-less": "^1.17.1",
+    "enzyme-to-json": "^3.6.2",
     "formik": "^2.2.6",
     "jwt-decode": "^3.1.2",
     "less": "^4.1.1",
@@ -51,5 +52,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.1"
   }
 }
