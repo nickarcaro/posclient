@@ -1,5 +1,7 @@
-import { HashRouter as Router, Route, Switch } from "react-router-dom";
-import { map } from "lodash";
+//libreria de manejo de rutas
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { map } from "lodash"; //iterador
+//array de rutas
 import routes from "./routes";
 
 //sistema de navegación (ciclo for), renderiza el layout y su componente(pagina), esto se ve como {children}

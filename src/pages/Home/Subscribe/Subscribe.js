@@ -1,5 +1,7 @@
 import { Row, Col, Layout } from "antd";
+//componente de formulario de suscripcion
 import SubscribeForm from "../../../components/HomeLayout/SubscribeForm";
+
 const Subscribe = () => {
   const { Content } = Layout;
   return (

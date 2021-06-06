@@ -1,26 +1,28 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Menu, Row, Col, Avatar } from "antd";
 import {
   ShopOutlined,
   UserOutlined,
   PoweroffOutlined,
 } from "@ant-design/icons"; //iconos
-import { Link, useRouteMatch } from "react-router-dom"; //link para ir
-import { getMeApi } from "../../../api/user";
-import useAuth from "../../../hooks/useAuth";
+import { Link, useRouteMatch } from "react-router-dom"; //link para redireccion
+import { getMeApi } from "../../../api/user"; //obtengo mis datos como usuario
+import useAuth from "../../../hooks/useAuth"; //hook de usuario autenticado
 
 const MenuTop = () => {
+  //captar la url
   const { url } = useRouteMatch();
   const [user, setUser] = useState(undefined);
 
   const { logout, auth } = useAuth();
-
+  //obtengo mis datos
   useEffect(() => {
     (async () => {
       const response = await getMeApi(logout);
       setUser(response);
     })();
   }, [auth, logout]);
+
   //muestra menu desde el almacen a ver
   return (
     <Row justify="end">

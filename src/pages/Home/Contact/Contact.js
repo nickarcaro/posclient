@@ -1,6 +1,7 @@
+import { Row, Col, Typography } from "antd";
+//componentes de pagina de contacto
 import Information from "../../../components/HomeLayout/Content/Information";
 import ContactForm from "../../../components/HomeLayout/Content/ContactForm";
-import { Row, Col, Typography } from "antd";
 
 //pagina de contacto
 const Contact = () => {

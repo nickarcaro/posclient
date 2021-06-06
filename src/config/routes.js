@@ -2,7 +2,7 @@
 import HomeLayout from "../layouts/HomeLayout";
 import AdminLayout from "../layouts/AdminLayout";
 import UserLayout from "../layouts/UserLayout";
-//pages Home
+//pages Home (portal comercial)
 import Home from "../pages/Home/Home";
 import Contact from "../pages/Home/Contact";
 import AboutUs from "../pages/Home/AboutUs";
@@ -11,7 +11,7 @@ import Subscribe from "../pages/Home/Subscribe";
 // user pages (usuario ya logueado, pero que no ha elegido almacen para ver)
 import Account from "../pages/Admin/Account";
 import Stores from "../pages/Admin/Stores";
-//pages dashboard
+//pages dashboard (del almacen)
 import Dashboard from "../pages/Admin/Dashboard";
 import Categories from "../pages/Admin/Categories";
 import Jerarquies from "../pages/Admin/Jerarquies";
@@ -22,6 +22,7 @@ import Sells from "../pages/Admin/Sells";
 import Suppliers from "../pages/Admin/Suppliers";
 
 //sistema de rutas del pos (array de objetos con path, layout padre, pagina hija y si la ruta del path es exacta)
+// los :namestore indican ruta dinámica, es decir que se muestre el nombre del almacen de la api
 const routes = [
   {
     path: "/",

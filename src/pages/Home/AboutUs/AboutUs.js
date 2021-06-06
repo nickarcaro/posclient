@@ -1,4 +1,5 @@
 import { Row, Col, Typography, Layout } from "antd";
+//componentes para pagina sobre nosotros
 import FAQ from "../../../components/HomeLayout/Content/FAQ";
 import DescriptionUs from "../../../components/HomeLayout/Content/DescriptionUs";
 const AboutUs = () => {

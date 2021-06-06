@@ -17,7 +17,6 @@ export default function App() {
   const [realoadUser, setReloadUser] = useState(false);
 
   //obtención de token cuando se actualice la pagina (reload user)
-
   useEffect(() => {
     const token = getToken();
     if (token) {
@@ -31,7 +30,7 @@ export default function App() {
     setReloadUser(false);
   }, [realoadUser]);
 
-  //login de usuario (guarda los datos del usuario)
+  //login de usuario (guarda los datos del usuario) y luego redirige a url /pos
 
   const login = (token) => {
     setToken(token);
@@ -51,7 +50,6 @@ export default function App() {
   }, [auth, setAuth]);
 
   //manejo global del dato de usuario cuando se actualice el auth
-
   const authData = useMemo(
     () => ({
       auth,
@@ -64,6 +62,7 @@ export default function App() {
   //cuando se actualiza, auth es undefined y luego tiene el dato
   if (auth === undefined) return null;
 
+  //authcontext: variable global para los datos del usuario (utilizado e  todos los componentes)
   return (
     <AuthContext.Provider value={authData}>
       <Navigation />

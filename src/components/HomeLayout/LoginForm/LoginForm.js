@@ -40,7 +40,11 @@ const LoginForm = ({ showForgotPass, onCloseModal }) => {
           type="text"
           placeholder="Correo electrónico"
           onChange={formik.handleChange}
+          value={formik.values.identifier}
         />
+        {formik.errors.identifier ? (
+          <div>{formik.errors.identifier}</div>
+        ) : null}
       </Form.Item>
       <Form.Item>
         <Input.Password
