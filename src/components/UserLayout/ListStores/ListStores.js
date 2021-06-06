@@ -3,7 +3,6 @@ import QueueAnim from "rc-queue-anim";
 import { map, size } from "lodash";
 import { Row, Col, Button, Card, Spin } from "antd";
 import { Link } from "react-router-dom";
-
 import { getStores } from "../../../api/store";
 import useAuth from "../../../hooks/useAuth";
 
@@ -18,7 +17,7 @@ const ListStores = ({ setReloadStores, reloadStores, openModal }) => {
       setReloadStores(false);
     })();
   }, [reloadStores, logout, setReloadStores, auth.idUser]);
-
+  console.log(stores);
   if (!stores)
     return (
       <Spin

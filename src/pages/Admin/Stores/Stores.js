@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "antd";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import ListStores from "../../../components/UserLayout/ListStores";
 import AddStore from "../../../components/UserLayout/AddStore";
 import Modal from "../../../components/Modal";
@@ -13,6 +13,8 @@ const Stores = () => {
   const [titleModal, setTitleModal] = useState("");
   const [formModal, setFormModal] = useState(null);
   const [reloadStores, setReloadStores] = useState(false);
+  const { nameStore } = useParams();
+  console.log(nameStore);
 
   const { auth, logout } = useAuth();
   const history = useHistory();
