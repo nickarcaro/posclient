@@ -1,6 +1,6 @@
 import { Layout } from "antd";
-//componente menutop (reutilizado tambien en adminlayout)
-import MenuTop from "../../components/AdminLayout/MenuTop";
+//componente menutop del userlayout
+import MenuTop from "../../components/UserLayout/MenuTop";
 
 const UserLayout = ({ children }) => {
   const { Header, Content } = Layout; //componentes

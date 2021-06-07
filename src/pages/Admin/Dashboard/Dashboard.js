@@ -1,30 +1,31 @@
 import React, { useState, useEffect } from "react";
-import useAuth from "../../../hooks/useAuth";
+import useStore from "../../../hooks/useStore";
 import { useHistory } from "react-router-dom";
-
-import { getStoreBySlug } from "../../../api/store";
+import { Layout } from "antd";
 
 const Dashboard = ({ match }) => {
-  const [store, setStore] = useState(undefined);
-  const [reloadStores, setReloadStores] = useState(false);
-  const { auth, logout } = useAuth();
+  const { Content } = Layout;
   const history = useHistory();
-
   const { namestore } = match.params;
+  const { store, logoutStore } = useStore();
 
-  useEffect(() => {
-    (async () => {
-      const response = await getStoreBySlug(namestore, logout);
-      setStore(response);
-      setReloadStores(false);
-    })();
-  }, [reloadStores, logout, setReloadStores]);
-
-  console.log(store, namestore);
-  //if (store === undefined) return null;
-  //if ( store[0].slug !== namestore) history.replace("/pos");
-
-  return <div>panel</div>;
+  if (namestore !== store.slug || !store) {
+    history.replace("/pos");
+    return null;
+  }
+  console.log(store);
+  return (
+    <Content>
+      <Layout
+        className="site-layout-background"
+        style={{ padding: "24px 0", background: "#fff", marginTop: 20 }}
+      >
+        <Content style={{ padding: "0 24px", minHeight: 280 }}>
+          <div>dashboard</div>
+        </Content>
+      </Layout>
+    </Content>
+  );
 };
 
 export default Dashboard;

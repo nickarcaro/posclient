@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "antd";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import ListStores from "../../../components/UserLayout/ListStores";
 import AddStore from "../../../components/UserLayout/AddStore";
 import Modal from "../../../components/Modal";
 import useAuth from "../../../hooks/useAuth";
 import { getMeApi } from "../../../api/user";
-
+import useStore from "../../../hooks/useStore";
 const Stores = () => {
   const [user, setUser] = useState(undefined);
   const [show, setShow] = useState(false);
   const [titleModal, setTitleModal] = useState("");
   const [formModal, setFormModal] = useState(null);
   const [reloadStores, setReloadStores] = useState(false);
-  const { nameStore } = useParams();
-  console.log(nameStore);
-
+  const { store, logoutStore } = useStore();
   const { auth, logout } = useAuth();
+
   const history = useHistory();
 
   useEffect(() => {
@@ -46,22 +45,38 @@ const Stores = () => {
   };
   return (
     <section className="page-wrapper page1">
-      <div>
-        <Button type="primary" onClick={() => openModal("Nuevo Almacen")}>
-          Añadir Almacen
-        </Button>
-      </div>
-      <div>
-        list store
-        <ListStores
-          reloadStores={reloadStores}
-          setReloadStores={setReloadStores}
-          openModal={openModal}
-        />
-      </div>
-      <Modal show={show} setShow={setShow} title={titleModal}>
-        {formModal}
-      </Modal>
+      {!store ? (
+        <>
+          <div>
+            <Button type="primary" onClick={() => openModal("Nuevo Almacen")}>
+              Añadir Almacen
+            </Button>
+          </div>
+          <div>
+            list store
+            <ListStores
+              reloadStores={reloadStores}
+              setReloadStores={setReloadStores}
+              openModal={openModal}
+            />
+          </div>
+          <Modal show={show} setShow={setShow} title={titleModal}>
+            {formModal}
+          </Modal>
+        </>
+      ) : (
+        <div>
+          Estas en {store.nombre}:
+          <ul>
+            <Button>
+              <Link to={`/pos/${store.slug}`}> ingresar a {store.nombre} </Link>
+            </Button>
+          </ul>
+          <ul>
+            <Button onClick={logoutStore}>salir de {store.nombre} </Button>
+          </ul>
+        </div>
+      )}
     </section>
   );
 };

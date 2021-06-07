@@ -5,10 +5,12 @@ import { Row, Col, Button, Card, Spin } from "antd";
 import { Link } from "react-router-dom";
 import { getStores } from "../../../api/store";
 import useAuth from "../../../hooks/useAuth";
+import useStore from "../../../hooks/useStore";
 
 const ListStores = ({ setReloadStores, reloadStores, openModal }) => {
   const [stores, setStores] = useState(null);
   const { auth, logout } = useAuth();
+  const { loginStore } = useStore();
 
   useEffect(() => {
     (async () => {
@@ -17,7 +19,6 @@ const ListStores = ({ setReloadStores, reloadStores, openModal }) => {
       setReloadStores(false);
     })();
   }, [reloadStores, logout, setReloadStores, auth.idUser]);
-  console.log(stores);
   if (!stores)
     return (
       <Spin
@@ -45,6 +46,7 @@ const ListStores = ({ setReloadStores, reloadStores, openModal }) => {
                   logout={logout}
                   setReloadStores={setReloadStores}
                   openModal={openModal}
+                  loginStore={loginStore}
                 />
               </Col>
             ))}
@@ -55,10 +57,8 @@ const ListStores = ({ setReloadStores, reloadStores, openModal }) => {
   );
 };
 
-const Store = ({ store, logout, setReloadStores, openModal }) => {
+const Store = ({ store, logout, setReloadStores, openModal, loginStore }) => {
   const { Meta } = Card;
-
-  console.log(store);
   return (
     <Card>
       <Meta title={store.nombre} description={store.estado} />
@@ -67,8 +67,8 @@ const Store = ({ store, logout, setReloadStores, openModal }) => {
         <Button onClick={() => openModal(`Editar: ${store.nombre}`, store)}>
           Editar
         </Button>
-        <Button>
-          <Link to={`pos/${store.slug}`}>{store.nombre}</Link>
+        <Button onClick={() => loginStore(store)}>
+          ingresar a {store.nombre}
         </Button>
       </div>
     </Card>

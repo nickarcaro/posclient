@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Menu, Row, Col, Avatar, Button } from "antd";
+import { Menu, Row, Col, Avatar } from "antd";
 import {
   ShopOutlined,
   UserOutlined,
@@ -19,7 +19,7 @@ const MenuTop = () => {
       const response = await getMeApi(logout);
       setUser(response);
     })();
-  }, [auth]);
+  }, [auth, logout]);
   //muestra menu desde el almacen a ver
   return (
     <Row justify="end">
