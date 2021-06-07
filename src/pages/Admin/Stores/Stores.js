@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "antd";
-import { useHistory, Link } from "react-router-dom";
+import { Button, Layout } from "antd";
+import { useHistory, Redirect } from "react-router-dom";
 import ListStores from "../../../components/UserLayout/ListStores";
 import AddStore from "../../../components/UserLayout/AddStore";
 import Modal from "../../../components/Modal";
 import useAuth from "../../../hooks/useAuth";
 import { getMeApi } from "../../../api/user";
 import useStore from "../../../hooks/useStore";
+
 const Stores = () => {
   const [user, setUser] = useState(undefined);
   const [show, setShow] = useState(false);
   const [titleModal, setTitleModal] = useState("");
   const [formModal, setFormModal] = useState(null);
   const [reloadStores, setReloadStores] = useState(false);
-  const { store, logoutStore } = useStore();
+  const { store } = useStore();
   const { auth, logout } = useAuth();
+  const { Content } = Layout;
 
   const history = useHistory();
 
@@ -43,40 +45,30 @@ const Stores = () => {
     );
     setShow(true);
   };
+
+  if (store) {
+    return <Redirect to={`/pos/${store.slug}`} />;
+  }
+
   return (
     <section className="page-wrapper page1">
-      {!store ? (
-        <>
-          <div>
-            <Button type="primary" onClick={() => openModal("Nuevo Almacen")}>
-              Añadir Almacen
-            </Button>
-          </div>
-          <div>
-            list store
-            <ListStores
-              reloadStores={reloadStores}
-              setReloadStores={setReloadStores}
-              openModal={openModal}
-            />
-          </div>
-          <Modal show={show} setShow={setShow} title={titleModal}>
-            {formModal}
-          </Modal>
-        </>
-      ) : (
-        <div>
-          Estas en {store.nombre}:
-          <ul>
-            <Button>
-              <Link to={`/pos/${store.slug}`}> ingresar a {store.nombre} </Link>
-            </Button>
-          </ul>
-          <ul>
-            <Button onClick={logoutStore}>salir de {store.nombre} </Button>
-          </ul>
-        </div>
-      )}
+      <div>
+        <Button type="primary" onClick={() => openModal("Nuevo Almacen")}>
+          Añadir Almacen
+        </Button>
+      </div>
+      <div>
+        <Content style={{ padding: "0 24px", minHeight: 280, marginTop: 20 }}>
+          <ListStores
+            reloadStores={reloadStores}
+            setReloadStores={setReloadStores}
+            openModal={openModal}
+          />
+        </Content>
+      </div>
+      <Modal show={show} setShow={setShow} title={titleModal}>
+        {formModal}
+      </Modal>
     </section>
   );
 };
