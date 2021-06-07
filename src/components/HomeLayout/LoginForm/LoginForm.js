@@ -2,6 +2,7 @@ import { React, useState } from "react";
 import { Form, Input, Button, notification } from "antd";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
 import { useFormik } from "formik";
+import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import useAuth from "../../../hooks/useAuth";
 import { loginApi } from "../../../api/user";
@@ -74,7 +75,10 @@ const LoginForm = ({ showForgotPass, onCloseModal }) => {
         >
           Iniciar Sesión
         </Button>
-        O <div>suscribete!</div>
+        O<br />
+        <Button>
+          <Link to="/suscribete">suscribete</Link>
+        </Button>
       </Form.Item>
     </Form>
   );

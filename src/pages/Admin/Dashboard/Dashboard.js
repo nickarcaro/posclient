@@ -13,7 +13,6 @@ const Dashboard = ({ match }) => {
     history.replace("/pos");
     return null;
   }
-  console.log(store);
   return (
     <Content>
       <Layout

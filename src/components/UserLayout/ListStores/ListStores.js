@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import QueueAnim from "rc-queue-anim";
 import { map, size } from "lodash";
 import { Row, Col, Button, Card, Spin } from "antd";
-import { Link } from "react-router-dom";
 import { getStores } from "../../../api/store";
 import useAuth from "../../../hooks/useAuth";
 import useStore from "../../../hooks/useStore";

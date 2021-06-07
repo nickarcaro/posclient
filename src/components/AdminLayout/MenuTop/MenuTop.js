@@ -9,7 +9,8 @@ import useStore from "../../../hooks/useStore"; //hook de usuario autenticado
 const MenuTop = () => {
   //captar la url
   const [user, setUser] = useState(undefined);
-  const { store, logoutStore } = useStore();
+
+  const { store, logoutStore, setReloadStore, loginStore } = useStore();
   const { logout, auth } = useAuth();
   //obtengo mis datos
   useEffect(() => {
@@ -17,7 +18,8 @@ const MenuTop = () => {
       const response = await getMeApi(logout);
       setUser(response);
     })();
-  }, [auth, logout]);
+  }, [auth, logout, setReloadStore]);
+  if (store === undefined) return null;
 
   //muestra menu desde el almacen a ver
   return (
