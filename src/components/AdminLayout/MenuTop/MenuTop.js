@@ -1,19 +1,15 @@
 import { useState, useEffect } from "react";
 import { Menu, Row, Col, Avatar } from "antd";
-import {
-  ShopOutlined,
-  UserOutlined,
-  PoweroffOutlined,
-} from "@ant-design/icons"; //iconos
-import { Link, useRouteMatch } from "react-router-dom"; //link para redireccion
+import { UserOutlined, PoweroffOutlined } from "@ant-design/icons"; //iconos
+import { Link } from "react-router-dom"; //link para redireccion
 import { getMeApi } from "../../../api/user"; //obtengo mis datos como usuario
 import useAuth from "../../../hooks/useAuth"; //hook de usuario autenticado
+import useStore from "../../../hooks/useStore"; //hook de usuario autenticado
 
 const MenuTop = () => {
   //captar la url
-  const { url } = useRouteMatch();
   const [user, setUser] = useState(undefined);
-
+  const { store, logoutStore } = useStore();
   const { logout, auth } = useAuth();
   //obtengo mis datos
   useEffect(() => {
@@ -27,61 +23,35 @@ const MenuTop = () => {
   return (
     <Row justify="end">
       {user !== undefined && (
-        <MenuOptions url={url} logout={logout} user={user} />
+        <MenuOptions logoutStore={logoutStore} user={user} store={store} />
       )}
     </Row>
   );
 };
 
-const MenuOptions = ({ url, logout, user }) => {
+const MenuOptions = ({ logoutStore, user, store }) => {
   const { SubMenu } = Menu;
   return (
-    <>
-      {url === "/pos" || url === "/pos/mi-cuenta" ? (
-        <Menu mode="horizontal">
-          <Menu.Item
-            key="setting:1"
-            icon={<Avatar size="small" icon={<UserOutlined />} />}
-          >
+    <Col lg={24} xl={(24, { span: 5 })}>
+      <Menu mode="horizontal">
+        <SubMenu
+          key="SubMenu"
+          icon={<Avatar size="small" icon={<UserOutlined />} />}
+          title={` ${user.name} ${user.lastname} - ${store.nombre} `}
+        >
+          <Menu.Item key="setting:4" icon={<UserOutlined />}>
             <Link to="/pos/mi-cuenta"> Mi Cuenta</Link>
-          </Menu.Item>
-          <Menu.Item key="setting:2" icon={<ShopOutlined />}>
-            <Link to="/pos"> Mis Almacenes</Link>
           </Menu.Item>
           <Menu.Item
             key="setting:3"
             icon={<PoweroffOutlined />}
-            onClick={logout}
+            onClick={logoutStore}
           >
-            Cerrar Sesión
+            salir del almacen
           </Menu.Item>
-        </Menu>
-      ) : (
-        <Col lg={24} xl={(24, { span: 5 })}>
-          <Menu mode="horizontal">
-            <SubMenu
-              key="SubMenu"
-              icon={<Avatar size="small" icon={<UserOutlined />} />}
-              title={` ${user.name} ${user.lastname} `}
-            >
-              <Menu.Item key="setting:1" icon={<UserOutlined />}>
-                <Link to="/pos/mi-cuenta"> Mi Cuenta</Link>
-              </Menu.Item>
-              <Menu.Item key="setting:2" icon={<ShopOutlined />}>
-                <Link to="/pos"> Mis Almacenes</Link>
-              </Menu.Item>
-              <Menu.Item
-                key="setting:3"
-                icon={<PoweroffOutlined />}
-                onClick={logout}
-              >
-                Cerrar Sesión
-              </Menu.Item>
-            </SubMenu>
-          </Menu>
-        </Col>
-      )}
-    </>
+        </SubMenu>
+      </Menu>
+    </Col>
   );
 };
 
