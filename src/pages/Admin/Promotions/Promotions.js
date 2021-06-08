@@ -20,7 +20,12 @@ const Promotions = ({ match }) => {
         style={{ padding: "24px 0", background: "#fff", marginTop: 20 }}
       >
         <Content style={{ padding: "0 24px", minHeight: 280 }}>
-          <div>promociones</div>
+          <div>
+            <button>Añadir promocion</button> <span />
+            <button>buscar Promocion</button> <span />
+          </div>
+          <br />
+          <div>listar promociones</div>
         </Content>
       </Layout>
     </Content>

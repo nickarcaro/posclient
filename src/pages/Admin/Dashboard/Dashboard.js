@@ -20,7 +20,7 @@ const Dashboard = ({ match }) => {
         style={{ padding: "24px 0", background: "#fff", marginTop: 20 }}
       >
         <Content style={{ padding: "0 24px", minHeight: 280 }}>
-          <div>dashboard</div>
+          <div>Indicadores gráficos </div>
         </Content>
       </Layout>
     </Content>

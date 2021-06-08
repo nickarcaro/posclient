@@ -20,7 +20,12 @@ const Jerarquies = ({ match }) => {
         style={{ padding: "24px 0", background: "#fff", marginTop: 20 }}
       >
         <Content style={{ padding: "0 24px", minHeight: 280 }}>
-          <div>jerarquias</div>
+          <div>
+            <button>Añadir Jerarquia</button> <span />
+            <button>buscar Jerarquia</button> <span />
+          </div>
+          <br />
+          <div>listar jerarquias</div>
         </Content>
       </Layout>
     </Content>
