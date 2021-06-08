@@ -19,7 +19,13 @@ const Suppliers = ({ match }) => {
         style={{ padding: "24px 0", background: "#fff", marginTop: 20 }}
       >
         <Content style={{ padding: "0 24px", minHeight: 280 }}>
-          <div>proveedores</div>
+          <div>
+            <button>Añadir proveedor</button> <span />
+            <button>buscar Proveedor</button> <span />
+            <button>añadir archivo</button> <span />
+          </div>
+          <br />
+          <div>listar proveedores</div>
         </Content>
       </Layout>
     </Content>

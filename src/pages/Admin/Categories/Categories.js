@@ -21,7 +21,12 @@ const Categories = ({ match }) => {
         style={{ padding: "24px 0", background: "#fff", marginTop: 20 }}
       >
         <Content style={{ padding: "0 24px", minHeight: 280 }}>
-          <div>categorias</div>
+          <div>
+            <button>Añadir Categoria</button> <span />
+            <button>buscar Categoria</button> <span />
+          </div>
+          <br />
+          <div>listar Categorias</div>
         </Content>
       </Layout>
     </Content>
