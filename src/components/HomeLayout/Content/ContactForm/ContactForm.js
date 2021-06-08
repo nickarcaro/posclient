@@ -1,6 +1,7 @@
 import { Form, Input, Button, Select } from "antd";
 import { MailOutlined, UserOutlined } from "@ant-design/icons";
 import { data } from "./data";
+
 const ContactForm = () => {
   const { Option } = Select;
 

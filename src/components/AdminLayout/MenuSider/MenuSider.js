@@ -12,12 +12,14 @@ import {
   PercentageOutlined,
   PartitionOutlined,
 } from "@ant-design/icons";
-
+import useStore from "../../../hooks/useStore";
 const MenuSider = ({ menuCollapsed, setMenuCollapsed }) => {
+  const { store } = useStore();
   const { Sider } = Layout;
+  const location = useLocation();
+
   //el nombre del almacen
   //sider cambia el icono cuando se oprime
-  let location = useLocation();
   return (
     <Sider
       trigger={menuCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -31,29 +33,54 @@ const MenuSider = ({ menuCollapsed, setMenuCollapsed }) => {
         mode="inline"
         defaultSelectedKeys={[location.pathname]}
       >
-        <Menu.Item key={`1`} icon={<DashboardOutlined />}>
-          indicadores
+        <Menu.Item key={`/pos/${store.slug}`} icon={<DashboardOutlined />}>
+          <Link to={`/pos/${store.slug}`}>Indicadores</Link>
         </Menu.Item>
-        <Menu.Item key={`/productos`} icon={<ContainerOutlined />}>
-        <Link to={`./productos`}>Productos</Link>
+        <Menu.Item
+          key={`/pos/${store.slug}/productos`}
+          icon={<ContainerOutlined />}
+        >
+          Productos
+          <Link to={`/pos/${store.slug}/productos`} />
         </Menu.Item>
-        <Menu.Item key={`/vendedores`} icon={<TeamOutlined />}>
-          vendedores
+        <Menu.Item
+          key={`/pos/${store.slug}/vendedores`}
+          icon={<TeamOutlined />}
+        >
+          Vendedores
+          <Link to={`/pos/${store.slug}/vendedores`} />
         </Menu.Item>
-        <Menu.Item key={`/ventas`} icon={<DollarOutlined />}>
-          <Link to={`./ventas`}>Ventas</Link>
+        <Menu.Item key={`/pos/${store.slug}/ventas`} icon={<DollarOutlined />}>
+          Ventas
+          <Link to={`/pos/${store.slug}/ventas`} />
         </Menu.Item>
-        <Menu.Item key={`/proveedores`} icon={<CarOutlined />}>
-          <Link to={`./proveedores`}>Proveedores</Link>
+        <Menu.Item
+          key={`/pos/${store.slug}/proveedores`}
+          icon={<CarOutlined />}
+        >
+          Proveedores
+          <Link to={`/pos/${store.slug}/proveedores`} />
         </Menu.Item>
-        <Menu.Item key={`/jerarquias`} icon={<PartitionOutlined />}>
-          <Link to={`./jerarquias`}>Jerarquias</Link>
+        <Menu.Item
+          key={`/pos/${store.slug}/jerarquias`}
+          icon={<PartitionOutlined />}
+        >
+          Jerarquias
+          <Link to={`/pos/${store.slug}/jerarquias`} />{" "}
         </Menu.Item>
-        <Menu.Item key={`/categorias`} icon={<TagsOutlined />}>
-          <Link to={`./categorias`}>Categorias</Link>
+        <Menu.Item
+          key={`/pos/${store.slug}/categorias`}
+          icon={<TagsOutlined />}
+        >
+          Categorías
+          <Link to={`/pos/${store.slug}/categorias`} />
         </Menu.Item>
-        <Menu.Item key={`/promociones`} icon={<PercentageOutlined />}>
-          <Link to={`./promociones`}> Promociones</Link>
+        <Menu.Item
+          key={`/pos/${store.slug}/promociones`}
+          icon={<PercentageOutlined />}
+        >
+          Promociones
+          <Link to={`/pos/${store.slug}/promociones`} />
         </Menu.Item>
       </Menu>
     </Sider>

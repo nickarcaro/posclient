@@ -1,5 +1,6 @@
 import { Tabs } from "antd";
 import { direction } from "./data";
+
 const Information = () => {
   const { TabPane } = Tabs;
   return (

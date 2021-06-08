@@ -1,5 +1,6 @@
 import { Layout } from "antd";
-import MenuTop from "../../components/AdminLayout/MenuTop";
+//componente menutop del userlayout
+import MenuTop from "../../components/UserLayout/MenuTop";
 
 const UserLayout = ({ children }) => {
   const { Header, Content } = Layout; //componentes
@@ -10,7 +11,6 @@ const UserLayout = ({ children }) => {
         <Header className="header" style={{ padding: 0, background: "#fff" }}>
           <MenuTop />
         </Header>
-
         <Content
           className="site-layout-background"
           style={{
