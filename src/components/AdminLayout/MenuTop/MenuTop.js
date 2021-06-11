@@ -10,16 +10,15 @@ const MenuTop = () => {
   //captar la url
   const [user, setUser] = useState(undefined);
 
-  const { store, logoutStore, setReloadStore, loginStore } = useStore();
+  const { store, logoutStore } = useStore();
   const { logout, auth } = useAuth();
   //obtengo mis datos
   useEffect(() => {
     (async () => {
       const response = await getMeApi(logout);
-      setUser(response);
+      setUser(response || null);
     })();
-  }, [auth, logout, setReloadStore]);
-  if (store === undefined) return null;
+  }, [auth, setUser, logout]);
 
   //muestra menu desde el almacen a ver
   return (
@@ -36,22 +35,24 @@ const MenuOptions = ({ logoutStore, user, store }) => {
   return (
     <Col lg={24} xl={(24, { span: 5 })}>
       <Menu mode="horizontal">
-        <SubMenu
-          key="SubMenu"
-          icon={<Avatar size="small" icon={<UserOutlined />} />}
-          title={` ${user.name} ${user.lastname} - ${store.nombre} `}
-        >
-          <Menu.Item key="setting:4" icon={<UserOutlined />}>
-            <Link to="/pos/mi-cuenta"> Mi Cuenta</Link>
-          </Menu.Item>
-          <Menu.Item
-            key="setting:3"
-            icon={<PoweroffOutlined />}
-            onClick={logoutStore}
+        {store !== undefined && (
+          <SubMenu
+            key="SubMenu"
+            icon={<Avatar size="small" icon={<UserOutlined />} />}
+            title={` ${user.name} ${user.lastname} - ${store.nombre} `}
           >
-            salir del almacen
-          </Menu.Item>
-        </SubMenu>
+            <Menu.Item key="setting:4" icon={<UserOutlined />}>
+              <Link to="/pos/mi-cuenta"> Mi Cuenta</Link>
+            </Menu.Item>
+            <Menu.Item
+              key="setting:3"
+              icon={<PoweroffOutlined />}
+              onClick={logoutStore}
+            >
+              salir del almacen
+            </Menu.Item>
+          </SubMenu>
+        )}
       </Menu>
     </Col>
   );

@@ -31,45 +31,59 @@ const ListStores = ({ setReloadStores, reloadStores, openModal }) => {
       {size(stores) === 0 ? (
         <h3>No hay Almacenes</h3>
       ) : (
-        <div>
-          <QueueAnim
-            component={Row}
-            type="bottom"
-            className="page row text-center"
-            delay={500}
-          >
-            {map(stores, (store) => (
-              <Col md={4} key={store.id}>
-                <Store
-                  store={store}
-                  logout={logout}
-                  setReloadStores={setReloadStores}
-                  openModal={openModal}
-                  loginStore={loginStore}
-                />
-              </Col>
-            ))}
-          </QueueAnim>
-        </div>
+        <QueueAnim
+          component={Row}
+          type="bottom"
+          className="page row text-center"
+          style={{ margin: 10 }}
+          delay={500}
+        >
+          {map(stores, (store) => (
+            <Col
+              md={4}
+              key={store.id}
+              offset={1}
+              span={6}
+              style={{ padding: "8px" }}
+            >
+              <Store
+                store={store}
+                logout={logout}
+                setReloadStores={setReloadStores}
+                openModal={openModal}
+                loginStore={loginStore}
+              />
+            </Col>
+          ))}
+        </QueueAnim>
       )}
     </div>
   );
 };
 
 const Store = ({ store, logout, setReloadStores, openModal, loginStore }) => {
+  const [loading, setLoading] = useState(false);
+  const accessStore = (store) => {
+    setLoading(true);
+    loginStore(store);
+    setLoading(false);
+  };
+
   const { Meta } = Card;
   return (
-    <Card>
-      <Meta title={store.nombre} description={store.estado} />
-
-      <div className="actions">
+    <Card
+      style={{ width: 250 }}
+      cover={<img alt="image" />}
+      actions={[
         <Button onClick={() => openModal(`Editar: ${store.nombre}`, store)}>
           Editar
-        </Button>
-        <Button onClick={() => loginStore(store)}>
-          ingresar a {store.nombre}
-        </Button>
-      </div>
+        </Button>,
+        <Button onClick={() => accessStore(store)} loading={loading}>
+          ingresar
+        </Button>,
+      ]}
+    >
+      <Meta title={store.nombre} description={`Estado: ${store.estado}`} />
     </Card>
   );
 };

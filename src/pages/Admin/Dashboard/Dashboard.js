@@ -2,17 +2,22 @@ import React, { useState, useEffect } from "react";
 import useStore from "../../../hooks/useStore";
 import { useHistory } from "react-router-dom";
 import { Layout } from "antd";
+import { getStoreById } from "../../../api/store";
+
+import useAuth from "../../../hooks/useAuth";
 
 const Dashboard = ({ match }) => {
   const { Content } = Layout;
-  const history = useHistory();
   const { namestore } = match.params;
-  const { store, logoutStore } = useStore();
+  const { store } = useStore();
+
+  const history = useHistory();
 
   if (namestore !== store.slug || !store) {
     history.replace("/pos");
     return null;
   }
+  if (store === undefined) return null;
   return (
     <Content>
       <Layout
@@ -21,6 +26,7 @@ const Dashboard = ({ match }) => {
       >
         <Content style={{ padding: "0 24px", minHeight: 280 }}>
           <div>Indicadores gráficos </div>
+          {store.nombre}
         </Content>
       </Layout>
     </Content>
