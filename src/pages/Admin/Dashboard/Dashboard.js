@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import useStore from "../../../hooks/useStore";
 import { useHistory } from "react-router-dom";
-import { Layout } from "antd";
+import { Layout, Row, Col } from "antd";
 import { getStoreById } from "../../../api/store";
 
 import useAuth from "../../../hooks/useAuth";

@@ -43,8 +43,10 @@ const ProductForm = ({
         message: "Producto creado",
       });
       formik.resetForm();
-      setReloadUser(true);
       setReloadProducts(true);
+
+      setReloadUser(true);
+      setReloadStore(true);
       setLoading(false);
       setShowModal(false);
     }
@@ -53,7 +55,6 @@ const ProductForm = ({
     setLoading(true);
     const formDataTemp = {
       ...formData,
-      almacen: store,
     };
     const response = updateStore(product.id, formDataTemp, logout);
 
@@ -83,7 +84,7 @@ const ProductForm = ({
         type="text"
         placeholder="Nombre"
         onChange={formik.handleChange}
-        value={formik.values.name}
+        value={formik.values.nombre}
       />
       <Input
         name="estado"

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, List, Avatar, Button } from "antd";
-import { map, size } from "lodash";
+import { List, Avatar, Button } from "antd";
+import { size } from "lodash";
 import { getProducts } from "../../../../api/products";
 import useAuth from "../../../../hooks/useAuth";
 import useStore from "../../../../hooks/useStore";
@@ -16,7 +16,7 @@ const ListProducts = ({ reloadProducts, setReloadProducts, openModal }) => {
       setProducts(response || []);
       setReloadProducts(false);
     })();
-  }, [reloadProducts]);
+  }, [reloadProducts, setReloadProducts, logout, setProducts]);
 
   if (!products) return null;
   console.log(products);
@@ -43,7 +43,7 @@ const ListProducts = ({ reloadProducts, setReloadProducts, openModal }) => {
   );
 };
 
-const Product = ({ product, logout, setReloadProducts, openModal }) => {
+const Product = ({ product, openModal }) => {
   return (
     <List.Item
       actions={[
@@ -51,7 +51,7 @@ const Product = ({ product, logout, setReloadProducts, openModal }) => {
           type="primary"
           onClick={() => openModal(`Editar: ${product.nombre}`, product)}
         >
-          editar
+          Editar
         </Button>,
       ]}
     >

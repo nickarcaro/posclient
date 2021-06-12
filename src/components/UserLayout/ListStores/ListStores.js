@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import QueueAnim from "rc-queue-anim";
 import { map, size } from "lodash";
-import { Row, Col, Button, Card, Spin } from "antd";
+import { Row, Col, Button, Card, Spin, List } from "antd";
 import { getStores } from "../../../api/store";
 import useAuth from "../../../hooks/useAuth";
 import useStore from "../../../hooks/useStore";
@@ -31,20 +31,17 @@ const ListStores = ({ setReloadStores, reloadStores, openModal }) => {
       {size(stores) === 0 ? (
         <h3>No hay Almacenes</h3>
       ) : (
-        <QueueAnim
-          component={Row}
-          type="bottom"
-          className="page row text-center"
-          style={{ margin: 10 }}
-          delay={500}
-        >
-          {map(stores, (store) => (
-            <Col
-              md={4}
-              key={store.id}
-              offset={1}
-              span={6}
-              style={{ padding: "8px" }}
+        <List
+          style={{ marginTop: 20 }}
+          grid={{ gutter: [16, 16], column: 4 }}
+          dataSource={stores}
+          renderItem={(store) => (
+            <QueueAnim
+              component={Row}
+              type="bottom"
+              className="page row text-center"
+              style={{ margin: 10 }}
+              delay={500}
             >
               <Store
                 store={store}
@@ -53,9 +50,9 @@ const ListStores = ({ setReloadStores, reloadStores, openModal }) => {
                 openModal={openModal}
                 loginStore={loginStore}
               />
-            </Col>
-          ))}
-        </QueueAnim>
+            </QueueAnim>
+          )}
+        />
       )}
     </div>
   );
@@ -88,3 +85,24 @@ const Store = ({ store, logout, setReloadStores, openModal, loginStore }) => {
   );
 };
 export default ListStores;
+
+/* 
+
+{map(stores, (store) => (
+            <Col
+              md={4}
+              key={store.id}
+              offset={1}
+              span={6}
+              style={{ padding: "8px" }}
+            >
+              <Store
+                store={store}
+                logout={logout}
+                setReloadStores={setReloadStores}
+                openModal={openModal}
+                loginStore={loginStore}
+              />
+            </Col>
+          ))}
+*/
