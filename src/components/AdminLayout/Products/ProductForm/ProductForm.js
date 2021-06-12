@@ -29,6 +29,7 @@ const ProductForm = ({
     setLoading(true);
     const formDataTemp = {
       ...formData,
+      almacen: store,
     };
     const response = await addProduct(store.id, formDataTemp, logout);
 
@@ -39,7 +40,7 @@ const ProductForm = ({
       setLoading(false);
     } else {
       notification["success"]({
-        message: "Almacen creado",
+        message: "Producto creado",
       });
       formik.resetForm();
       setReloadUser(true);
@@ -63,7 +64,7 @@ const ProductForm = ({
       setLoading(false);
     } else {
       notification["success"]({
-        message: "Almacen modificado",
+        message: "Producto modificado",
       });
       formik.resetForm();
       setReloadUser(true);
