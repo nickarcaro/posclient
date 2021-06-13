@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import QueueAnim from "rc-queue-anim";
-import { map, size } from "lodash";
-import { Row, Col, Button, Card, Spin, List } from "antd";
+import { size } from "lodash";
+import { Row, Button, Card, Spin, List } from "antd";
 import { getStores } from "../../../api/store";
 import useAuth from "../../../hooks/useAuth";
 import useStore from "../../../hooks/useStore";
@@ -18,6 +18,7 @@ const ListStores = ({ setReloadStores, reloadStores, openModal }) => {
       setReloadStores(false);
     })();
   }, [reloadStores, logout, setReloadStores, auth.idUser]);
+
   if (!stores)
     return (
       <Spin
@@ -70,7 +71,6 @@ const Store = ({ store, logout, setReloadStores, openModal, loginStore }) => {
   return (
     <Card
       style={{ width: 250 }}
-      cover={<img alt="image" />}
       actions={[
         <Button onClick={() => openModal(`Editar: ${store.nombre}`, store)}>
           Editar
@@ -85,24 +85,3 @@ const Store = ({ store, logout, setReloadStores, openModal, loginStore }) => {
   );
 };
 export default ListStores;
-
-/* 
-
-{map(stores, (store) => (
-            <Col
-              md={4}
-              key={store.id}
-              offset={1}
-              span={6}
-              style={{ padding: "8px" }}
-            >
-              <Store
-                store={store}
-                logout={logout}
-                setReloadStores={setReloadStores}
-                openModal={openModal}
-                loginStore={loginStore}
-              />
-            </Col>
-          ))}
-*/

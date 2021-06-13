@@ -13,9 +13,9 @@ export async function getProducts(idAlmacen, logout) {
   }
 }
 
-export async function addProduct(idAlmacen, product, logout) {
+export async function addProduct(product, logout) {
   try {
-    const url = `${BASE_PATH}/productos?almacen=${idAlmacen}`;
+    const url = `${BASE_PATH}/productos`;
     const params = {
       method: "POST",
       headers: {

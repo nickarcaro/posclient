@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { List, Avatar, Button } from "antd";
+import { List, Button } from "antd";
 import { size } from "lodash";
 import { getProducts } from "../../../../api/products";
 import useAuth from "../../../../hooks/useAuth";
@@ -16,14 +16,13 @@ const ListProducts = ({ reloadProducts, setReloadProducts, openModal }) => {
       setProducts(response || []);
       setReloadProducts(false);
     })();
-  }, [reloadProducts, setReloadProducts, logout, setProducts]);
+  }, [reloadProducts, setReloadProducts, setProducts, store, logout]);
 
   if (!products) return null;
-  console.log(products);
   return (
     <div className="list-address">
       {size(products) === 0 ? (
-        <h3>No hay ninguna dirección creada</h3>
+        <h3>No hay productos</h3>
       ) : (
         <List
           style={{ marginTop: 20 }}

@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import useStore from "../../../hooks/useStore";
 import { useHistory } from "react-router-dom";
 import { Layout } from "antd";
@@ -7,7 +6,7 @@ const Jerarquies = ({ match }) => {
   const { Content } = Layout;
   const history = useHistory();
   const { namestore } = match.params;
-  const { store, logoutStore } = useStore();
+  const { store } = useStore();
 
   if (namestore !== store.slug || !store) {
     history.replace("/pos");

@@ -31,7 +31,7 @@ const ProductForm = ({
       ...formData,
       almacen: store,
     };
-    const response = await addProduct(store.id, formDataTemp, logout);
+    const response = await addProduct(formDataTemp, logout);
 
     if (!response) {
       notification["error"]({
@@ -42,12 +42,11 @@ const ProductForm = ({
       notification["success"]({
         message: "Producto creado",
       });
-      formik.resetForm();
-      setReloadProducts(true);
-
       setReloadUser(true);
       setReloadStore(true);
+      setReloadProducts(true);
       setLoading(false);
+      formik.resetForm();
       setShowModal(false);
     }
   };
@@ -55,8 +54,9 @@ const ProductForm = ({
     setLoading(true);
     const formDataTemp = {
       ...formData,
+      almacen: store.id,
     };
-    const response = updateStore(product.id, formDataTemp, logout);
+    const response = updateStore(product._id, formDataTemp, logout);
 
     if (!response) {
       notification["error"]({
@@ -68,10 +68,10 @@ const ProductForm = ({
         message: "Producto modificado",
       });
       formik.resetForm();
+
       setReloadUser(true);
       setReloadStore(true);
       setReloadProducts(true);
-
       setLoading(false);
       setShowModal(false);
     }
@@ -86,13 +86,6 @@ const ProductForm = ({
         onChange={formik.handleChange}
         value={formik.values.nombre}
       />
-      <Input
-        name="estado"
-        type="text"
-        placeholder="Estado"
-        onChange={formik.handleChange}
-        value={formik.values.estado}
-      />
       <div className="actions">
         <Button htmlType="submit" loading={loading}>
           {newProduct ? "Crear producto" : "Actualizar producto"}
@@ -105,8 +98,6 @@ const ProductForm = ({
 function initialValues(product) {
   return {
     nombre: product?.nombre || "",
-    estado: product?.estado || "",
-    imagen: product?.imagen || "",
   };
 }
 

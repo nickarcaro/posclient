@@ -1,10 +1,6 @@
-import React, { useState, useEffect } from "react";
 import useStore from "../../../hooks/useStore";
 import { useHistory } from "react-router-dom";
-import { Layout, Row, Col } from "antd";
-import { getStoreById } from "../../../api/store";
-
-import useAuth from "../../../hooks/useAuth";
+import { Layout } from "antd";
 
 const Dashboard = ({ match }) => {
   const { Content } = Layout;
