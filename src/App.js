@@ -3,9 +3,6 @@ import React, { useState, useEffect, useMemo, useCallback } from "react";
 import jwtDecode from "jwt-decode";
 //contexto de la aplicación (globalmente en la app tiene los datos del usuario)
 import AuthContext from "./context/AuthContext";
-//contexto del almacen
-import StoreContext from "./context/StoreContext";
-
 //api de token
 import { setToken, getToken, removeToken } from "./api/token";
 import { setShop, getShop, removeShop } from "./api/store";
@@ -86,18 +83,12 @@ export default function App() {
       login,
       logout,
       setReloadUser,
-    }),
-    [auth, logout]
-  );
-
-  const storeData = useMemo(
-    () => ({
       store,
       loginStore,
       logoutStore,
       setReloadStore,
     }),
-    [store, logoutStore]
+    [auth, logout, store, logoutStore]
   );
 
   //cuando se actualiza, auth es undefined y luego tiene el dato
@@ -107,9 +98,7 @@ export default function App() {
   //authcontext: variable global para los datos del usuario (utilizado e  todos los componentes)
   return (
     <AuthContext.Provider value={authData}>
-      <StoreContext.Provider value={storeData}>
-        <Navigation />
-      </StoreContext.Provider>
+      <Navigation />
     </AuthContext.Provider>
   );
 }

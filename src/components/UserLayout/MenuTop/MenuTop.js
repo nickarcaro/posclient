@@ -8,13 +8,11 @@ import {
 import { Link } from "react-router-dom"; //link para ir
 import { getMeApi } from "../../../api/user";
 import useAuth from "../../../hooks/useAuth";
-import useStore from "../../../hooks/useStore";
 
 const MenuTop = () => {
   const { SubMenu } = Menu;
   const [user, setUser] = useState(undefined);
-  const { logout, auth } = useAuth();
-  const { store, logoutStore } = useStore();
+  const { logout, auth, store, logoutStore } = useAuth();
 
   useEffect(() => {
     (async () => {

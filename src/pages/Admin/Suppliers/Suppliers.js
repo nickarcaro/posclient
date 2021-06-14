@@ -1,11 +1,11 @@
-import useStore from "../../../hooks/useStore";
+import useAuth from "../../../hooks/useAuth";
 import { useHistory } from "react-router-dom";
 import { Layout } from "antd";
 const Suppliers = ({ match }) => {
   const { Content } = Layout;
   const history = useHistory();
   const { namestore } = match.params;
-  const { store } = useStore();
+  const { store } = useAuth();
 
   if (namestore !== store.slug || !store) {
     history.replace("/pos");

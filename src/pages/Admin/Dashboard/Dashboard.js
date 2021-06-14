@@ -1,11 +1,11 @@
-import useStore from "../../../hooks/useStore";
+import useAuth from "../../../hooks/useAuth";
 import { useHistory } from "react-router-dom";
 import { Layout } from "antd";
 
 const Dashboard = ({ match }) => {
   const { Content } = Layout;
   const { namestore } = match.params;
-  const { store } = useStore();
+  const { store } = useAuth();
 
   const history = useHistory();
 

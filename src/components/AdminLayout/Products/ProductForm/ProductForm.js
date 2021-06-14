@@ -2,20 +2,14 @@ import React, { useState } from "react";
 import { Form, Button, Input, notification } from "antd";
 import { useFormik } from "formik";
 import useAuth from "../../../../hooks/useAuth";
-import useStore from "../../../../hooks/useStore";
 import * as Yup from "yup";
 
 import { addProduct, updateStore } from "../../../../api/products";
 
-const ProductForm = ({
-  setShowModal,
-  setReloadProducts,
-  newProduct,
-  product,
-}) => {
+const ProductForm = (props) => {
+  const { setShowModal, setReloadProducts, newProduct, product } = props;
   const [loading, setLoading] = useState(false);
-  const { logout, setReloadUser } = useAuth();
-  const { store, setReloadStore } = useStore();
+  const { logout, store } = useAuth();
 
   const formik = useFormik({
     initialValues: initialValues(product),
@@ -32,6 +26,7 @@ const ProductForm = ({
       almacen: store,
     };
     const response = await addProduct(formDataTemp, logout);
+    formik.resetForm();
 
     if (!response) {
       notification["error"]({
@@ -42,11 +37,8 @@ const ProductForm = ({
       notification["success"]({
         message: "Producto creado",
       });
-      setReloadUser(true);
-      setReloadStore(true);
       setReloadProducts(true);
       setLoading(false);
-      formik.resetForm();
       setShowModal(false);
     }
   };
@@ -56,7 +48,7 @@ const ProductForm = ({
       ...formData,
       almacen: store.id,
     };
-    const response = updateStore(product._id, formDataTemp, logout);
+    const response = updateStore(product.id, formDataTemp, logout);
 
     if (!response) {
       notification["error"]({
@@ -64,13 +56,10 @@ const ProductForm = ({
       });
       setLoading(false);
     } else {
+      formik.resetForm();
       notification["success"]({
         message: "Producto modificado",
       });
-      formik.resetForm();
-
-      setReloadUser(true);
-      setReloadStore(true);
       setReloadProducts(true);
       setLoading(false);
       setShowModal(false);
@@ -79,15 +68,19 @@ const ProductForm = ({
 
   return (
     <Form onFinish={formik.handleSubmit}>
-      <Input
-        name="nombre"
-        type="text"
-        placeholder="Nombre"
-        onChange={formik.handleChange}
-        value={formik.values.nombre}
-      />
+      <Form.Item name="name">
+        <Input
+          id="nombre"
+          type="text"
+          name="name"
+          placeholder="Nombre"
+          onChange={formik.handleChange}
+          value={formik.values.name}
+        />
+      </Form.Item>
+
       <div className="actions">
-        <Button htmlType="submit" loading={loading}>
+        <Button type="primary" htmlType="submit" loading={loading}>
           {newProduct ? "Crear producto" : "Actualizar producto"}
         </Button>
       </div>
@@ -97,7 +90,7 @@ const ProductForm = ({
 
 function initialValues(product) {
   return {
-    nombre: product?.nombre || "",
+    name: product?.nombre || "",
   };
 }
 

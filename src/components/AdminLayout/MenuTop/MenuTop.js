@@ -4,14 +4,12 @@ import { UserOutlined, PoweroffOutlined } from "@ant-design/icons"; //iconos
 import { Link } from "react-router-dom"; //link para redireccion
 import { getMeApi } from "../../../api/user"; //obtengo mis datos como usuario
 import useAuth from "../../../hooks/useAuth"; //hook de usuario autenticado
-import useStore from "../../../hooks/useStore"; //hook de usuario autenticado
 
 const MenuTop = () => {
   //captar la url
   const [user, setUser] = useState(undefined);
 
-  const { store, logoutStore } = useStore();
-  const { logout, auth } = useAuth();
+  const { logout, auth, store, logoutStore } = useAuth();
   //obtengo mis datos
   useEffect(() => {
     (async () => {

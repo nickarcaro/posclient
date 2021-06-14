@@ -12,9 +12,9 @@ import {
   PercentageOutlined,
   PartitionOutlined,
 } from "@ant-design/icons";
-import useStore from "../../../hooks/useStore";
+import useAuth from "../../../hooks/useAuth";
 const MenuSider = ({ menuCollapsed, setMenuCollapsed }) => {
-  const { store } = useStore();
+  const { store } = useAuth();
   const { Sider } = Layout;
   const location = useLocation();
 

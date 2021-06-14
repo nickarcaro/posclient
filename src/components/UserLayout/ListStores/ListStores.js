@@ -4,12 +4,10 @@ import { size } from "lodash";
 import { Row, Button, Card, Spin, List } from "antd";
 import { getStores } from "../../../api/store";
 import useAuth from "../../../hooks/useAuth";
-import useStore from "../../../hooks/useStore";
 
 const ListStores = ({ setReloadStores, reloadStores, openModal }) => {
   const [stores, setStores] = useState(null);
-  const { auth, logout } = useAuth();
-  const { loginStore } = useStore();
+  const { auth, logout, loginStore } = useAuth();
 
   useEffect(() => {
     (async () => {

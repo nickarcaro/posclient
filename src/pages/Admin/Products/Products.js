@@ -1,4 +1,4 @@
-import useStore from "../../../hooks/useStore";
+import useAuth from "../../../hooks/useAuth";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Layout, Button } from "antd";
@@ -9,7 +9,7 @@ const Products = ({ match }) => {
   const { Content } = Layout;
   const history = useHistory();
   const { namestore } = match.params;
-  const { store } = useStore();
+  const { store } = useAuth();
 
   if (namestore !== store.slug || !store) {
     history.replace("/pos");
@@ -53,7 +53,6 @@ function Configuration() {
       <Button onClick={() => openModal("Nuevo producto")}>
         Añadir Producto
       </Button>
-
       <ListProducts
         reloadProducts={reloadProducts}
         setReloadProducts={setReloadProducts}

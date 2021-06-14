@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { List, Button } from "antd";
+import { List, Button, Switch } from "antd";
 import { size } from "lodash";
 import { getProducts } from "../../../../api/products";
 import useAuth from "../../../../hooks/useAuth";
-import useStore from "../../../../hooks/useStore";
+//import { updateStore } from "../../../../api/products";
 
 const ListProducts = ({ reloadProducts, setReloadProducts, openModal }) => {
+  const [activate, setActivate] = useState(true);
   const [products, setProducts] = useState(null);
-  const { logout } = useAuth();
-  const { store } = useStore();
+  const { logout, store } = useAuth();
 
   useEffect(() => {
     (async () => {
@@ -16,7 +16,7 @@ const ListProducts = ({ reloadProducts, setReloadProducts, openModal }) => {
       setProducts(response || []);
       setReloadProducts(false);
     })();
-  }, [reloadProducts, setReloadProducts, setProducts, store, logout]);
+  }, [reloadProducts, setProducts, store.id, setReloadProducts, logout]);
 
   if (!products) return null;
   return (
@@ -34,6 +34,8 @@ const ListProducts = ({ reloadProducts, setReloadProducts, openModal }) => {
               logout={logout}
               setReloadProducts={setReloadProducts}
               openModal={openModal}
+              activate={activate}
+              setActivate={setActivate}
             />
           )}
         />
@@ -42,7 +44,7 @@ const ListProducts = ({ reloadProducts, setReloadProducts, openModal }) => {
   );
 };
 
-const Product = ({ product, openModal }) => {
+const Product = ({ product, openModal, activate, setActivate }) => {
   return (
     <List.Item
       actions={[
@@ -52,14 +54,19 @@ const Product = ({ product, openModal }) => {
         >
           Editar
         </Button>,
+        <Switch defaultChecked onChange={() => setActivate(!activate)} />,
       ]}
     >
       <List.Item.Meta
         title={`
-              ${product.nombre} 
-              
+             Nombre: ${product.nombre} 
+            
           `}
-        description={product.estado}
+        description={` Estado:
+        ${product.estado}, Precio:
+        ${product.precio}
+        
+    `}
       />
     </List.Item>
   );
