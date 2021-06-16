@@ -10,6 +10,8 @@ const ProductForm = (props) => {
   const { setShowModal, setReloadProducts, newProduct, product } = props;
   const [loading, setLoading] = useState(false);
   const { logout, store } = useAuth();
+  console.log(` desde ${newProduct}`, product);
+  console.log(`desde ${newProduct}`, product);
 
   const formik = useFormik({
     initialValues: initialValues(product),
