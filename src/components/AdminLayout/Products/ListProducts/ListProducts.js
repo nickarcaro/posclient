@@ -3,7 +3,6 @@ import { List, Button, Switch } from "antd";
 import { size } from "lodash";
 import { getProducts } from "../../../../api/products";
 import useAuth from "../../../../hooks/useAuth";
-//import { updateStore } from "../../../../api/products";
 
 const ListProducts = ({ reloadProducts, setReloadProducts, openModal }) => {
   const [activate, setActivate] = useState(true);
@@ -19,6 +18,7 @@ const ListProducts = ({ reloadProducts, setReloadProducts, openModal }) => {
   }, [reloadProducts, setProducts, store.id, setReloadProducts, logout]);
 
   if (!products) return null;
+
   return (
     <div className="list-address">
       {size(products) === 0 ? (
@@ -45,6 +45,7 @@ const ListProducts = ({ reloadProducts, setReloadProducts, openModal }) => {
 };
 
 const Product = ({ product, openModal, activate, setActivate }) => {
+  console.log(product);
   return (
     <List.Item
       actions={[

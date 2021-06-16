@@ -2,6 +2,7 @@ import useAuth from "../../../hooks/useAuth";
 import React, { useState } from "react";
 import ListSellers from "../../../components/AdminLayout/Sellers/ListSellers";
 import SellerForm from "../../../components/AdminLayout/Sellers/SellerForm";
+import EditSeller from "../../../components/AdminLayout/Sellers/EditSeller";
 import { useHistory } from "react-router-dom";
 import { Layout, Button } from "antd";
 import Modal from "../../../components/Modal";
@@ -35,14 +36,25 @@ const Configuration = () => {
   const [titleModal, setTitleModal] = useState("");
   const [formModal, setFormModal] = useState(null);
   const [reloadSellers, setReloadSellers] = useState(false);
-  const openModal = (title, sellers) => {
+  const editUserModal = (title, sellers) => {
+    setTitleModal(title);
+
+    setFormModal(
+      <EditSeller
+        setReloadSellers={setReloadSellers}
+        seller={sellers}
+        setShowModal={setShowModal}
+      />
+    );
+    setShowModal(true);
+  };
+
+  const addUserModal = (title) => {
     setTitleModal(title);
     setFormModal(
       <SellerForm
         setShowModal={setShowModal}
         setReloadSellers={setReloadSellers}
-        newSeller={sellers ? false : true}
-        seller={sellers || null}
       />
     );
     setShowModal(true);
@@ -50,13 +62,13 @@ const Configuration = () => {
 
   return (
     <div>
-      <Button onClick={() => openModal("Nuevo producto")}>
+      <Button onClick={() => addUserModal("Nuevo vendedor")}>
         Añadir Vendedor
       </Button>
       <ListSellers
         reloadSellers={reloadSellers}
         setReloadSellers={setReloadSellers}
-        openModal={openModal}
+        editUserModal={editUserModal}
       />
       <Modal show={showModal} setShow={setShowModal} title={titleModal}>
         {formModal}

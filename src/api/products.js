@@ -14,6 +14,7 @@ export async function getProducts(idAlmacen, logout) {
 }
 
 export async function addProduct(product, logout) {
+  console.log(product, logout);
   try {
     const url = `${BASE_PATH}/productos`;
     const params = {

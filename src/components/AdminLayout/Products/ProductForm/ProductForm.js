@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button, Input, notification } from "antd";
+import { Form, Button, Input, notification, InputNumber } from "antd";
 import { useFormik } from "formik";
 import useAuth from "../../../../hooks/useAuth";
 import * as Yup from "yup";
@@ -10,8 +10,6 @@ const ProductForm = (props) => {
   const { setShowModal, setReloadProducts, newProduct, product } = props;
   const [loading, setLoading] = useState(false);
   const { logout, store } = useAuth();
-  console.log(` desde ${newProduct}`, product);
-  console.log(`desde ${newProduct}`, product);
 
   const formik = useFormik({
     initialValues: initialValues(product),
@@ -22,6 +20,7 @@ const ProductForm = (props) => {
   });
 
   const createProduct = async (formData) => {
+    console.log(formData);
     setLoading(true);
     const formDataTemp = {
       ...formData,
@@ -48,7 +47,7 @@ const ProductForm = (props) => {
     setLoading(true);
     const formDataTemp = {
       ...formData,
-      almacen: store.id,
+      almacen: store,
     };
     const response = updateStore(product.id, formDataTemp, logout);
 
@@ -74,10 +73,28 @@ const ProductForm = (props) => {
         <Input
           id="nombre"
           type="text"
-          name="name"
+          name="nombre"
           placeholder="Nombre"
           onChange={formik.handleChange}
-          value={formik.values.name}
+          value={formik.values.nombre}
+        />
+      </Form.Item>
+      <Form.Item>
+        <InputNumber
+          id="precio_actual"
+          name="precio_actual"
+          placeholder="precio"
+          onChange={formik.handleChange}
+          value={formik.values.precio_actual}
+        />
+      </Form.Item>
+      <Form.Item>
+        <InputNumber
+          id="stock_actual"
+          name="stock_actual"
+          placeholder="stock"
+          onChange={formik.handleChange}
+          value={formik.values.stock_actual}
         />
       </Form.Item>
 
@@ -92,7 +109,9 @@ const ProductForm = (props) => {
 
 function initialValues(product) {
   return {
-    name: product?.nombre || "",
+    nombre: product?.nombre || "",
+    stock_actual: product?.stock_actual || "0",
+    precio_actual: product?.precio_actual || "0",
   };
 }
 
