@@ -65,7 +65,7 @@ const Product = ({ product, openModal, activate, setActivate }) => {
           `}
         description={` Estado:
         ${product.estado}, Precio:
-        ${product.precio}
+        ${product.precio_actual}
         
     `}
       />
