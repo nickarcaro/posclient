@@ -12,7 +12,11 @@ const ProductForm = (props) => {
   const { logout, store } = useAuth();
 
   const formik = useFormik({
-    initialValues: initialValues(product),
+    initialValues: {
+      nombre: product?.nombre || "",
+      stock_actual: product?.stock_actual || 0,
+      precio_actual: product?.precio_actual || 0,
+    },
     validationSchema: Yup.object(validationSchema()),
     onSubmit: (formData) => {
       newProduct ? createProduct(formData) : modifyProduct(formData);
@@ -83,18 +87,26 @@ const ProductForm = (props) => {
         <InputNumber
           id="precio_actual"
           name="precio_actual"
-          placeholder="precio"
-          onChange={formik.handleChange}
-          value={formik.values.precio_actual}
+          type={"number"}
+          onChange={(v) => {
+            formik.setFieldValue("precio_actual", v);
+          }}
+          onBlur={formik.handleBlur}
+          defaultValue={formik.initialValues["precio_actual"]}
+          placeholder="Precio"
         />
       </Form.Item>
       <Form.Item>
         <InputNumber
           id="stock_actual"
           name="stock_actual"
-          placeholder="stock"
-          onChange={formik.handleChange}
-          value={formik.values.stock_actual}
+          type={"number"}
+          onChange={(v) => {
+            formik.setFieldValue("stock_actual", v);
+          }}
+          onBlur={formik.handleBlur}
+          defaultValue={formik.initialValues["stock_actual"]}
+          placeholder="Stock"
         />
       </Form.Item>
 
@@ -106,14 +118,6 @@ const ProductForm = (props) => {
     </Form>
   );
 };
-
-function initialValues(product) {
-  return {
-    nombre: product?.nombre || "",
-    stock_actual: product?.stock_actual || "0",
-    precio_actual: product?.precio_actual || "0",
-  };
-}
 
 function validationSchema() {
   return {

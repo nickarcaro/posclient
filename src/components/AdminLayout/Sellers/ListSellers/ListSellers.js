@@ -4,7 +4,7 @@ import { size } from "lodash";
 import useAuth from "../../../../hooks/useAuth";
 import { getSellers } from "../../../../api/sellers";
 
-const ListSellers = ({ reloadSellers, setReloadSellers, editUserModal }) => {
+const ListSellers = ({ reloadSellers, setReloadSellers, openModal }) => {
   const [activate, setActivate] = useState(true);
   const [sellers, setSellers] = useState(null);
   const { logout, store } = useAuth();
@@ -33,7 +33,7 @@ const ListSellers = ({ reloadSellers, setReloadSellers, editUserModal }) => {
               seller={seller}
               activate={activate}
               setActivate={setActivate}
-              editUserModal={editUserModal}
+              openModal={openModal}
             />
           )}
         />
@@ -42,26 +42,27 @@ const ListSellers = ({ reloadSellers, setReloadSellers, editUserModal }) => {
   );
 };
 
-const Seller = ({ seller, activate, setActivate, editUserModal }) => {
+const Seller = ({ seller, activate, setActivate, openModal }) => {
   return (
     <List.Item
       actions={[
         <Button
           type="primary"
-          onClick={() => editUserModal(`Editar: ${seller.nombre}`, seller)}
+          onClick={() => openModal(`Editar: ${seller.nombre}`, seller)}
         >
           Editar
         </Button>,
-        <Switch defaultChecked onChange={() => setActivate(!activate)} />,
       ]}
     >
       <List.Item.Meta
         title={`
-           Nombre: ${seller.apellido} 
+           Nombre: ${seller.nombre},
+           Apellido: ${seller.apellido},
+            
           
         `}
         description={` Estado:
-      ${seller.estado}, Precio:
+      ${seller.estado}, Correo:
       ${seller.email}
       
   `}

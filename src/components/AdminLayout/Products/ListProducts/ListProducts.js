@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { List, Button, Switch } from "antd";
+import { List, Button } from "antd";
 import { size } from "lodash";
 import { getProducts } from "../../../../api/products";
 import useAuth from "../../../../hooks/useAuth";
 
 const ListProducts = ({ reloadProducts, setReloadProducts, openModal }) => {
-  const [activate, setActivate] = useState(true);
   const [products, setProducts] = useState(null);
   const { logout, store } = useAuth();
 
@@ -34,8 +33,6 @@ const ListProducts = ({ reloadProducts, setReloadProducts, openModal }) => {
               logout={logout}
               setReloadProducts={setReloadProducts}
               openModal={openModal}
-              activate={activate}
-              setActivate={setActivate}
             />
           )}
         />
@@ -44,7 +41,7 @@ const ListProducts = ({ reloadProducts, setReloadProducts, openModal }) => {
   );
 };
 
-const Product = ({ product, openModal, activate, setActivate }) => {
+const Product = ({ product, openModal }) => {
   console.log(product);
   return (
     <List.Item
@@ -55,7 +52,6 @@ const Product = ({ product, openModal, activate, setActivate }) => {
         >
           Editar
         </Button>,
-        <Switch defaultChecked onChange={() => setActivate(!activate)} />,
       ]}
     >
       <List.Item.Meta
@@ -65,7 +61,8 @@ const Product = ({ product, openModal, activate, setActivate }) => {
           `}
         description={` Estado:
         ${product.estado}, Precio:
-        ${product.precio_actual}
+        ${product.precio_actual},
+        Stock:${product.stock_actual}
         
     `}
       />

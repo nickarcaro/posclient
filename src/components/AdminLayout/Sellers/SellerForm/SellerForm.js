@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button, Input, notification, Select } from "antd";
+import { Form, Button, Input, notification, Row, Col } from "antd";
 import { useFormik } from "formik";
 import useAuth from "../../../../hooks/useAuth";
 import * as Yup from "yup";
@@ -9,20 +9,25 @@ import { addSeller, updateSeller } from "../../../../api/sellers";
 const SellerForm = ({ setShowModal, setReloadSellers, newSeller, seller }) => {
   const [loading, setLoading] = useState(false);
   const { logout, store } = useAuth();
-  const { Option } = Select;
-
   const formik = useFormik({
-    initialValues: newSeller ? initialValuesCreate() : initialValues(seller),
-    validationSchema: newSeller
-      ? Yup.object(validationSchemaCreate())
-      : Yup.object(validationSchema()),
+    initialValues: {
+      nombre: seller?.nombre || "",
+      apellido: seller?.apellido || "",
+      email: seller?.email || "",
+      password: "",
+    },
+    validationSchema: Yup.object().shape({
+      nombre: Yup.string().required(true),
+      apellido: Yup.string().required(true),
+      email: Yup.string().email(true).required(true),
+      password: Yup.string().required(true),
+    }),
     onSubmit: (formData) => {
       newSeller ? createSeller(formData) : modifySeller(formData);
     },
   });
 
   const createSeller = async (formData) => {
-    console.log("daro", formData);
     setLoading(true);
     const formDataTemp = {
       ...formData,
@@ -71,92 +76,65 @@ const SellerForm = ({ setShowModal, setReloadSellers, newSeller, seller }) => {
 
   return (
     <Form onFinish={formik.handleSubmit}>
-      <Form.Item name="name">
-        <Input
-          type="text"
-          name="nombre"
-          placeholder="Nombre"
-          onChange={formik.handleChange}
-          value={formik.values.nombre}
-        />
-      </Form.Item>
-      <Form.Item name="apellido">
-        <Input
-          type="text"
-          name="apellido"
-          placeholder="Apellidos"
-          onChange={formik.handleChange}
-          value={formik.values.apellido}
-        />
-      </Form.Item>
-      <Form.Item name="email">
-        <Input
-          type="text"
-          name="email"
-          placeholder="Nombre"
-          onChange={formik.handleChange}
-          value={formik.values.email}
-        />
-      </Form.Item>
-      <Form.Item>
-        <Select name="estado" onChange={formik.handleChange}>
-          <Option value="activo">Activo</Option>
-          <Option value="inactivo">Inactivo</Option>
-        </Select>
-      </Form.Item>
-      <Form.Item name="password">
-        <Input.Password
-          name="password"
-          placeholder="Contraseña"
-          onChange={formik.handleChange}
-        />
-      </Form.Item>
-      <div className="actions">
-        <Button type="primary" htmlType="submit" loading={loading}>
-          {newSeller ? "Crear vendedor" : "Actualizar vendedor"}
-        </Button>
-      </div>
+      <Row gutter={24}>
+        <Col span={12}>
+          <Form.Item name="name">
+            <Input
+              type="text"
+              name="nombre"
+              placeholder="Nombre"
+              onChange={formik.handleChange}
+              value={formik.values.nombre}
+              onBlur={formik.handleBlur}
+            />
+          </Form.Item>
+        </Col>
+        <Col span={12}>
+          <Form.Item name="apellido">
+            <Input
+              type="text"
+              name="apellido"
+              placeholder="Apellidos"
+              onChange={formik.handleChange}
+              value={formik.values.apellido}
+              onBlur={formik.handleBlur}
+            />
+          </Form.Item>
+        </Col>
+        <Col span={12}>
+          {" "}
+          <Form.Item name="email">
+            <Input
+              type="text"
+              name="email"
+              placeholder="Nombre"
+              onChange={formik.handleChange}
+              value={formik.values.email}
+              onBlur={formik.handleBlur}
+            />
+          </Form.Item>
+        </Col>
+
+        <Col span={12}>
+          <Form.Item name="password">
+            <Input.Password
+              name="password"
+              placeholder="Contraseña"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+          </Form.Item>
+        </Col>
+        <Col span={24}>
+          <div className="actions">
+            <Button type="primary" htmlType="submit" loading={loading}>
+              {newSeller ? "Crear vendedor" : "Actualizar vendedor"}
+            </Button>
+          </div>
+        </Col>
+      </Row>
     </Form>
   );
 };
-
-function initialValuesCreate() {
-  return {
-    nombre: "",
-    apellido: "",
-    email: "",
-    password: "",
-    estado: "activo",
-  };
-}
-
-function initialValues(seller) {
-  return {
-    nombre: seller?.nombre || "",
-    apellido: seller?.apellido || "",
-    email: seller?.email || "",
-    password: "",
-    estado: "activo",
-  };
-}
-
-function validationSchemaCreate() {
-  return {
-    nombre: Yup.string().required(true),
-    apellido: Yup.string().required(true),
-    email: Yup.string().email(true).required(true),
-    password: Yup.string().required(true),
-  };
-}
-
-function validationSchema() {
-  return {
-    nombre: Yup.string(),
-
-    apellido: Yup.string(),
-    email: Yup.string().email(true),
-    password: Yup.string(),
-  };
-}
 
 export default SellerForm;
