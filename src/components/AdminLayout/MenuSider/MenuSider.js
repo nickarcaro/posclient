@@ -10,7 +10,6 @@ import {
   CarOutlined,
   TagsOutlined,
   PercentageOutlined,
-  PartitionOutlined,
 } from "@ant-design/icons";
 import useAuth from "../../../hooks/useAuth";
 const MenuSider = ({ menuCollapsed, setMenuCollapsed }) => {
@@ -60,13 +59,6 @@ const MenuSider = ({ menuCollapsed, setMenuCollapsed }) => {
         >
           Proveedores
           <Link to={`/pos/${store.slug}/proveedores`} />
-        </Menu.Item>
-        <Menu.Item
-          key={`/pos/${store.slug}/jerarquias`}
-          icon={<PartitionOutlined />}
-        >
-          Jerarquias
-          <Link to={`/pos/${store.slug}/jerarquias`} />{" "}
         </Menu.Item>
         <Menu.Item
           key={`/pos/${store.slug}/categorias`}
