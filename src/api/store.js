@@ -25,6 +25,18 @@ export async function getStoreBySlug(userId, namestore, logout) {
   }
 }
 
+export async function getStoreById(storeId, logout) {
+  try {
+    const url = `${BASE_PATH}/almacenes/${storeId}`;
+    const result = await authFetch(url, null, logout);
+    if (result.statusCode === 500) throw Error("Error del servidor");
+    return result;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
 export async function addStore(store, logout) {
   try {
     const url = `${BASE_PATH}/almacenes`;

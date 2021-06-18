@@ -18,13 +18,11 @@ const Account = () => {
       setUser(response);
     })();
   }, [auth, setUser, logout]);
-
   if (user === undefined) return null;
   if (!auth && !user) {
     history.replace("/");
     return null;
   }
-
   return (
     <Content>
       <Layout

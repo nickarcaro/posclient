@@ -5,6 +5,10 @@ const AuthContext = createContext({
   login: () => null,
   logout: () => null,
   setReloadUser: () => null,
+  store: undefined,
+  loginStore: () => null,
+  logoutStore: () => null,
+  setReloadStore: () => null,
 });
 
 export default AuthContext;

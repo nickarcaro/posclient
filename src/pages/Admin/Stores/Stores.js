@@ -6,7 +6,6 @@ import AddStore from "../../../components/UserLayout/AddStore";
 import Modal from "../../../components/Modal";
 import useAuth from "../../../hooks/useAuth";
 import { getMeApi } from "../../../api/user";
-import useStore from "../../../hooks/useStore";
 
 const Stores = () => {
   const [user, setUser] = useState(undefined);
@@ -14,8 +13,8 @@ const Stores = () => {
   const [titleModal, setTitleModal] = useState("");
   const [formModal, setFormModal] = useState(null);
   const [reloadStores, setReloadStores] = useState(false);
-  const { store } = useStore();
-  const { auth, logout } = useAuth();
+
+  const { auth, logout, store } = useAuth();
   const { Content } = Layout;
 
   const history = useHistory();

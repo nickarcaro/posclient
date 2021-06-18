@@ -1,4 +1,7 @@
-import useStore from "../../../hooks/useStore";
+import useAuth from "../../../hooks/useAuth";
+import ListSells from "../../../components/AdminLayout/Sells/ListSells";
+import React, { useState } from "react";
+
 import { useHistory } from "react-router-dom";
 import { Layout } from "antd";
 
@@ -6,7 +9,7 @@ const Sells = ({ match }) => {
   const { Content } = Layout;
   const history = useHistory();
   const { namestore } = match.params;
-  const { store } = useStore();
+  const { store } = useAuth();
 
   if (namestore !== store.slug || !store) {
     history.replace("/pos");
@@ -19,15 +22,23 @@ const Sells = ({ match }) => {
         style={{ padding: "24px 0", background: "#fff", marginTop: 20 }}
       >
         <Content style={{ padding: "0 24px", minHeight: 280 }}>
-          <div>
-            <button>buscar Venta</button> <span />
-          </div>
-          <br />
-          <div>listar venta</div>
+          <Configuration />
         </Content>
       </Layout>
     </Content>
   );
 };
 
+const Configuration = () => {
+  const [reloadSells, setReloadSells] = useState(false);
+  return (
+    <>
+      <div>
+        <button>buscar Venta</button> <span />
+      </div>
+      <br />
+      <ListSells reloadSells={reloadSells} setReloadSells={setReloadSells} />
+    </>
+  );
+};
 export default Sells;
