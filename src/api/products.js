@@ -51,7 +51,7 @@ export async function addStockIn(stockIn, logout) {
   }
 }
 
-export async function updateStore(idProduct, product, logout) {
+export async function updateProduct(idProduct, product, logout) {
   try {
     const url = `${BASE_PATH}/productos/${idProduct}`;
     const params = {

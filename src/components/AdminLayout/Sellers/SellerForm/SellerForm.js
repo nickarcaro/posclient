@@ -107,7 +107,7 @@ const SellerForm = ({ setShowModal, setReloadSellers, newSeller, seller }) => {
             <Input
               type="text"
               name="email"
-              placeholder="Nombre"
+              placeholder="Correo"
               onChange={formik.handleChange}
               value={formik.values.email}
               onBlur={formik.handleBlur}
