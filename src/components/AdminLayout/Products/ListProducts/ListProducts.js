@@ -42,7 +42,6 @@ const ListProducts = ({ reloadProducts, setReloadProducts, openModal }) => {
 };
 
 const Product = ({ product, openModal }) => {
-  console.log(product);
   return (
     <List.Item
       actions={[

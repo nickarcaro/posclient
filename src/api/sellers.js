@@ -49,3 +49,33 @@ export async function updateSeller(idSeller, seller, logout) {
     return null;
   }
 }
+
+export async function createUser(user, logout) {
+  try {
+    const url = `${BASE_PATH}/users`;
+    const params = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    };
+    const result = await authFetch(url, params, logout);
+    return result ? result : null;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export async function getUsers(idAlmacen, logout) {
+  try {
+    const url = `${BASE_PATH}/vendors?almacen=${idAlmacen}`;
+    const result = await authFetch(url, null, logout);
+    if (result.statusCode === 500) throw Error("Error del servidor");
+    return result;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}

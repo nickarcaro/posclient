@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import useAuth from "../../../../hooks/useAuth";
 import * as Yup from "yup";
 
-import { addProduct, updateStore } from "../../../../api/products";
+import { addProduct, updateProduct } from "../../../../api/products";
 
 const ProductForm = (props) => {
   const { setShowModal, setReloadProducts, newProduct, product } = props;
@@ -53,7 +53,7 @@ const ProductForm = (props) => {
       ...formData,
       almacen: store,
     };
-    const response = updateStore(product.id, formDataTemp, logout);
+    const response = updateProduct(product.id, formDataTemp, logout);
 
     if (!response) {
       notification["error"]({
