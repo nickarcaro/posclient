@@ -1,5 +1,6 @@
 import useAuth from "../../../hooks/useAuth";
 import { useHistory } from "react-router-dom";
+import SellsLine from "../../../components/AdminLayout/Dashboard/SellsLine";
 import { Layout } from "antd";
 
 const Dashboard = ({ match }) => {
@@ -21,8 +22,7 @@ const Dashboard = ({ match }) => {
         style={{ padding: "24px 0", background: "#fff", marginTop: 20 }}
       >
         <Content style={{ padding: "0 24px", minHeight: 280 }}>
-          <div>Indicadores gráficos </div>
-          {store.nombre}
+          <SellsLine />
         </Content>
       </Layout>
     </Content>
