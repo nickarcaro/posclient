@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { List, Button, Switch } from "antd";
+import {  List, Button, Switch } from "antd";
 import { size } from "lodash";
 import { getSells } from "../../../../api/sells";
+import { getSellsDetail } from "../../../../api/sellsdetail";
 import useAuth from "../../../../hooks/useAuth";
+import { PlusSquareTwoTone } from "@ant-design/icons"
+import Modal from "../../../Modal";
 
 const ListSells = ({ reloadSells, setReloadSells }) => {
   const [activate, setActivate] = useState(true);
@@ -38,6 +41,37 @@ const ListSells = ({ reloadSells, setReloadSells }) => {
 };
 
 const Sell = ({ sell, activate, setActivate }) => {
+  const [showModal, setShowModal] = useState(false);
+  const [titleModal, setTitleModal] = useState("");
+  const [formModal, setFormModal] = useState(null);
+  const [sellsDetail, setSellsDetail] = useState(null);
+  const { logout } = useAuth();
+
+  useEffect(() => {
+    (async () => {
+      const response = await getSellsDetail(sell.id, logout);
+      setSellsDetail(response || []);
+    })();
+  }, [ setSellsDetail, sell.id, logout]);
+
+  const openModal = (title) => {
+    setTitleModal(title);
+    setFormModal(
+      <List
+        itemLayout="horizontal"
+        dataSource={sellsDetail}
+    
+        renderItem={item => (
+          <List.Item>
+            <List.Item.Meta
+              description= {` Producto: ${item.producto.nombre}, Cantidad: ${item.cantidad}, Precio unitario: ${item.precio_unitario}, Precio total: ${item.precio_total}`}
+            />
+          </List.Item>
+        )}
+      />,   
+    );
+    setShowModal(true);
+  };
   return (
     <List.Item
       actions={[
@@ -46,21 +80,19 @@ const Sell = ({ sell, activate, setActivate }) => {
     >
       <List.Item.Meta
         title={`
-            
-            Precio: ${sell.total}
+            Fecha: ${sell.fecha}
+           
           `}
         description=
         {` 
-           Fecha: ${sell.fecha},
-           Anulada: ${sell.anulada},
-           Medio de pago: ${sell.medio_pago}
-
-      
+           Precio: ${sell.total},
+           Medio de pago: ${sell.medio_pago}    
         `}
-        
-
       />
-      <div>"DETALLE"</div>
+      <Button type="primary" size="large" onClick={() => openModal("Detalle de venta")} icon={<PlusSquareTwoTone />}>Detalle { }</Button>
+      <Modal show={showModal} setShow={setShowModal} title={titleModal}>
+        {formModal}
+      </Modal>
     </List.Item>
   );
 };
