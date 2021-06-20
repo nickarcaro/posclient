@@ -3,7 +3,7 @@ import { authFetch } from "../utils/fetch";
 
 export async function getSellers(idAlmacen, logout) {
   try {
-    const url = `${BASE_PATH}/vendedores?almacen=${idAlmacen}`;
+    const url = `${BASE_PATH}/users?almacen=${idAlmacen}`;
     const result = await authFetch(url, null, logout);
     if (result.statusCode === 500) throw Error("Error del servidor");
     return result;
@@ -16,7 +16,7 @@ export async function getSellers(idAlmacen, logout) {
 export async function addSeller(seller, logout) {
   console.log(seller, logout);
   try {
-    const url = `${BASE_PATH}/vendedores`;
+    const url = `${BASE_PATH}/users`;
     const params = {
       method: "POST",
       headers: {

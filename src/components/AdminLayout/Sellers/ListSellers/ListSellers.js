@@ -48,7 +48,7 @@ const Seller = ({ seller, activate, setActivate, openModal }) => {
       actions={[
         <Button
           type="primary"
-          onClick={() => openModal(`Editar: ${seller.nombre}`, seller)}
+          onClick={() => openModal(`Editar: ${seller.name}`, seller)}
         >
           Editar
         </Button>,
@@ -56,13 +56,13 @@ const Seller = ({ seller, activate, setActivate, openModal }) => {
     >
       <List.Item.Meta
         title={`
-           Nombre: ${seller.nombre},
-           Apellido: ${seller.apellido},
+           Nombre: ${seller.name},
+           Apellido: ${seller.lastname},
             
           
         `}
         description={` Estado:
-      ${seller.estado}, Correo:
+      ${seller.confirmed}, Correo:
       ${seller.email}
       
   `}
