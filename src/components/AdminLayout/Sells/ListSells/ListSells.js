@@ -51,7 +51,7 @@ const Sell = ({ sell, activate, setActivate }) => {
           `}
         description=
         {` 
-           Precio: ${sell.total},
+           Fecha: ${sell.fecha},
            Anulada: ${sell.anulada},
            Medio de pago: ${sell.medio_pago}
 
