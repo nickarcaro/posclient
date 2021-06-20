@@ -64,7 +64,7 @@ const Sell = ({ sell, activate, setActivate }) => {
         renderItem={item => (
           <List.Item>
             <List.Item.Meta
-              description= {` Producto: ${item.producto.nombre}, Cantidad: ${item.cantidad}, Precio unitario: ${item.precio_unitario}, Precio total: ${item.precio_total}`}
+              description= {` Producto: ${item.producto.nombre}, Cantidad: ${item.cantidad}, Precio unitario: ${item.precio_unitario}, Precio total: ${item.precio_total}, Valor IVA: ${Valor_IVA}`}
             />
           </List.Item>
         )}
