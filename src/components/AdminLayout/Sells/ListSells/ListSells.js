@@ -46,15 +46,21 @@ const Sell = ({ sell, activate, setActivate }) => {
     >
       <List.Item.Meta
         title={`
-             Nombre: ${sell.nombre} 
             
+            Precio: ${sell.total}
           `}
-        description={` Estado:
-        ${sell.estado}, Precio:
-        ${sell.precio}
+        description=
+        {` 
+           Precio: ${sell.total},
+           Anulada: ${sell.anulada},
+           Medio de pago: ${sell.medio_pago}
+
+      
+        `}
         
-    `}
+
       />
+      <div>"DETALLE"</div>
     </List.Item>
   );
 };
