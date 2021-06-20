@@ -32,6 +32,25 @@ export async function addProduct(product, logout) {
   }
 }
 
+export async function addStockIn(stockIn, logout) {
+  console.log(stockIn, logout);
+  try {
+    const url = `${BASE_PATH}/entrada-stocks`;
+    const params = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(stockIn),
+    };
+    const result = await authFetch(url, params, logout);
+    return result;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
 export async function updateStore(idProduct, product, logout) {
   try {
     const url = `${BASE_PATH}/productos/${idProduct}`;
