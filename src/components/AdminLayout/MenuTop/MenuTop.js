@@ -34,22 +34,25 @@ const MenuOptions = ({ logoutStore, user, store }) => {
     <Col lg={24} xl={(24, { span: 5 })}>
       <Menu mode="horizontal">
         {store !== undefined && (
-          <SubMenu
-            key="SubMenu"
-            icon={<Avatar size="small" icon={<UserOutlined />} />}
-            title={` ${user.name} ${user.lastname} - ${store.nombre} `}
-          >
-            <Menu.Item key="setting:4" icon={<UserOutlined />}>
-              <Link to="/pos/mi-cuenta"> Mi Cuenta</Link>
-            </Menu.Item>
-            <Menu.Item
-              key="setting:3"
-              icon={<PoweroffOutlined />}
-              onClick={logoutStore}
+          <>
+            <SubMenu
+              key="SubMenu"
+              icon={<Avatar size="small" icon={<UserOutlined />} />}
+              title={` ${user.name} ${user.lastname} - ${store.nombre} `}
             >
-              salir del almacen
-            </Menu.Item>
-          </SubMenu>
+              <Menu.Item key="setting:4" icon={<UserOutlined />}>
+                <Link to="/pos/mi-cuenta"> Mi Cuenta</Link>
+              </Menu.Item>
+
+              <Menu.Item
+                key="setting:3"
+                icon={<PoweroffOutlined />}
+                onClick={logoutStore}
+              >
+                salir del almacen
+              </Menu.Item>
+            </SubMenu>
+          </>
         )}
       </Menu>
     </Col>
