@@ -13,6 +13,19 @@ export async function getProducts(idAlmacen, logout) {
   }
 }
 
+export async function getProduct(idProduct, logout) {
+  try {
+    const url = `${BASE_PATH}/productos/${idProduct}`;
+    const result = await authFetch(url, null, logout);
+    if (result.statusCode === 500) throw Error("Error del servidor");
+    return result;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+
 export async function addProduct(product, logout) {
   console.log(product, logout);
   try {
