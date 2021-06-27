@@ -15,12 +15,13 @@ const ListSells = ({ reloadSells, setReloadSells }) => {
   useEffect(() => {
     (async () => {
       const response = await getSells(store.id, logout);
-      setSells(response || []);
+      setSells(response.sort((a,b) => b.id - a.id) || []);
       setReloadSells(false);
     })();
   }, [reloadSells, setSells, store.id, setReloadSells, logout]);
 
   if (!sells) return null;
+
 
   return (
     <div className="list-address">
@@ -64,7 +65,7 @@ const Sell = ({ sell, activate, setActivate }) => {
         renderItem={item => (
           <List.Item>
             <List.Item.Meta
-              description= {` Producto: ${item.producto.nombre}, Cantidad: ${item.cantidad}, Precio unitario: ${item.precio_unitario}, Precio total: ${item.precio_total}, Valor IVA: ${item.valor_IVA}`}
+              description= {` Producto: ${item.producto.nombre}, Cantidad: ${item.cantidad}, Precio unitario: ${item.precio_unitario}, Precio total: ${item.precio_total}`}
             />
           </List.Item>
         )}
