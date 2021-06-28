@@ -1,10 +1,11 @@
 import useAuth from "../../../hooks/useAuth";
 import { useHistory } from "react-router-dom";
-import { Layout, Row, Col } from 'antd';
+import { Layout, Row, Col, Button } from 'antd';
 import { getCategories } from "../../../api/categories";
 import ListCategories from "../../../components/AdminLayout/Categories/ListCategories";
 import CategoriesDetails from "../../../components/AdminLayout/Categories/CategoriesDetail";
 import React, { useState, useEffect } from "react";
+import { PlusSquareTwoTone } from "@ant-design/icons"
 
 
 const Categories = ({ match }) => {
@@ -35,8 +36,7 @@ const Categories = ({ match }) => {
       >
         <Content style={{ padding: "0 24px", minHeight: 280 }}>
           <div>
-            <button>Añadir Categoria</button> <span />
-            <button>Buscar Categoria</button> <span />
+          <Button type="primary" size="large" onClick={() => history.push(`/pos/${store.slug}/categorias/nueva-categoria`)} icon={<PlusSquareTwoTone />}>Nueva  Categoria { }</Button>
 
           </div>
           <br />

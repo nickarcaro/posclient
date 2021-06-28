@@ -20,6 +20,7 @@ import Promotions from "../pages/Admin/Promotions";
 import Sellers from "../pages/Admin/Sellers";
 import Sells from "../pages/Admin/Sells";
 import Suppliers from "../pages/Admin/Suppliers";
+import AddCategory from "../pages/Admin/Categories/AddCategories"
 
 import AddPromotion from "../pages/Admin/Promotions/AddPromotion";
 
@@ -90,6 +91,12 @@ const routes = [
     path: "/pos/:namestore/categorias",
     layout: AdminLayout,
     component: Categories,
+    exact: true,
+  },
+  {
+    path: "/pos/:namestore/categorias/nueva-categoria",
+    layout: AdminLayout,
+    component: AddCategory,
     exact: true,
   },
   {
