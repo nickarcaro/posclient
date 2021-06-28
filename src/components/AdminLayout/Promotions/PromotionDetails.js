@@ -4,11 +4,15 @@ import {List, Divider, Typography} from 'antd'
 const { Title } = Typography;
 
 const PromotionDetails = ({promotion}) => {
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+
   return promotion === undefined ? (
     <div>Seleccione una promocion</div>
   ) : (
     <>
       <Divider orientation="left">{promotion.nombre}</Divider>
+      <h1>Vigente desde: {(new Date(promotion.inicio_vigencia)).toLocaleDateString('es-CL', options)}</h1>
+      <h1>Vigente hasta: {(new Date(promotion.fin_vigencia)).toLocaleDateString('es-CL', options)}</h1>
       <List
         header={<h1>Productos</h1>}
         // footer={
