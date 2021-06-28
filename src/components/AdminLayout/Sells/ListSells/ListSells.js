@@ -1,11 +1,29 @@
 import React, { useState, useEffect } from "react";
-import {  List, Button, Switch } from "antd";
+import {  List, Button, Switch, Divider, Row, Col } from "antd";
 import { size } from "lodash";
 import { getSells } from "../../../../api/sells";
 import { getSellsDetail } from "../../../../api/sellsdetail";
 import useAuth from "../../../../hooks/useAuth";
 import { PlusSquareTwoTone } from "@ant-design/icons"
 import Modal from "../../../Modal";
+
+export const getPromotionDiscount = (promotion) => {
+  let totalOriginal = 0
+  for (const prodProm of promotion.productos_promocion){
+    totalOriginal += prodProm.producto.precio_actual * prodProm.cantidad
+  }
+  return totalOriginal - promotion.precio_promocion
+}
+
+export const getSubTotal = (sale) => {
+  let subTotal = parseInt(sale.total)
+  for (const prom of sale.promocions) {
+    console.log("promocion: ", prom)
+    console.log("descuento: ", getPromotionDiscount(prom))
+    subTotal += getPromotionDiscount(prom)
+  }
+  return subTotal
+}
 
 const ListSells = ({ reloadSells, setReloadSells }) => {
   const [activate, setActivate] = useState(true);
@@ -58,18 +76,64 @@ const Sell = ({ sell, activate, setActivate }) => {
   const openModal = (title) => {
     setTitleModal(title);
     setFormModal(
-      <List
-        itemLayout="horizontal"
-        dataSource={sellsDetail}
-    
-        renderItem={item => (
-          <List.Item>
-            <List.Item.Meta
-              description= {` Producto: ${item.producto.nombre}, Cantidad: ${item.cantidad}, Precio unitario: ${item.precio_unitario}, Precio total: ${item.precio_total}`}
+      <>
+        <Divider>Productos</Divider>
+        <List
+          itemLayout="horizontal"
+          dataSource={sellsDetail}
+
+          footer={
+            <Row>
+              <Col span={12}>
+                {
+                  sell.promocions.length > 0 ?
+                  <h4>Sub-Total</h4> :
+                  <h4>Total</h4>
+                }
+              </Col>
+              <Col span={12}>
+                <h4 style={{ float: "right" }}>${getSubTotal(sell)}</h4>
+              </Col>
+            </Row>
+          }
+
+          renderItem={item => (
+            <List.Item>
+              <List.Item.Meta
+                title= {` Producto: ${item.producto.nombre}, Cantidad: ${item.cantidad}, Precio unitario: ${item.precio_unitario}, Precio total: ${item.precio_total}`}
+              />
+            </List.Item>
+          )}
+        />
+        {
+          sell.promocions.length > 0 ?
+          <>
+            <Divider>Promociones</Divider>
+            <List
+              itemLayout="horizontal"
+
+              footer={
+                <Row>
+                  <Col span={12}><h3>Total</h3></Col>
+                  <Col span={12}>
+                    <h3 style={{ float: "right" }}>${sell.total}</h3>
+                  </Col>
+                </Row>
+              }
+            
+              dataSource={sell.promocions}  
+              renderItem={promocion => (
+                <List.Item>
+                  <List.Item.Meta
+                    title= {` ${promocion.nombre}, Valor: $${promocion.precio_promocion}, Descuento: $${getPromotionDiscount(promocion)}`}
+                  />
+                </List.Item>
+              )}
             />
-          </List.Item>
-        )}
-      />,   
+          </>
+          : null
+        }
+      </>   
     );
     setShowModal(true);
   };

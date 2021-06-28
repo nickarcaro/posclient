@@ -1,7 +1,8 @@
-import React from 'react'
-import {List} from 'antd'
+import React, {useState}from 'react'
+import {List, Button } from 'antd'
 
 const ListPromotions = ({promotions, select}) => {
+
   return (
     <>
       <List
