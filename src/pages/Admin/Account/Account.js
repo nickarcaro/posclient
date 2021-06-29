@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import useAuth from "../../../hooks/useAuth";
 import { getMeApi } from "../../../api/user";
 import { useHistory } from "react-router-dom";
-import { Layout } from "antd";
+import { Layout, Row } from "antd";
 import ChangePasswordForm from "../../../components/UserLayout/ChangePasswordForm";
 import ChangeNameForm from "../../../components/UserLayout/ChangeNameForm";
 import ChangeEmailForm from "../../../components/UserLayout/ChangeEmailForm";
@@ -44,18 +44,20 @@ const Account = () => {
 function Configuration({ user, logout, setReloadUser }) {
   return (
     <div className="account__configuration">
-      <h3>Configuración</h3>
-      <div className="data">
+      <h2>Configuración</h2>
+      <div>
         <ChangeNameForm
           user={user}
           logout={logout}
           setReloadUser={setReloadUser}
         />
+        <br />
         <ChangeEmailForm
           user={user}
           logout={logout}
           setReloadUser={setReloadUser}
         />
+        <br />
         <ChangePasswordForm user={user} logout={logout} />
       </div>
     </div>

@@ -11,6 +11,7 @@ export default function Modal({ show, setShow, title, children, ...other }) {
       visible={show}
       onCancel={onClose}
       footer={false}
+      destroyOnClose
       {...other}
     >
       {children}

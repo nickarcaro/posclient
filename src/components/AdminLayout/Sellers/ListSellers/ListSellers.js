@@ -5,7 +5,6 @@ import useAuth from "../../../../hooks/useAuth";
 import { getSellers } from "../../../../api/sellers";
 
 const ListSellers = ({ reloadSellers, setReloadSellers, openModal }) => {
-  const [activate, setActivate] = useState(true);
   const [sellers, setSellers] = useState(null);
   const { logout, store } = useAuth();
 
@@ -29,12 +28,7 @@ const ListSellers = ({ reloadSellers, setReloadSellers, openModal }) => {
           itemLayout="horizontal"
           dataSource={sellers}
           renderItem={(seller) => (
-            <Seller
-              seller={seller}
-              activate={activate}
-              setActivate={setActivate}
-              openModal={openModal}
-            />
+            <Seller seller={seller} openModal={openModal} />
           )}
         />
       )}
@@ -42,7 +36,7 @@ const ListSellers = ({ reloadSellers, setReloadSellers, openModal }) => {
   );
 };
 
-const Seller = ({ seller, activate, setActivate, openModal }) => {
+const Seller = ({ seller, openModal }) => {
   return (
     <List.Item
       actions={[
@@ -56,10 +50,8 @@ const Seller = ({ seller, activate, setActivate, openModal }) => {
     >
       <List.Item.Meta
         title={`
-           Nombre: ${seller.name},
-           Apellido: ${seller.lastname},
-            
-          
+           Nombre: ${seller.name} ${seller.lastname}
+             
         `}
         description={` Estado:
       ${seller.confirmed}, Correo:

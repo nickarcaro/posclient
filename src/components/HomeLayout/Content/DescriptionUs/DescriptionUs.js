@@ -14,8 +14,8 @@ const DescriptionUs = () => {
         <span key="line" className="separator" />
         <QueueAnim type="bottom" className="info-content" key="content">
           <p className="main-info" key="1">
-            "Somos un grupo dedicado a la labor de brindar servicios a los
-            almacenes"
+            "Somos un equipo dedicado a la labor de brindar servicios a los
+            almacenes y futuros emprendedores."
           </p>
         </QueueAnim>
       </QueueAnim>

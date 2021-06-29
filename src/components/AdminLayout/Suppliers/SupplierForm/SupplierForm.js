@@ -45,7 +45,7 @@ const SupplierForm = ({
       setLoading(false);
     } else {
       notification["success"]({
-        message: "Producto creado",
+        message: "Proveedor creado",
       });
       setReloadSuppliers(true);
       setLoading(false);
@@ -68,7 +68,7 @@ const SupplierForm = ({
     } else {
       formik.resetForm();
       notification["success"]({
-        message: "Producto modificado",
+        message: "Proveedor modificado",
       });
       setReloadSuppliers(true);
       setLoading(false);

@@ -38,10 +38,10 @@ const MenuOptions = ({ logoutStore, user, store }) => {
             <SubMenu
               key="SubMenu"
               icon={<Avatar size="small" icon={<UserOutlined />} />}
-              title={` ${user.name} ${user.lastname} - ${store.nombre} `}
+              title={` ${store.nombre} `}
             >
               <Menu.Item key="setting:4" icon={<UserOutlined />}>
-                <Link to="/pos/mi-cuenta"> Mi Cuenta</Link>
+                <Link to="/pos/mi-cuenta"> Mi Cuenta ({user.name})</Link>
               </Menu.Item>
 
               <Menu.Item
@@ -49,7 +49,7 @@ const MenuOptions = ({ logoutStore, user, store }) => {
                 icon={<PoweroffOutlined />}
                 onClick={logoutStore}
               >
-                salir del almacen
+                Salir del {store.nombre}
               </Menu.Item>
             </SubMenu>
           </>

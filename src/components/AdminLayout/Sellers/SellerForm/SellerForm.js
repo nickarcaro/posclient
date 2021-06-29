@@ -31,6 +31,7 @@ const SellerForm = ({ setShowModal, setReloadSellers, newSeller, seller }) => {
       role: 3,
       confirmed: true,
       username: formData.email,
+      is_admin: false,
     };
     const response = await addSeller(formDataTemp, logout);
     formik.resetForm();
@@ -42,7 +43,7 @@ const SellerForm = ({ setShowModal, setReloadSellers, newSeller, seller }) => {
       setLoading(false);
     } else {
       notification["success"]({
-        message: "Producto creado",
+        message: "Vendedor creado",
       });
       setReloadSellers(true);
       setLoading(false);
@@ -65,7 +66,7 @@ const SellerForm = ({ setShowModal, setReloadSellers, newSeller, seller }) => {
     } else {
       formik.resetForm();
       notification["success"]({
-        message: "Producto modificado",
+        message: "Vendedor modificado",
       });
       setReloadSellers(true);
       setLoading(false);

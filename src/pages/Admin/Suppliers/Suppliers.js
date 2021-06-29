@@ -16,7 +16,6 @@ const Suppliers = ({ match }) => {
     history.replace("/pos");
     return null;
   }
-  console.log(store);
   return (
     <Content>
       <Layout
@@ -52,7 +51,7 @@ function Configuration() {
 
   return (
     <div>
-      <Button onClick={() => openModal("Nuevo proveedor")}>
+      <Button type="primary" onClick={() => openModal("Nuevo proveedor")}>
         Añadir Proveedor
       </Button>
       <ListSuppliers

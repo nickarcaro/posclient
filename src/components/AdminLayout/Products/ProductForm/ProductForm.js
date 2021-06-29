@@ -83,7 +83,7 @@ const ProductForm = (props) => {
           value={formik.values.nombre}
         />
       </Form.Item>
-      <Form.Item>
+      <Form.Item label="Precio">
         <InputNumber
           id="precio_actual"
           name="precio_actual"
@@ -93,10 +93,9 @@ const ProductForm = (props) => {
           }}
           onBlur={formik.handleBlur}
           defaultValue={formik.initialValues["precio_actual"]}
-          placeholder="Precio"
         />
       </Form.Item>
-      <Form.Item>
+      <Form.Item label="Stock">
         <InputNumber
           id="stock_actual"
           name="stock_actual"
@@ -106,7 +105,6 @@ const ProductForm = (props) => {
           }}
           onBlur={formik.handleBlur}
           defaultValue={formik.initialValues["stock_actual"]}
-          placeholder="Stock"
         />
       </Form.Item>
 

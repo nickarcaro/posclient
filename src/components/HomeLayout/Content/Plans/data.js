@@ -6,8 +6,8 @@ export const page1 = [
     title: "Plan Básico",
     description: (
       <>
-        <li>3 usuarios</li>
-        <li>1 almacen</li>
+        <li>3 Usuarios</li>
+        <li>1 Almacen</li>
       </>
     ),
   },
@@ -18,9 +18,9 @@ export const page1 = [
     description: (
       <>
         <li>
-          6 usuario <span> x almacen</span>
+          6 Usuarios <span> por Almacen</span>
         </li>
-        <li>2 almacenes</li>
+        <li>2 Almacenes</li>
       </>
     ),
   },
