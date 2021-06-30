@@ -50,14 +50,30 @@ const Product = ({ productData, openModal2, setReloadProducts, logout }) => {
   const [showModal, setShowModal] = useState(false);
   const [titleModal, setTitleModal] = useState("");
   const [formModal, setFormModal] = useState(null);
+
+  const [showModal2, setShowModal2] = useState(false);
+  const [titleModal2, setTitleModal2] = useState("");
+  const [formModal2, setFormModal2] = useState(null);
+
   const [product, setProduct] = useState(productData);
   const [actualValue, setActualValue] = useState(0);
+  const [actualValue2, setActualValue2] = useState(0);
   const [newValue, setNewValue] = useState(null);
+  const [newValue2, setNewValue2] = useState(null);
 
   function onChange(value) {
     setActualValue(value)
   }
+  function onChange2(value) {
+    setActualValue2(value)
+  }
 
+  useEffect(() => {
+
+    const newValue2 = product.stock_actual - actualValue2
+    setProduct({ ...product, stock_actual: newValue2 })
+
+  }, [newValue2]);
 
   useEffect(() => {
 
@@ -100,6 +116,25 @@ const Product = ({ productData, openModal2, setReloadProducts, logout }) => {
       );
     setShowModal(true);
   };
+  const openModal3 = (title, type) => {
+    setTitleModal2(title);
+    setFormModal2
+      (
+        <div><div>{type} : <InputNumber onChange={onChange2} />,;
+        </div>
+
+          <div> <Button type="primary" onClick={async () => {
+            setNewValue2(product.stock_actual - actualValue2 )
+            
+            setShowModal2(false)
+          }
+          } > Confirmar</Button>
+          </div>
+        </div>
+
+      );
+    setShowModal2(true);
+  };
 
   return (
 
@@ -115,7 +150,7 @@ const Product = ({ productData, openModal2, setReloadProducts, logout }) => {
         ,
         <Button
           type="primary"
-          onClick={() => openModal("Modificar Stock", "Stock a quitar")}
+          onClick={() => openModal3("Modificar Stock", "Stock a quitar")}
         >
           Quitar Stock
         </Button>,
@@ -128,6 +163,9 @@ const Product = ({ productData, openModal2, setReloadProducts, logout }) => {
         <Modal show={showModal} setShow={setShowModal} title={titleModal}>
           {formModal}
         </Modal>,
+        <Modal show={showModal2} setShow={setShowModal2} title={titleModal2}>
+          {formModal2}
+        </Modal>
       ]}
 
     >
