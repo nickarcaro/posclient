@@ -21,6 +21,7 @@
     "express": "^4.17.1",
     "formik": "^2.2.6",
     "ignore-styles": "^5.0.1",
+    "jsdoc": "^3.6.7",
     "jwt-decode": "^3.1.2",
     "less": "^4.1.1",
     "lodash": "^4.17.21",
@@ -41,7 +42,8 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "doc": "jsdoc -c jsdoc.json"
   },
   "eslintConfig": {
     "extends": [
