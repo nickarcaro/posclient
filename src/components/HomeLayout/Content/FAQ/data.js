@@ -1,7 +1,7 @@
 export const questions = [
   {
     pregunta: "¿Es Gratis?",
-    text: "Depende del plan",
+    text: "Existe una muestra gratuita con límite de creación. Para acceder a más funciones y otros almacenes existen precios asociados",
   },
   {
     pregunta: "¿Cuantos vendedores puedo tener?",

@@ -15,7 +15,7 @@ import "./less/index.less";
 export default function App() {
   //estados de usuario autenticado y de recargar usuario
   const [auth, setAuth] = useState(undefined);
-  const [realoadUser, setReloadUser] = useState(false);
+  const [reloadUser, setReloadUser] = useState(false);
   const [reloadStore, setReloadStore] = useState(false);
   const [store, setStore] = useState(undefined);
 
@@ -31,7 +31,7 @@ export default function App() {
       setAuth(null);
     }
     setReloadUser(false);
-  }, [realoadUser]);
+  }, [reloadUser]);
 
   //obtención del almacen cuando se ingresa a su panel (trasforma el string en object)
   useEffect(() => {

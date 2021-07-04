@@ -1,5 +1,9 @@
 import { Card, Col, Row, Typography } from "antd";
-import { FundOutlined, BulbOutlined, ShopOutlined } from "@ant-design/icons";
+import {
+  FundOutlined,
+  UsergroupAddOutlined,
+  ShopOutlined,
+} from "@ant-design/icons";
 
 const HowToWork = () => {
   //estilos
@@ -12,8 +16,8 @@ const HowToWork = () => {
   return (
     <Row style={styleRow}>
       <Col lg={24} style={styleText}>
-        <Title level={2}>¿Cómo funciona ?</Title>
-        <Title level={3}>registra tu almacen y empieza a gestionar</Title>
+        <Title level={2}>¿Cómo funciona?</Title>
+        <Title level={3}>Registra tu almacen y comienza a gestionar</Title>
       </Col>
 
       <Col lg={4} />
@@ -23,21 +27,21 @@ const HowToWork = () => {
             <CardInfo
               icon={<ShopOutlined style={styleIcon} />}
               title="En la Nube"
-              description="Manten tus operaciones diarias de tu negocio de manera online y almacenada en la nube."
+              description="Manten las operaciones diarias de tu negocio de manera online y almacenada en la nube."
             />
           </Col>
           <Col md={8} style={paddingCard}>
             <CardInfo
               icon={<FundOutlined style={styleIcon} />}
               title="Reportes"
-              description="Accede a resportes de tu negocio."
+              description="Accede a reportes de tu negocio."
             />
           </Col>
           <Col md={8} style={paddingCard}>
             <CardInfo
-              icon={<BulbOutlined style={styleIcon} />}
-              title="Control "
-              description="Mantén seguro tus registros para acceder después."
+              icon={<UsergroupAddOutlined style={styleIcon} />}
+              title="Ventas"
+              description="Añade vendedores a tu almacén."
             />
           </Col>
         </Row>

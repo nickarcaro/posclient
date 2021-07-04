@@ -20,6 +20,9 @@ import Promotions from "../pages/Admin/Promotions";
 import Sellers from "../pages/Admin/Sellers";
 import Sells from "../pages/Admin/Sells";
 import Suppliers from "../pages/Admin/Suppliers";
+import AddCategory from "../pages/Admin/Categories/AddCategories"
+
+import AddPromotion from "../pages/Admin/Promotions/AddPromotion";
 
 //sistema de rutas del pos (array de objetos con path, layout padre, pagina hija y si la ruta del path es exacta)
 // los :namestore indican ruta dinámica, es decir que se muestre el nombre del almacen de la api
@@ -91,6 +94,12 @@ const routes = [
     exact: true,
   },
   {
+    path: "/pos/:namestore/categorias/nueva-categoria",
+    layout: AdminLayout,
+    component: AddCategory,
+    exact: true,
+  },
+  {
     path: "/pos/:namestore/ventas",
     layout: AdminLayout,
     component: Sells,
@@ -106,6 +115,12 @@ const routes = [
     path: "/pos/:namestore/promociones",
     layout: AdminLayout,
     component: Promotions,
+    exact: true,
+  },
+  {
+    path: "/pos/:namestore/promociones/nueva-promocion",
+    layout: AdminLayout,
+    component: AddPromotion,
     exact: true,
   },
   {

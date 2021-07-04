@@ -51,7 +51,7 @@ function Configuration() {
 
   return (
     <div>
-      <Button onClick={() => openModal("Nuevo proveedor")}>
+      <Button type="primary" onClick={() => openModal("Nuevo proveedor")}>
         Añadir Proveedor
       </Button>
       <ListSuppliers

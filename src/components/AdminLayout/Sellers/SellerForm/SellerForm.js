@@ -4,34 +4,34 @@ import { useFormik } from "formik";
 import useAuth from "../../../../hooks/useAuth";
 import * as Yup from "yup";
 
-import { addSeller, updateSeller } from "../../../../api/sellers";
+import { addSeller, updateSeller, createUser } from "../../../../api/sellers";
 
 const SellerForm = ({ setShowModal, setReloadSellers, newSeller, seller }) => {
   const [loading, setLoading] = useState(false);
   const { logout, store } = useAuth();
   const formik = useFormik({
     initialValues: {
-      nombre: seller?.nombre || "",
-      apellido: seller?.apellido || "",
+      name: seller?.name || "",
+      lastname: seller?.lastname || "",
       email: seller?.email || "",
       password: "",
     },
-    validationSchema: Yup.object().shape({
-      nombre: Yup.string().required(true),
-      apellido: Yup.string().required(true),
-      email: Yup.string().email(true).required(true),
-      password: Yup.string().required(true),
-    }),
+    validationSchema: Yup.object().shape({}),
     onSubmit: (formData) => {
       newSeller ? createSeller(formData) : modifySeller(formData);
     },
   });
 
   const createSeller = async (formData) => {
+    console.log(formData);
     setLoading(true);
     const formDataTemp = {
       ...formData,
-      almacen: store,
+      almacen: store.id,
+      role: 3,
+      confirmed: true,
+      username: formData.email,
+      is_admin: false,
     };
     const response = await addSeller(formDataTemp, logout);
     formik.resetForm();
@@ -43,7 +43,7 @@ const SellerForm = ({ setShowModal, setReloadSellers, newSeller, seller }) => {
       setLoading(false);
     } else {
       notification["success"]({
-        message: "Producto creado",
+        message: "Vendedor creado",
       });
       setReloadSellers(true);
       setLoading(false);
@@ -66,7 +66,7 @@ const SellerForm = ({ setShowModal, setReloadSellers, newSeller, seller }) => {
     } else {
       formik.resetForm();
       notification["success"]({
-        message: "Producto modificado",
+        message: "Vendedor modificado",
       });
       setReloadSellers(true);
       setLoading(false);
@@ -81,10 +81,10 @@ const SellerForm = ({ setShowModal, setReloadSellers, newSeller, seller }) => {
           <Form.Item name="name">
             <Input
               type="text"
-              name="nombre"
+              name="name"
               placeholder="Nombre"
               onChange={formik.handleChange}
-              value={formik.values.nombre}
+              value={formik.values.name}
               onBlur={formik.handleBlur}
             />
           </Form.Item>
@@ -93,21 +93,20 @@ const SellerForm = ({ setShowModal, setReloadSellers, newSeller, seller }) => {
           <Form.Item name="apellido">
             <Input
               type="text"
-              name="apellido"
+              name="lastname"
               placeholder="Apellidos"
               onChange={formik.handleChange}
-              value={formik.values.apellido}
+              value={formik.values.lastname}
               onBlur={formik.handleBlur}
             />
           </Form.Item>
         </Col>
         <Col span={12}>
-          {" "}
           <Form.Item name="email">
             <Input
               type="text"
               name="email"
-              placeholder="Nombre"
+              placeholder="Correo"
               onChange={formik.handleChange}
               value={formik.values.email}
               onBlur={formik.handleBlur}

@@ -34,7 +34,7 @@ const Configuration = () => {
   return (
     <>
       <div>
-        <button>buscar Venta</button> <span />
+        <h3>Historial de ventas</h3>
       </div>
       <br />
       <ListSells reloadSells={reloadSells} setReloadSells={setReloadSells} />

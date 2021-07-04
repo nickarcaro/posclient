@@ -80,7 +80,6 @@ const MenuOptions = ({ onShowModal, user, logout }) => {
             <Menu.Item key="setting:1" onClick={onShowModal}>
               Login
             </Menu.Item>
-            <Menu.Item key="setting:2">Login vendedores </Menu.Item>
             <Menu.Item key={"/suscribete"}>
               <Link to={"/suscribete"}>Suscribete</Link>
             </Menu.Item>

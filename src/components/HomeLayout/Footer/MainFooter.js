@@ -37,30 +37,30 @@ const MainFooter = () => {
             <div className="footer-center">
               <h2>Producto</h2>
               <div>
-                <p target="_blank ">link1</p>
+                <p target="_blank ">link7</p>
               </div>
               <div>
-                <p target="_blank ">link1</p>
+                <p target="_blank ">link8</p>
               </div>
               <div>
-                <p target="_blank ">link1</p>
+                <p target="_blank ">link9</p>
               </div>
             </div>
           </Col>
           <Col lg={4} sm={24} xs={24}>
             <div className="footer-center">
-              <h2>usuarios</h2>
+              <h2>Usuarios</h2>
               <div>
-                <p target="_blank ">link1</p>
+                <p target="_blank ">link10</p>
               </div>
               <div>
-                <p target="_blank ">link1</p>
+                <p target="_blank ">link11</p>
               </div>
               <div>
-                <p target="_blank ">link1</p>
+                <p target="_blank ">link12</p>
               </div>
               <div>
-                <p target="_blank ">link1</p>
+                <p target="_blank ">link13</p>
               </div>
             </div>
           </Col>
@@ -78,7 +78,9 @@ const MainFooter = () => {
         <Col lg={6} sm={24} />
         <Col lg={18} sm={24}>
           <span style={{ marginRight: 12 }}>2021</span>
-          <span style={{ marginRight: 12 }}>Copyright © udp</span>
+          <span style={{ marginRight: 12 }}>
+            Copyright © Universidad Diego Portales
+          </span>
         </Col>
       </Row>
       <BackTop />

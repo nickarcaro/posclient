@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import useAuth from "../../../../hooks/useAuth";
 import * as Yup from "yup";
 
-import { addProduct, updateStore } from "../../../../api/products";
+import { addProduct, updateProduct } from "../../../../api/products";
 
 const ProductForm = (props) => {
   const { setShowModal, setReloadProducts, newProduct, product } = props;
@@ -53,7 +53,7 @@ const ProductForm = (props) => {
       ...formData,
       almacen: store,
     };
-    const response = updateStore(product.id, formDataTemp, logout);
+    const response = updateProduct(product.id, formDataTemp, logout);
 
     if (!response) {
       notification["error"]({
@@ -83,7 +83,7 @@ const ProductForm = (props) => {
           value={formik.values.nombre}
         />
       </Form.Item>
-      <Form.Item>
+      <Form.Item label="Precio">
         <InputNumber
           id="precio_actual"
           name="precio_actual"
@@ -93,10 +93,9 @@ const ProductForm = (props) => {
           }}
           onBlur={formik.handleBlur}
           defaultValue={formik.initialValues["precio_actual"]}
-          placeholder="Precio"
         />
       </Form.Item>
-      <Form.Item>
+      <Form.Item label="Stock">
         <InputNumber
           id="stock_actual"
           name="stock_actual"
@@ -106,7 +105,6 @@ const ProductForm = (props) => {
           }}
           onBlur={formik.handleBlur}
           defaultValue={formik.initialValues["stock_actual"]}
-          placeholder="Stock"
         />
       </Form.Item>
 

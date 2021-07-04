@@ -51,7 +51,7 @@ const Configuration = () => {
 
   return (
     <div>
-      <Button onClick={() => openModal("Nuevo vendedor")}>
+      <Button type="primary" onClick={() => openModal("Nuevo vendedor")}>
         Añadir Vendedor
       </Button>
       <ListSellers

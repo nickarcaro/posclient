@@ -5,7 +5,6 @@ import useAuth from "../../../../hooks/useAuth";
 import { getSellers } from "../../../../api/sellers";
 
 const ListSellers = ({ reloadSellers, setReloadSellers, openModal }) => {
-  const [activate, setActivate] = useState(true);
   const [sellers, setSellers] = useState(null);
   const { logout, store } = useAuth();
 
@@ -29,12 +28,7 @@ const ListSellers = ({ reloadSellers, setReloadSellers, openModal }) => {
           itemLayout="horizontal"
           dataSource={sellers}
           renderItem={(seller) => (
-            <Seller
-              seller={seller}
-              activate={activate}
-              setActivate={setActivate}
-              openModal={openModal}
-            />
+            <Seller seller={seller} openModal={openModal} />
           )}
         />
       )}
@@ -42,13 +36,13 @@ const ListSellers = ({ reloadSellers, setReloadSellers, openModal }) => {
   );
 };
 
-const Seller = ({ seller, activate, setActivate, openModal }) => {
+const Seller = ({ seller, openModal }) => {
   return (
     <List.Item
       actions={[
         <Button
           type="primary"
-          onClick={() => openModal(`Editar: ${seller.nombre}`, seller)}
+          onClick={() => openModal(`Editar: ${seller.name}`, seller)}
         >
           Editar
         </Button>,
@@ -56,13 +50,11 @@ const Seller = ({ seller, activate, setActivate, openModal }) => {
     >
       <List.Item.Meta
         title={`
-           Nombre: ${seller.nombre},
-           Apellido: ${seller.apellido},
-            
-          
+           Nombre: ${seller.name} ${seller.lastname}
+             
         `}
         description={` Estado:
-      ${seller.estado}, Correo:
+      ${seller.confirmed}, Correo:
       ${seller.email}
       
   `}
