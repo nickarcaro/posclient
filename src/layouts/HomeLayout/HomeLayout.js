@@ -1,12 +1,15 @@
 import { Layout, Row, Col } from "antd"; //libreria de estilo
 
-//componentes
+/** componentes */
 import MenuTop from "../../components/HomeLayout/MenuTop";
 import MainFooter from "../../components/HomeLayout/Footer/MainFooter";
 
+/**
+ * @param {component} children componente hijo(página)
+ */
 const HomeLayout = ({ children }) => {
   const { Header, Content } = Layout;
-  //recibe la página (children) que se realiza en navigation
+  /** recibe la página (children) que se realiza en navigation */
   return (
     <Layout>
       <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>

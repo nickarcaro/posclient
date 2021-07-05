@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: pages/Home/Subscribe/Subscribe.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,44 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: pages/Home/Subscribe/Subscribe.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { Row, Col, Layout } from "antd";
+//componente de formulario de suscripcion
+import SubscribeForm from "../../../components/HomeLayout/SubscribeForm";
+/**
+ * @function Subscribe
+ * @description Pagina de formulario de suscripción
+ */
 
+const Subscribe = () => {
+  const { Content } = Layout;
+  return (
+    &lt;Content style={{ padding: "0 50px", marginTop: 80 }}>
+      &lt;Row style={{ marginTop: 100, marginBottom: 100 }}>
+        &lt;Col xl={4} lg={4} />
 
-    <h3> </h3>
+        &lt;Col xl={16} lg={16} style={{ textAlign: "center" }}>
+          &lt;h2>Suscripción&lt;/h2>
+          &lt;SubscribeForm />
+        &lt;/Col>
+        &lt;Col xl={4} lg={4} />
+      &lt;/Row>
+    &lt;/Content>
+  );
+};
 
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default Subscribe;
+</code></pre>
+        </article>
+    </section>
 
 
 

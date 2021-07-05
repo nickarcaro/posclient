@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: layouts/HomeLayout/HomeLayout.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,50 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: layouts/HomeLayout/HomeLayout.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { Layout, Row, Col } from "antd"; //libreria de estilo
 
+/** componentes */
+import MenuTop from "../../components/HomeLayout/MenuTop";
+import MainFooter from "../../components/HomeLayout/Footer/MainFooter";
 
-    <h3> </h3>
+/**
+ * @param {component} children componente hijo(página)
+ */
+const HomeLayout = ({ children }) => {
+  const { Header, Content } = Layout;
+  /** recibe la página (children) que se realiza en navigation */
+  return (
+    &lt;Layout>
+      &lt;Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
+        &lt;Row>
+          &lt;Col xs={9} sm={9} md={9} lg={9} xl={9}>
+            &lt;img alt="pos almacenes" />
+          &lt;/Col>
+          &lt;Col xs={7} sm={6} md={6} lg={6} xl={6} />
+          &lt;Col xs={8} sm={9} md={9} lg={9} xl={9}>
+            &lt;MenuTop />
+          &lt;/Col>
+        &lt;/Row>
+      &lt;/Header>
+      &lt;Content>{children}&lt;/Content>
+      &lt;MainFooter />
+    &lt;/Layout>
+  );
+};
 
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default HomeLayout;
+</code></pre>
+        </article>
+    </section>
 
 
 

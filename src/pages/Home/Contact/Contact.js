@@ -3,6 +3,10 @@ import { Row, Col, Typography } from "antd";
 import Information from "../../../components/HomeLayout/Content/Information";
 import ContactForm from "../../../components/HomeLayout/Content/ContactForm";
 
+/**
+ * @function Contact
+ * @description página de formulario de contacto
+ */
 //pagina de contacto
 const Contact = () => {
   const { Title } = Typography;

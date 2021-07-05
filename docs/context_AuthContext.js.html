@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: context/AuthContext.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,37 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: context/AuthContext.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { createContext } from "react";
+/**
+ * Contexto Global de la aplicación (manejo de credenciales de usuario)
+ 
+ */
+const AuthContext = createContext({
+  auth: undefined,
+  login: () => null,
+  logout: () => null,
+  setReloadUser: () => null,
+  store: undefined,
+  loginStore: () => null,
+  logoutStore: () => null,
+  setReloadStore: () => null,
+});
 
+export default AuthContext;
 
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+//contexto global del usuario que se autentica en el sistema
+</code></pre>
+        </article>
+    </section>
 
 
 

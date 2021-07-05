@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: pages/Home/Contact/Contact.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,56 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: pages/Home/Contact/Contact.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { Row, Col, Typography } from "antd";
+//componentes de pagina de contacto
+import Information from "../../../components/HomeLayout/Content/Information";
+import ContactForm from "../../../components/HomeLayout/Content/ContactForm";
 
+/**
+ * @function Contact
+ * @description página de formulario de contacto
+ */
+//pagina de contacto
+const Contact = () => {
+  const { Title } = Typography;
+  const styleRow = { marginTop: 100, marginBottom: 100 };
 
-    <h3> </h3>
+  return (
+    &lt;Row style={styleRow}>
+      &lt;Col lg={24} style={{ textAlign: "center", marginBottom: 25 }}>
+        &lt;Title>Contacto&lt;/Title>
+      &lt;/Col>
 
+      &lt;Col lg={4} />
+      &lt;Col lg={16}>
+        &lt;Row gutter={24}>
+          &lt;Col lg={12}>
+            &lt;ContactForm />
+          &lt;/Col>
 
+          &lt;Col lg={12}>
+            &lt;Information />
+          &lt;/Col>
+        &lt;/Row>
+      &lt;/Col>
+      &lt;Col lg={4} />
+    &lt;/Row>
+  );
+};
 
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default Contact;
+</code></pre>
+        </article>
+    </section>
 
 
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: layouts/UserLayout/UserLayout.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,51 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: layouts/UserLayout/UserLayout.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { Layout } from "antd";
+//componente menutop del userlayout
+import MenuTop from "../../components/UserLayout/MenuTop";
 
+/**
+ * @param {component} children componente hijo(páginas de usuario antes de ingresar al almacen)
+ */
 
-    <h3> </h3>
+const UserLayout = ({ children }) => {
+  const { Header, Content } = Layout; //componentes
 
+  return (
+    &lt;Layout style={{ minHeight: "100vh" }}>
+      &lt;Layout>
+        &lt;Header className="header" style={{ padding: 0, background: "#fff" }}>
+          &lt;MenuTop />
+        &lt;/Header>
+        &lt;Content
+          className="site-layout-background"
+          style={{
+            padding: 24,
+            margin: 0,
+            minHeight: 280,
+          }}
+        >
+          {children}
+        &lt;/Content>
+      &lt;/Layout>
+    &lt;/Layout>
+  );
+};
 
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default UserLayout;
+</code></pre>
+        </article>
+    </section>
 
 
 

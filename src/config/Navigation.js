@@ -1,10 +1,13 @@
-//libreria de manejo de rutas
+/**
+ * sistema de navegación (ciclo for), renderiza el layout y su componente(pagina), esto se ve como {children}
+ * @returns {component} sistema de rutas de la aplicación
+ */
+
+/**libreria de manejo de rutas */
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { map } from "lodash"; //iterador
-//array de rutas
+/**array de rutas */
 import routes from "./routes";
-
-//sistema de navegación (ciclo for), renderiza el layout y su componente(pagina), esto se ve como {children}
 
 export default function Navigation() {
   return (

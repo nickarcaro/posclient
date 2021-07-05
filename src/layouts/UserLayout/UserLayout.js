@@ -2,6 +2,10 @@ import { Layout } from "antd";
 //componente menutop del userlayout
 import MenuTop from "../../components/UserLayout/MenuTop";
 
+/**
+ * @param {component} children componente hijo(páginas de usuario antes de ingresar al almacen)
+ */
+
 const UserLayout = ({ children }) => {
   const { Header, Content } = Layout; //componentes
 

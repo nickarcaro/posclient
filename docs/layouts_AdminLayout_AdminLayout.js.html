@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: layouts/AdminLayout/AdminLayout.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,52 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: layouts/AdminLayout/AdminLayout.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState } from "react";
+import { Layout } from "antd";
+//components (sider y menutop)
+import MenuSider from "../../components/AdminLayout/MenuSider";
+import MenuTop from "../../components/AdminLayout/MenuTop";
 
+/**
+ * @param {component} children componente hijo(páginas de dueño)
+ */
 
-    <h3> </h3>
+//componente layout , toma componente de página (paginas de /pages/admin)
+const AdminLayout = ({ children }) => {
+  const { Header, Content, Footer } = Layout;
+  //estados, cuando se apreta el boton del nav vertical de abajo (ese estado se manda al componente menusider)
+  const [menuCollapsed, setMenuCollapsed] = useState(false);
 
+  return (
+    &lt;Layout style={{ minHeight: "100vh" }}>
+      &lt;MenuSider
+        menuCollapsed={menuCollapsed}
+        setMenuCollapsed={setMenuCollapsed}
+      />
+      &lt;Layout>
+        &lt;Header style={{ padding: 0, background: "#fff" }}>
+          &lt;MenuTop />
+        &lt;/Header>
+        &lt;Content style={{ margin: "0 16px" }}>{children}&lt;/Content>
+        &lt;Footer>POS Almacenes&lt;/Footer>
+      &lt;/Layout>
+    &lt;/Layout>
+  );
+};
 
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default AdminLayout;
+</code></pre>
+        </article>
+    </section>
 
 
 

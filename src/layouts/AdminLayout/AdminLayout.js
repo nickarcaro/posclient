@@ -4,6 +4,10 @@ import { Layout } from "antd";
 import MenuSider from "../../components/AdminLayout/MenuSider";
 import MenuTop from "../../components/AdminLayout/MenuTop";
 
+/**
+ * @param {component} children componente hijo(páginas de dueño)
+ */
+
 //componente layout , toma componente de página (paginas de /pages/admin)
 const AdminLayout = ({ children }) => {
   const { Header, Content, Footer } = Layout;

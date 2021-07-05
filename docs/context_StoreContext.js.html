@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: context/StoreContext.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,38 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: context/StoreContext.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { createContext } from "react";
 
+/**
+ * Contexto Global de la aplicación (manejo de credenciales del almacen ingresado)
+ * @param {object} store - objeto con datos del almacen
+ *  @param {function} loginStore - función para ingresar del almacen
+ * @param {function} loginStore - función para salir del almacen
+ * @param {function} loginStore - función para recargar información del almacen
+ 
+ */
+const StoreContext = createContext({
+  store: undefined,
+  loginStore: () => null,
+  logoutStore: () => null,
+  setReloadStore: () => null,
+});
 
-    <h3> </h3>
+export default StoreContext;
 
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+//contexto global de la tienda que el usuario selecciona  cuando la ingresa en /pos
+</code></pre>
+        </article>
+    </section>
 
 
 

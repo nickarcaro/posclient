@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: hooks/useStore.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,29 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: hooks/useStore.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { useContext } from "react";
+import StoreContext from "../context/StoreContext";
 
+/**
+ * @function useAuth
+ * @description funcion que almacena contexto de almacen logueado
+ */
 
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+const useStore = () => useContext(StoreContext);
+export default useStore;
+//cracion de hook que utiliza el contexto global del usuario
+</code></pre>
+        </article>
+    </section>
 
 
 

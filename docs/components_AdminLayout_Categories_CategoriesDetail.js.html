@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: components/AdminLayout/Categories/CategoriesDetail.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,45 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: components/AdminLayout/Categories/CategoriesDetail.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { Component } from "react";
+import { List } from "antd";
+/**
+ * Componente de detalle de categorias
+ 
+ */
 
+const CategoriesDetails = ({ categories }) => {
+  return categories === undefined ? (
+    &lt;div> Seleccione una categoria&lt;/div>
+  ) : (
+    &lt;>
+      &lt;List
+        bordered
+        header={&lt;h1>Productos&lt;/h1>}
+        dataSource={categories.productos}
+        renderItem={(item) => (
+          &lt;List.Item>
+            &lt;div>{item.nombre}&lt;/div>
+          &lt;/List.Item>
+        )}
+      />
+    &lt;/>
+  );
+};
 
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default CategoriesDetails;
+</code></pre>
+        </article>
+    </section>
 
 
 
