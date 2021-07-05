@@ -1,6 +1,13 @@
 import { BASE_PATH } from "../utils/constants";
 import { authFetch } from "../utils/fetch";
 
+/**
+ * 
+ * Conexion entre front end y back end para obtener productos
+ * @param {String} idAlmacen  ID del almacen
+ * @param {Function} logout Funcion para cerrar sesion
+ * @returns Lista de Products
+ */
 export async function getProducts(idAlmacen, logout) {
   try {
     const url = `${BASE_PATH}/productos?almacen=${idAlmacen}`;
@@ -13,6 +20,13 @@ export async function getProducts(idAlmacen, logout) {
   }
 }
 
+/**
+ * Conexion entre front end y back end para obtener un producto
+ * @param {String} idProduct ID del producto
+ * @param {Function} logout Funcion para cerrar sesion
+ * @returns Lista de Product
+ */
+
 export async function getProduct(idProduct, logout) {
   try {
     const url = `${BASE_PATH}/productos/${idProduct}`;
@@ -24,6 +38,13 @@ export async function getProduct(idProduct, logout) {
     return null;
   }
 }
+
+/**
+ * Conexion entre front end y back end para obtener un producto
+ * @param {Object} product Objeto producto
+ * @param {Function} logout Funcion para cerrar sesion
+ * 
+ */
 
 
 export async function addProduct(product, logout) {
@@ -45,6 +66,13 @@ export async function addProduct(product, logout) {
   }
 }
 
+/**
+ * Conexion entre front end y back end para cambiar stock de un producto
+ * @param {String} stockIn Valor a sumar (puede ser negativo)
+ * @param {Function} logout Funcion para cerrar sesion
+ * 
+ */
+
 export async function addStockIn(stockIn, logout) {
   console.log(stockIn, logout);
   try {
@@ -63,6 +91,14 @@ export async function addStockIn(stockIn, logout) {
     return null;
   }
 }
+
+/**
+ * Conexion entre front end y back end para actualizar un producto
+ * @param {String} idProduct ID de un producto
+ * @param {Object} product Object de un product
+ * @param {Function} logout Funcion para cerrar sesion
+ * 
+ */
 
 export async function updateProduct(idProduct, product, logout) {
   try {

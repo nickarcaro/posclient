@@ -8,6 +8,7 @@ import { PlusSquareTwoTone } from "@ant-design/icons";
 import Modal from "../../../Modal";
 import moment from "moment";
 
+
 export const getPromotionDiscount = (promotion) => {
   let totalOriginal = 0;
   for (const prodProm of promotion.productos_promocion) {
@@ -25,6 +26,12 @@ export const getSubTotal = (sale) => {
   }
   return subTotal;
 };
+
+/**
+ * 
+ * Componente de lista de ventas
+ * 
+ */
 
 const ListSells = ({ reloadSells, setReloadSells }) => {
   const [sells, setSells] = useState(null);

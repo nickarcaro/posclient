@@ -1,6 +1,11 @@
 import React from 'react'
 import {List} from 'antd'
 
+/**
+ * Componente de lista de categoria
+ 
+ */
+
 const ListCategories = ({categories, select}) => {
   return (
     <>

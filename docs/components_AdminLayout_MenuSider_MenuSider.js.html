@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: context/AuthContext.js</title>
+    <title>JSDoc: Source: components/AdminLayout/MenuSider/MenuSider.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: context/AuthContext.js</h1>
+    <h1 class="page-title">Source: components/AdminLayout/MenuSider/MenuSider.js</h1>
 
     
 
@@ -26,25 +26,96 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { createContext } from "react";
+            <pre class="prettyprint source linenums"><code>import { Menu, Layout } from "antd";
+import { Link, withRouter, useLocation } from "react-router-dom";
+import {
+  DashboardOutlined,
+  MenuUnfoldOutlined,
+  MenuFoldOutlined,
+  TeamOutlined,
+  DollarOutlined,
+  ContainerOutlined,
+  CarOutlined,
+  TagsOutlined,
+  PercentageOutlined,
+} from "@ant-design/icons";
+import useAuth from "../../../hooks/useAuth";
+
 /**
- * Contexto Global de la aplicación (manejo de credenciales de usuario)
- 
+ * 
+ * 
+ * Componente de menu lateral
+ *
  */
-const AuthContext = createContext({
-  auth: undefined,
-  login: () => null,
-  logout: () => null,
-  setReloadUser: () => null,
-  store: undefined,
-  loginStore: () => null,
-  logoutStore: () => null,
-  setReloadStore: () => null,
-});
 
-export default AuthContext;
+const MenuSider = ({ menuCollapsed, setMenuCollapsed }) => {
+  const { store } = useAuth();
+  const { Sider } = Layout;
+  const location = useLocation();
 
-//contexto global del usuario que se autentica en el sistema
+  //el nombre del almacen
+  //sider cambia el icono cuando se oprime
+  return (
+    &lt;Sider
+      trigger={menuCollapsed ? &lt;MenuUnfoldOutlined /> : &lt;MenuFoldOutlined />}
+      collapsible
+      collapsed={menuCollapsed}
+      onCollapse={setMenuCollapsed}
+    >
+      &lt;div className="logo" />
+      &lt;Menu
+        theme="dark"
+        mode="inline"
+        defaultSelectedKeys={[location.pathname]}
+      >
+        &lt;Menu.Item key={`/pos/${store.slug}`} icon={&lt;DashboardOutlined />}>
+          &lt;Link to={`/pos/${store.slug}`}>Indicadores&lt;/Link>
+        &lt;/Menu.Item>
+        &lt;Menu.Item
+          key={`/pos/${store.slug}/productos`}
+          icon={&lt;ContainerOutlined />}
+        >
+          Productos
+          &lt;Link to={`/pos/${store.slug}/productos`} />
+        &lt;/Menu.Item>
+        &lt;Menu.Item
+          key={`/pos/${store.slug}/vendedores`}
+          icon={&lt;TeamOutlined />}
+        >
+          Vendedores
+          &lt;Link to={`/pos/${store.slug}/vendedores`} />
+        &lt;/Menu.Item>
+        &lt;Menu.Item key={`/pos/${store.slug}/ventas`} icon={&lt;DollarOutlined />}>
+          Ventas
+          &lt;Link to={`/pos/${store.slug}/ventas`} />
+        &lt;/Menu.Item>
+        &lt;Menu.Item
+          key={`/pos/${store.slug}/proveedores`}
+          icon={&lt;CarOutlined />}
+        >
+          Proveedores
+          &lt;Link to={`/pos/${store.slug}/proveedores`} />
+        &lt;/Menu.Item>
+        &lt;Menu.Item
+          key={`/pos/${store.slug}/categorias`}
+          icon={&lt;TagsOutlined />}
+        >
+          Categorías
+          &lt;Link to={`/pos/${store.slug}/categorias`} />
+        &lt;/Menu.Item>
+        &lt;Menu.Item
+          key={`/pos/${store.slug}/promociones`}
+          icon={&lt;PercentageOutlined />}
+        >
+          Promociones
+          &lt;Link to={`/pos/${store.slug}/promociones`} />
+        &lt;/Menu.Item>
+      &lt;/Menu>
+    &lt;/Sider>
+  );
+};
+
+export default withRouter(MenuSider);
 </code></pre>
         </article>
     </section>

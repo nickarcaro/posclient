@@ -1,20 +1,47 @@
 import { TOKEN } from "../utils/constants";
 import jwtDecode from "jwt-decode";
 
-//setear token em localstorage
+/**
+ * 
+ * 
+ * Conexion entre front end y back end para setear token en localstorage
+ *
+ */
+
+//setear token en localstorage
 export function setToken(token) {
   localStorage.setItem(TOKEN, token);
 }
+
+/**
+ * 
+ * 
+ * Conexion entre front end y back end para obtener token de usuario
+ *
+ */
 
 //obtener token de usuario
 export function getToken() {
   return localStorage.getItem(TOKEN);
 }
 
+/**
+ * 
+ * 
+ * Conexion entre front end y back end para eliminar token
+ *
+ */
 //eliminar token
 export function removeToken() {
   localStorage.removeItem(TOKEN);
 }
+
+/**
+ * 
+ * 
+ * Conexion entre front end y back end para renovar token
+ *
+ */
 
 //renovar token
 export function hasExpiredToken(token) {

@@ -3,7 +3,10 @@ import { List, Button, Switch } from "antd";
 import { size } from "lodash";
 import useAuth from "../../../../hooks/useAuth";
 import { getSellers } from "../../../../api/sellers";
-
+/**
+ * Componente de lista de vendedores
+ 
+ */
 const ListSellers = ({ reloadSellers, setReloadSellers, openModal }) => {
   const [sellers, setSellers] = useState(null);
   const { logout, store } = useAuth();

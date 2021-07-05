@@ -1,6 +1,13 @@
 import { BASE_PATH } from "../utils/constants";
 import { authFetch } from "../utils/fetch";
 
+/**
+ * Conexion entre front end y back end para obtener usuarios con permiso para vender
+ * @param {String} idAlmacen ID del almacen
+ * @param {Function} logout Funcion para cerrar sesion
+ * @returns Lista de usuarios con permiso para vender
+ */
+
 export async function getSellers(idAlmacen, logout) {
   try {
     const url = `${BASE_PATH}/users?almacen=${idAlmacen}`;
@@ -12,6 +19,14 @@ export async function getSellers(idAlmacen, logout) {
     return null;
   }
 }
+
+
+/**
+ * Conexion entre front end y back end para agregar vendedores
+ * @param {Object} seller Objeto vendedor
+ * @param {Function} logout Funcion para cerrar sesion
+ * 
+ */
 
 export async function addSeller(seller, logout) {
   console.log(seller, logout);
@@ -32,6 +47,14 @@ export async function addSeller(seller, logout) {
   }
 }
 
+/**
+ * Conexion entre front end y back end para actualizar vendedores
+ * @param {String} idSeller ID vendedor
+ * @param {Object} seller Objeto vendedor
+ * @param {Function} logout Funcion para cerrar sesion
+ * 
+ */
+
 export async function updateSeller(idSeller, seller, logout) {
   try {
     const url = `${BASE_PATH}/vendedores/${idSeller}`;
@@ -50,6 +73,13 @@ export async function updateSeller(idSeller, seller, logout) {
   }
 }
 
+/**
+ * Conexion entre front end y back end para crear usuario vendedor
+ * @param {Object} user Objeto de usuario
+ * @param {Function} logout Funcion para cerrar sesion
+ *
+ */
+
 export async function createUser(user, logout) {
   try {
     const url = `${BASE_PATH}/users`;
@@ -67,6 +97,13 @@ export async function createUser(user, logout) {
     return null;
   }
 }
+
+/**
+ * Conexion entre front end y back end para obtener vendedores
+ * @param {String} idAlmacen ID de almacen
+ * @param {Function} logout Funcion para cerrar sesion
+ * @returns Lista de usuarios vendedores
+ */
 
 export async function getUsers(idAlmacen, logout) {
   try {

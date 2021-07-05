@@ -12,6 +12,14 @@ import {
   PercentageOutlined,
 } from "@ant-design/icons";
 import useAuth from "../../../hooks/useAuth";
+
+/**
+ * 
+ * 
+ * Componente de menu lateral
+ *
+ */
+
 const MenuSider = ({ menuCollapsed, setMenuCollapsed }) => {
   const { store } = useAuth();
   const { Sider } = Layout;

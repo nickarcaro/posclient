@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: context/AuthContext.js</title>
+    <title>JSDoc: Source: api/promotions.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: context/AuthContext.js</h1>
+    <h1 class="page-title">Source: api/promotions.js</h1>
 
     
 
@@ -26,26 +26,53 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { createContext } from "react";
+            <pre class="prettyprint source linenums"><code>import { BASE_PATH } from "../utils/constants";
+import { authFetch } from "../utils/fetch";
+
 /**
- * Contexto Global de la aplicación (manejo de credenciales de usuario)
- 
+ * Conexion entre front end y back end para obtener promociones
+ * @param {String} idAlmacen ID de un almacen
+ * @param {Function} logout Funcion para cerrar sesion
+ * @returns Lista de promociones
  */
-const AuthContext = createContext({
-  auth: undefined,
-  login: () => null,
-  logout: () => null,
-  setReloadUser: () => null,
-  store: undefined,
-  loginStore: () => null,
-  logoutStore: () => null,
-  setReloadStore: () => null,
-});
 
-export default AuthContext;
+export async function getPromotions(idAlmacen, logout) {
+  try {
+    const url = `${BASE_PATH}/promocions?almacen=${idAlmacen}`;
+    const result = await authFetch(url, null, logout);
+    if (result.statusCode === 500) throw Error("Error del servidor");
+    return result;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
 
-//contexto global del usuario que se autentica en el sistema
-</code></pre>
+/**
+ * Conexion entre front end y back end para agregar promociones
+ * @param {String} promotion Objeto de promocion
+ * @param {Function} logout Funcion para cerrar sesion
+ * 
+ */
+
+export async function addPromotion(promotion, logout) {
+  console.log(promotion, logout);
+  try {
+    const url = `${BASE_PATH}/promocions`;
+    const params = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(promotion),
+    };
+    const result = await authFetch(url, params, logout);
+    return result;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}</code></pre>
         </article>
     </section>
 

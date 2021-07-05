@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: context/AuthContext.js</title>
+    <title>JSDoc: Source: api/sellsdetail.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: context/AuthContext.js</h1>
+    <h1 class="page-title">Source: api/sellsdetail.js</h1>
 
     
 
@@ -26,25 +26,27 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { createContext } from "react";
+            <pre class="prettyprint source linenums"><code>import { BASE_PATH } from "../utils/constants";
+import { authFetch } from "../utils/fetch";
+
 /**
- * Contexto Global de la aplicación (manejo de credenciales de usuario)
- 
+ * Conexion entre front end y back end para obtener el detalle de las ventas
+ * @param {String} idVenta ID de la venta
+ * @param {Function} logout Funcion para cerrar sesion
+ * @returns Detalle de la venta
  */
-const AuthContext = createContext({
-  auth: undefined,
-  login: () => null,
-  logout: () => null,
-  setReloadUser: () => null,
-  store: undefined,
-  loginStore: () => null,
-  logoutStore: () => null,
-  setReloadStore: () => null,
-});
 
-export default AuthContext;
-
-//contexto global del usuario que se autentica en el sistema
+export async function getSellsDetail(idVenta, logout) {
+  try {
+    const url = `${BASE_PATH}/detalle-ventas?venta=${idVenta}`;
+    const result = await authFetch(url, null, logout);
+    if (result.statusCode === 500) throw Error("Error del servidor");
+    return result;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
 </code></pre>
         </article>
     </section>

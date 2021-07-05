@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: context/AuthContext.js</title>
+    <title>JSDoc: Source: pages/Admin/Categories/Categories.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: context/AuthContext.js</h1>
+    <h1 class="page-title">Source: pages/Admin/Categories/Categories.js</h1>
 
     
 
@@ -26,25 +26,65 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { createContext } from "react";
+            <pre class="prettyprint source linenums"><code>import useAuth from "../../../hooks/useAuth";
+import { useHistory } from "react-router-dom";
+import { Layout, Row, Col, Button } from 'antd';
+import { getCategories } from "../../../api/categories";
+import ListCategories from "../../../components/AdminLayout/Categories/ListCategories";
+import CategoriesDetails from "../../../components/AdminLayout/Categories/CategoriesDetail";
+import React, { useState, useEffect } from "react";
+import { PlusSquareTwoTone } from "@ant-design/icons"
+
 /**
- * Contexto Global de la aplicación (manejo de credenciales de usuario)
- 
+ * 
+ * Pagina de categorias
+ * 
  */
-const AuthContext = createContext({
-  auth: undefined,
-  login: () => null,
-  logout: () => null,
-  setReloadUser: () => null,
-  store: undefined,
-  loginStore: () => null,
-  logoutStore: () => null,
-  setReloadStore: () => null,
-});
 
-export default AuthContext;
+const Categories = ({ match }) => {
+  const { Content } = Layout;
+  const history = useHistory();
+  const { namestore } = match.params;
+  const [categories, setCategories] = useState();
+  const { logout, store } = useAuth();
+  const [selectedCategories, setSelectedCategories] = useState(undefined)
 
-//contexto global del usuario que se autentica en el sistema
+  useEffect(() => {
+    (async () => {
+      const response = await getCategories(store.id, logout);
+      setCategories(response || []);
+    })();
+  }, [setCategories, store.id, logout]);
+
+  if (namestore !== store.slug || !store) {
+    history.replace("/pos");
+    return null;
+  }
+
+  return (
+    &lt;Content>
+      &lt;Layout
+        className="site-layout-background"
+        style={{ padding: "24px 0", background: "#fff", marginTop: 20 }}
+      >
+        &lt;Content style={{ padding: "0 24px", minHeight: 280 }}>
+          &lt;div>
+          &lt;Button type="primary" size="large" onClick={() => history.push(`/pos/${store.slug}/categorias/nueva-categoria`)} icon={&lt;PlusSquareTwoTone />}>Nueva  Categoria { }&lt;/Button>
+
+          &lt;/div>
+          &lt;br />
+          &lt;Row gutter={[16, 16]}>
+            &lt;Col span={12}> &lt;ListCategories categories={categories} select={setSelectedCategories}/> &lt;/Col>
+            &lt;Col span={10}> &lt;CategoriesDetails categories={selectedCategories}/> &lt;/Col>
+           
+          &lt;/Row>
+        &lt;/Content>
+      &lt;/Layout>
+    &lt;/Content>
+  );
+};
+
+export default Categories;
 </code></pre>
         </article>
     </section>

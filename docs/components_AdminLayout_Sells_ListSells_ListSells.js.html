@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/AdminLayout/Sells/ListSells/ListSells.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/AdminLayout/Sells/ListSells/ListSells.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, useEffect } from "react";
+import { List, Button, Switch, Divider, Row, Col } from "antd";
+import { size } from "lodash";
+import { getSells } from "../../../../api/sells";
+import { getSellsDetail } from "../../../../api/sellsdetail";
+import useAuth from "../../../../hooks/useAuth";
+import { PlusSquareTwoTone } from "@ant-design/icons";
+import Modal from "../../../Modal";
+import moment from "moment";
+
+
+export const getPromotionDiscount = (promotion) => {
+  let totalOriginal = 0;
+  for (const prodProm of promotion.productos_promocion) {
+    totalOriginal += prodProm.producto.precio_actual * prodProm.cantidad;
+  }
+  return totalOriginal - promotion.precio_promocion;
+};
+
+export const getSubTotal = (sale) => {
+  let subTotal = parseInt(sale.total);
+  for (const prom of sale.promocions) {
+    console.log("promocion: ", prom);
+    console.log("descuento: ", getPromotionDiscount(prom));
+    subTotal += getPromotionDiscount(prom);
+  }
+  return subTotal;
+};
+
+/**
+ * 
+ * Componente de lista de ventas
+ * 
+ */
+
+const ListSells = ({ reloadSells, setReloadSells }) => {
+  const [sells, setSells] = useState(null);
+  const { logout, store } = useAuth();
+
+  useEffect(() => {
+    (async () => {
+      const response = await getSells(store.id, logout);
+      setSells(response.sort((a, b) => b.id - a.id) || []);
+      setReloadSells(false);
+    })();
+  }, [reloadSells, setSells, store.id, setReloadSells, logout]);
+
+  if (!sells) return null;
+
+  return (
+    &lt;div className="list-address">
+      {size(sells) === 0 ? (
+        &lt;h3>No hay ventas&lt;/h3>
+      ) : (
+        &lt;List
+          style={{ marginTop: 20 }}
+          itemLayout="horizontal"
+          dataSource={sells}
+          renderItem={(sell) => &lt;Sell sell={sell} />}
+        />
+      )}
+    &lt;/div>
+  );
+};
+
+const Sell = ({ sell }) => {
+  const [showModal, setShowModal] = useState(false);
+  const [titleModal, setTitleModal] = useState("");
+  const [formModal, setFormModal] = useState(null);
+  const [sellsDetail, setSellsDetail] = useState(null);
+  const { logout } = useAuth();
+
+  useEffect(() => {
+    (async () => {
+      const response = await getSellsDetail(sell.id, logout);
+      setSellsDetail(response || []);
+    })();
+  }, [setSellsDetail, sell.id, logout]);
+
+  const openModal = (title) => {
+    setTitleModal(title);
+    setFormModal(
+      &lt;>
+        &lt;Divider>Productos&lt;/Divider>
+        &lt;List
+          itemLayout="horizontal"
+          dataSource={sellsDetail}
+          footer={
+            &lt;Row>
+              &lt;Col span={12}>
+                {sell.promocions.length > 0 ? (
+                  &lt;h4>Sub-Total&lt;/h4>
+                ) : (
+                  &lt;h4>Total&lt;/h4>
+                )}
+              &lt;/Col>
+              &lt;Col span={12}>
+                &lt;h4 style={{ float: "right" }}>${getSubTotal(sell)}&lt;/h4>
+              &lt;/Col>
+            &lt;/Row>
+          }
+          renderItem={(item) => (
+            &lt;List.Item>
+              &lt;List.Item.Meta
+                title={` Producto: ${item.producto.nombre}, Cantidad: ${item.cantidad}, Precio unitario: ${item.precio_unitario}, Precio total: ${item.precio_total}`}
+              />
+            &lt;/List.Item>
+          )}
+        />
+        {sell.promocions.length > 0 ? (
+          &lt;>
+            &lt;Divider>Promociones&lt;/Divider>
+            &lt;List
+              itemLayout="horizontal"
+              footer={
+                &lt;Row>
+                  &lt;Col span={12}>
+                    &lt;h3>Total&lt;/h3>
+                  &lt;/Col>
+                  &lt;Col span={12}>
+                    &lt;h3 style={{ float: "right" }}>${sell.total}&lt;/h3>
+                  &lt;/Col>
+                &lt;/Row>
+              }
+              dataSource={sell.promocions}
+              renderItem={(promocion) => (
+                &lt;List.Item>
+                  &lt;List.Item.Meta
+                    title={` ${promocion.nombre}, Valor: $${
+                      promocion.precio_promocion
+                    }, Descuento: $${getPromotionDiscount(promocion)}`}
+                  />
+                &lt;/List.Item>
+              )}
+            />
+          &lt;/>
+        ) : null}
+      &lt;/>
+    );
+    setShowModal(true);
+  };
+  return (
+    &lt;List.Item>
+      &lt;List.Item.Meta
+        title={`
+        
+            Fecha: ${moment(sell.fecha).format("DD/MM/YYYY , h:mm:ss a")}
+           
+          `}
+        description={` 
+           Precio: ${sell.total},
+           Medio de pago: ${sell.medio_pago}    
+        `}
+      />
+      &lt;Button
+        type="primary"
+        size="large"
+        onClick={() => openModal("Detalle de venta")}
+        icon={&lt;PlusSquareTwoTone />}
+      >
+        Detalle {}
+      &lt;/Button>
+      &lt;Modal show={showModal} setShow={setShowModal} title={titleModal}>
+        {formModal}
+      &lt;/Modal>
+    &lt;/List.Item>
+  );
+};
+
+export default ListSells;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AddCategories">AddCategories</a></li><li><a href="global.html#addCategory">addCategory</a></li><li><a href="global.html#addProduct">addProduct</a></li><li><a href="global.html#addPromotion">addPromotion</a></li><li><a href="global.html#addSeller">addSeller</a></li><li><a href="global.html#addStockIn">addStockIn</a></li><li><a href="global.html#addStore">addStore</a></li><li><a href="global.html#addSupplier">addSupplier</a></li><li><a href="global.html#AdminLayout">AdminLayout</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#AuthContext">AuthContext</a></li><li><a href="global.html#BASE_PATH">BASE_PATH</a></li><li><a href="global.html#Categories">Categories</a></li><li><a href="global.html#CategoriesDetails">CategoriesDetails</a></li><li><a href="global.html#Contact">Contact</a></li><li><a href="global.html#createUser">createUser</a></li><li><a href="global.html#getCategories">getCategories</a></li><li><a href="global.html#getProduct">getProduct</a></li><li><a href="global.html#getProducts">getProducts</a></li><li><a href="global.html#getPromotions">getPromotions</a></li><li><a href="global.html#getSellers">getSellers</a></li><li><a href="global.html#getSells">getSells</a></li><li><a href="global.html#getSellsDetail">getSellsDetail</a></li><li><a href="global.html#getStoreById">getStoreById</a></li><li><a href="global.html#getStoreBySlug">getStoreBySlug</a></li><li><a href="global.html#getStores">getStores</a></li><li><a href="global.html#getSuppliers">getSuppliers</a></li><li><a href="global.html#getUsers">getUsers</a></li><li><a href="global.html#Home">Home</a></li><li><a href="global.html#HomeLayout">HomeLayout</a></li><li><a href="global.html#ListCategories">ListCategories</a></li><li><a href="global.html#ListSellers">ListSellers</a></li><li><a href="global.html#ListSells">ListSells</a></li><li><a href="global.html#MenuSider">MenuSider</a></li><li><a href="global.html#registerApi">registerApi</a></li><li><a href="global.html#routes">routes</a></li><li><a href="global.html#SellerForm">SellerForm</a></li><li><a href="global.html#setToken">setToken</a></li><li><a href="global.html#STORE">STORE</a></li><li><a href="global.html#StoreContext">StoreContext</a></li><li><a href="global.html#Subscribe">Subscribe</a></li><li><a href="global.html#TOKEN">TOKEN</a></li><li><a href="global.html#updateProduct">updateProduct</a></li><li><a href="global.html#updateSeller">updateSeller</a></li><li><a href="global.html#updateStore">updateStore</a></li><li><a href="global.html#updateSupplier">updateSupplier</a></li><li><a href="global.html#useAuth">useAuth</a></li><li><a href="global.html#UserLayout">UserLayout</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Mon Jul 05 2021 16:32:06 GMT-0400 (hora estándar de Chile)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

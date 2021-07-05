@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: context/AuthContext.js</title>
+    <title>JSDoc: Source: api/token.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: context/AuthContext.js</h1>
+    <h1 class="page-title">Source: api/token.js</h1>
 
     
 
@@ -26,25 +26,41 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { createContext } from "react";
+            <pre class="prettyprint source linenums"><code>import { TOKEN } from "../utils/constants";
+import jwtDecode from "jwt-decode";
+
 /**
- * Contexto Global de la aplicación (manejo de credenciales de usuario)
- 
+ * 
+ * 
+ * Conexion entre front end y back end para tokens
+ *
  */
-const AuthContext = createContext({
-  auth: undefined,
-  login: () => null,
-  logout: () => null,
-  setReloadUser: () => null,
-  store: undefined,
-  loginStore: () => null,
-  logoutStore: () => null,
-  setReloadStore: () => null,
-});
 
-export default AuthContext;
+//setear token em localstorage
+export function setToken(token) {
+  localStorage.setItem(TOKEN, token);
+}
 
-//contexto global del usuario que se autentica en el sistema
+//obtener token de usuario
+export function getToken() {
+  return localStorage.getItem(TOKEN);
+}
+
+//eliminar token
+export function removeToken() {
+  localStorage.removeItem(TOKEN);
+}
+
+//renovar token
+export function hasExpiredToken(token) {
+  const tokenDecode = jwtDecode(token);
+  const expireDate = tokenDecode.exp * 1000;
+  const currentDate = new Date().getTime();
+  if (currentDate > expireDate) {
+    return true;
+  }
+  return false;
+}
 </code></pre>
         </article>
     </section>

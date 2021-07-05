@@ -7,6 +7,11 @@ import CategoriesDetails from "../../../components/AdminLayout/Categories/Catego
 import React, { useState, useEffect } from "react";
 import { PlusSquareTwoTone } from "@ant-design/icons"
 
+/**
+ * 
+ * Pagina de categorias
+ * 
+ */
 
 const Categories = ({ match }) => {
   const { Content } = Layout;

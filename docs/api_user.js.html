@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: context/AuthContext.js</title>
+    <title>JSDoc: Source: api/user.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: context/AuthContext.js</h1>
+    <h1 class="page-title">Source: api/user.js</h1>
 
     
 
@@ -26,25 +26,136 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { createContext } from "react";
+            <pre class="prettyprint source linenums"><code>import { BASE_PATH } from "../utils/constants";
+import { authFetch } from "../utils/fetch";
+
 /**
- * Contexto Global de la aplicación (manejo de credenciales de usuario)
- 
+ * 
+ * 
+ * Conexion entre front end y back end para usuarios
+ *
  */
-const AuthContext = createContext({
-  auth: undefined,
-  login: () => null,
-  logout: () => null,
-  setReloadUser: () => null,
-  store: undefined,
-  loginStore: () => null,
-  logoutStore: () => null,
-  setReloadStore: () => null,
-});
 
-export default AuthContext;
+export async function registerApi(formData) {
+  try {
+    const url = `${BASE_PATH}/auth/local/register`;
+    const params = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    };
+    const response = await fetch(url, params);
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
 
-//contexto global del usuario que se autentica en el sistema
+export async function loginApi(formData) {
+  try {
+    const url = `${BASE_PATH}/auth/local`;
+    const params = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    };
+    const response = await fetch(url, params);
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export async function resetPasswordApi(email) {
+  try {
+    const url = `${BASE_PATH}/auth/forgot-password`;
+    const params = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    };
+    const response = await fetch(url, params);
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export async function getMeApi(logout) {
+  try {
+    const url = `${BASE_PATH}/users/me`;
+    const result = await authFetch(url, null, logout);
+    return result ? result : null;
+  } catch (error) {
+    return null;
+  }
+}
+
+export async function updateNameApi(idUser, data, logout) {
+  try {
+    const url = `${BASE_PATH}/users/${idUser}`;
+    const params = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    };
+    const result = await authFetch(url, params, logout);
+    return result ? result : null;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export async function updateEmailApi(idUser, email, logout) {
+  try {
+    const url = `${BASE_PATH}/users/${idUser}`;
+    const params = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    };
+    const result = await authFetch(url, params, logout);
+    return result ? result : null;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export async function updatePasswordApi(idUser, password, logout) {
+  try {
+    const url = `${BASE_PATH}/users/${idUser}`;
+    const params = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ password }),
+    };
+    const result = await authFetch(url, params, logout);
+    return result ? result : null;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
 </code></pre>
         </article>
     </section>

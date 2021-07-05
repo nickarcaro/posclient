@@ -6,6 +6,11 @@ import * as Yup from "yup";
 
 import { addSeller, updateSeller, createUser } from "../../../../api/sellers";
 
+/**
+ * Componente de formulario de vendedores
+ 
+ */
+
 const SellerForm = ({ setShowModal, setReloadSellers, newSeller, seller }) => {
   const [loading, setLoading] = useState(false);
   const { logout, store } = useAuth();

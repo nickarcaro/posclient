@@ -1,6 +1,13 @@
 import { BASE_PATH, STORE } from "../utils/constants";
 import { authFetch } from "../utils/fetch";
 
+/**
+ * Conexion entre front end y back end para obtener los almacenes
+ * @param {String} idUser ID de usuario
+ * @param {Function} logout Funcion para cerrar sesion
+ * @returns Lista de almacenes
+ */
+
 export async function getStores(idUser, logout) {
   try {
     const url = `${BASE_PATH}/almacenes?user=${idUser}`;
@@ -12,6 +19,14 @@ export async function getStores(idUser, logout) {
     return null;
   }
 }
+
+/**
+ * Conexion entre front end y back end para obtener un almacen en base al slug
+ * @param {String} userId ID de usuario
+ * @param {String} namestore Nombre del almacen
+ * @param {Function} logout Funcion para cerrar sesion 
+ * @returns Almacen
+ */
 
 export async function getStoreBySlug(userId, namestore, logout) {
   try {
@@ -25,6 +40,13 @@ export async function getStoreBySlug(userId, namestore, logout) {
   }
 }
 
+/**
+ * Conexion entre front end y back end para obtener un almacen en base al ID
+ * @param {String} storeId ID del almacen 
+ * @param {Function} logout Funcion para cerrar sesion  
+ * @returns Almacen
+ */
+
 export async function getStoreById(storeId, logout) {
   try {
     const url = `${BASE_PATH}/almacenes/${storeId}`;
@@ -36,6 +58,13 @@ export async function getStoreById(storeId, logout) {
     return null;
   }
 }
+
+/**
+ * Conexion entre front end y back end para para agregar un almacen
+ * @param {Object} store Objeto almacen
+ * @param {Function} logout Funcion para cerrar sesion  
+ * 
+ */
 
 export async function addStore(store, logout) {
   try {
@@ -54,6 +83,15 @@ export async function addStore(store, logout) {
     return null;
   }
 }
+
+/**
+ * Conexion entre front end y back end para para actualizar un almacen
+ * @param {String} idStore ID del almacen
+ * @param {Object} store Objecto almacen
+ * @param {Function} logout Funcion para cerrar sesion  
+ * 
+ */
+
 
 export async function updateStore(idStore, store, logout) {
   try {

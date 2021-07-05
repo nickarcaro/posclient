@@ -7,6 +7,12 @@ import {addPromotion} from '../../../api/promotions'
 import {addCategory} from '../../../api/categories'
 import { post } from 'request';
 
+/**
+ * 
+ * Pagina para agregar categorias
+ * 
+ */
+
 const AddCategories = () => {
   const {Content} = Layout
   const [ products, setProducts ] = useState([])

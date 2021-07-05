@@ -1,6 +1,13 @@
 import { BASE_PATH } from "../utils/constants";
 import { authFetch } from "../utils/fetch";
 
+/**
+ * Conexion entre front end y back end para obtener los proveedores
+ * @param {String} idAlmacen ID del almacen
+ * @param {Function} logout Funcion para cerrar sesion
+ * @returns Lista de vendedores
+ */
+
 export async function getSuppliers(idAlmacen, logout) {
   try {
     const url = `${BASE_PATH}/proveedors?almacen=${idAlmacen}`;
@@ -12,6 +19,13 @@ export async function getSuppliers(idAlmacen, logout) {
     return null;
   }
 }
+
+/**
+ * Conexion entre front end y back end para agregar proveedores
+ * @param {Object} supplier Objeto de proveedor
+ * @param {*} logout Funcion para cerrar sesion
+ * 
+ */
 
 export async function addSupplier(supplier, logout) {
   try {
@@ -30,6 +44,14 @@ export async function addSupplier(supplier, logout) {
     return null;
   }
 }
+
+/**
+ * 
+ * @param {String} idSupplier ID de proveedor
+ * @param {Object} supplier Objeto de proveedor
+ * @param {Function} logout Funcion para cerrar sesion
+ * 
+ */
 
 export async function updateSupplier(idSupplier, supplier, logout) {
   try {
