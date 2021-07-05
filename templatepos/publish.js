@@ -661,7 +661,7 @@ exports.publish = (taffyData, opts, tutorials) => {
   packages = find({ kind: "package" });
 
   generate(
-    "Home",
+    "Documentacion",
     packages
       .concat([
         {
